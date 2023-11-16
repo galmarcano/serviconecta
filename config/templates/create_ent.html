@@ -12,7 +12,76 @@
 {% block content %}
 
 
-    <!-- encargado Ruy, puedes editar acá. Esto se hace con un form -->
+<div id="encabezado">
+
+    <h1>Registrate</h1>
+    <p>Nombre de Emprendedor</p>
+    <p>Tu Emprendimiento</p>
+
+</div>
+
+<header>
+
+    <article id="informacion">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="titulos">
+                <label for="nombre_emprendimiento"><b>Nombre de Tu Emprendimiento*:</b></label>
+                <input id="nombre_emprendimiento" type="text">
+            </div>
+
+            <div class="titulos">
+                <label for="nombre"><b>Nombre*:</b></label>
+                <input id="nombre" type="text">
+            </div>
+
+            <div class="titulos">
+                <label for="correo_electronico"><b>Correo Electronico*:</b></label>
+                <input id="correo_electronico" type="email">
+            </div>
+
+            <div class="titulos">
+                <label for="telefono"><b>Telefono*:</b></label>
+                <input id="telefono" type="number">
+            </div>
+
+            <div class="titulos">
+                <label for="descripcion"><b>Descripcion*:</b></label>
+                <input id="descripcion" type="text">
+            </div>
+
+            <div class="titulos">
+                <label for="ubicacion"><b>Ubicacion*:</b></label>
+                <input id="ubicacion" type="text">
+            </div>
+
+        </form>
+    </article>
+
+    <article id="imagenlogo">
+        <div>
+            <form action="procesar.php" method="post" enctype="multipart/form-data">
+                <label for="imagen"><b>Seleccionar imagen:</b></label>
+                <input class="imagen" type="file" id="imagen" name="imagen">
+                <label for="imagen" class="file-input-button">Cargar imagen</label>
+            </form>
+        </div>
+        <div>
+            <div id="vista-previa"></div>
+        </div>
+
+    </article>
+
+    <script src="static\js\create_ent.js"></script>
+
+</header>
+
+<section>
+    <button type="submit" class="btn">Guardar</button>
+</section>
+<br><br><br>
+
 
 
 {% endblock %}
