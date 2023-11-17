@@ -9,25 +9,22 @@
 
 {% block content %}
 
+<div class="principal">
 
-<div class="container">
-    <img src=" {% static 'images/emprendimiento1.jpg' %}" alt="emprendimiento_1">
-    <h1>Nombre del Emprendimiento</h1>
-    <p>Descripción del Emprendimiento</p>
-    <a href="#" class="btn">Más Información</a>
-</div>
-<div class="container">
-    <img src=" {% static 'images/emprendimiento2.png' %}" alt="emprendimiento_2">
-    <h1>Nombre del Emprendimiento</h1>
-    <p>Descripción del Emprendimiento</p>
-    <a href="#" class="btn">Más Información</a>
-</div>
-<div class="container">
-    <img src=" {% static 'images/emprendimiento3.jpg' %}" alt="emprendimiento_3">
-    <h1>Nombre del Emprendimiento</h1>
-    <p>Descripción del Emprendimiento</p>
-    <a href="#" class="btn">Más Información</a>
-</div>
+    {% for e in emprendis %}
+    <div class="container_list_ent">
+        {% if e.img_emprendimiento %}
+        <img src="{{ e.img_emprendimiento.url }}" alt="{{ e.nombre_emprendimiento }}" class="img_ent">
+        {% else %}
+        <img src="{% static 'images/emprendimiento_placeholder.jpg' %}" alt="{{ e.nombre_emprendimiento }}"
+            class="img_ent">
+        {% endif %}
+        <h1 class="nombre_ent">{{ e.nombre_emprendimiento }}</h1>
+        <p class="desc_ent">{{ e.descripcion_emprendimiento }}</p>
+        <a href="#" class="btn">Más Información</a>
+    </div>
+    {% endfor %}
+
 
 </div>
 

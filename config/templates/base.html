@@ -14,10 +14,11 @@
 
 </head>
 
-<body>
-    <header class="header">
+<body id="body_base">
 
-        <img src=" {% static 'images/logoserviconecta2.PNG' %}" alt="logoserviconecta">
+    <header id="header_base">
+
+        <img src=" {% static 'images/logoserviconecta2.PNG' %}" alt="logoserviconecta" id="logo_servi">
 
 
         <div class="buscarContainer">
@@ -31,10 +32,10 @@
         <ul class="menu-horizontal">
 
             <a class="active" href="#home">Inicio</a>
-            <li><a href="#emprendimientos">Emprendimientos</a></li>
-            <li><a href="#productos">Productos</a></li>
+            <li><a href="{% url 'list_ent' %}">Emprendimientos</a></li>
+            <li><a href="{% url 'list_prod' %}">Productos</a></li>
             <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#soporte">Soporte</a></li>
+            <li><a href="{% url 'support' %}">Soporte</a></li>
             <li><a href="#ingresar">Ingresar</a>
                 <ul class="menu-vertical">
                     <li><a href="#">Iniciar Sesión</a></li>

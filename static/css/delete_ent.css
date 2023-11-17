@@ -1,29 +1,36 @@
-main {
+#main_delete_ent {
     min-width: 100vh;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-button{
+
+button {
     min-width: 40vh;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 10%;
+    margin-bottom: 10%;
 }
 
-    div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+#delete_ent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-    h1, h2, img {
-        margin-top: 5%;
-        font-size: 100%;
-    }
+#h1_delete_ent,
+#h2_delete_ent{
+    font-size: 100%;
+}
+
+#logo_ent {
+    width: 20%; /* El 50% del ancho de su contenedor */
+    height: auto; /* Para mantener la proporción original de la imagen */
+}
