@@ -8,6 +8,8 @@ class Emprendimiento(models.Model):
     telefono_emprendimiento = models.CharField(max_length=15)
     descripcion_emprendimiento = models.TextField()
     ubicacion_emprendimiento = models.CharField(max_length=100)
+    img_emprendimiento = models.ImageField(upload_to='ent_logo_images', null=True, blank=True) #para agg imagenes
+
 
     def __str__(self):
         return self.nombre_emprendimiento
@@ -48,3 +50,12 @@ class Servicio(models.Model):
 
     def __str__(self):
         return self.nombre_servicio
+
+class Comentario(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    correo = models.EmailField()
+    mensaje = models.TextField()
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"

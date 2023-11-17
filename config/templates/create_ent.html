@@ -14,72 +14,71 @@
 
 <div id="encabezado">
 
-    <h1>Registrate</h1>
-    <p>Nombre de Emprendedor</p>
-    <p>Tu Emprendimiento</p>
+    <h1>Regístrate</h1>
+    <p>Nombre de emprendedor</p>
+    <p>Tu emprendimiento</p>
 
 </div>
 
-<header>
+<header id="header_create_ent">
 
-    <article id="informacion">
-        <form method="post">
-            {% csrf_token %}
 
+    <form method="post" enctype="multipart/form-data"
+        action="{% if id_emprendimiento %}{% url 'create_prod' id_emprendimiento=id_emprendimiento %}{% endif %}">
+        {% csrf_token %}
+
+        <article id="informacion">
             <div class="titulos">
-                <label for="nombre_emprendimiento"><b>Nombre de Tu Emprendimiento*:</b></label>
-                <input id="nombre_emprendimiento" type="text">
+                <label for="{{ formulario.nombre_emprendimiento.id_for_label }}"><b>Nombre de tu
+                        emprendimiento*:</b></label>
+                {{ formulario.nombre_emprendimiento }}
             </div>
 
             <div class="titulos">
-                <label for="nombre"><b>Nombre*:</b></label>
-                <input id="nombre" type="text">
+                <label for="{{ formulario.email_emprendimiento.id_for_label }}"><b>Email de tu
+                        emprendimiento*:</b></label>
+                {{ formulario.email_emprendimiento }}
             </div>
 
             <div class="titulos">
-                <label for="correo_electronico"><b>Correo Electronico*:</b></label>
-                <input id="correo_electronico" type="email">
+                <label for="{{ formulario.telefono_emprendimiento.id_for_label }}"><b>Teléfono*:</b></label>
+                {{ formulario.telefono_emprendimiento }}
             </div>
 
             <div class="titulos">
-                <label for="telefono"><b>Telefono*:</b></label>
-                <input id="telefono" type="number">
+                <label for="{{ formulario.descripcion_emprendimiento.id_for_label }}"><b>Descripción del
+                        emprendimiento*:</b></label>
+                {{ formulario.descripcion_emprendimiento }}
             </div>
 
             <div class="titulos">
-                <label for="descripcion"><b>Descripcion*:</b></label>
-                <input id="descripcion" type="text">
+                <label for="{{ formulario.ubicacion_emprendimiento.id_for_label }}"><b>Ubicacion*:</b></label>
+                {{ formulario.ubicacion_emprendimiento }}
             </div>
+        </article>
 
-            <div class="titulos">
-                <label for="ubicacion"><b>Ubicacion*:</b></label>
-                <input id="ubicacion" type="text">
+        <article id="imagenlogo">
+            <div>
+                <label for="{{ formulario.img_emprendimiento.id_for_label }}"><b>Seleccionar logo</b></label>
+            {{ formulario.img_emprendimiento }}
             </div>
+            <div>
+                <div id="vista-previa"></div>
+            </div>
+        </article>
 
-        </form>
-    </article>
+        <section>
+            <button type="submit" class="btn">Guardar</button>
+        </section>
 
-    <article id="imagenlogo">
-        <div>
-            <form action="procesar.php" method="post" enctype="multipart/form-data">
-                <label for="imagen"><b>Seleccionar imagen:</b></label>
-                <input class="imagen" type="file" id="imagen" name="imagen">
-                <label for="imagen" class="file-input-button">Cargar imagen</label>
-            </form>
-        </div>
-        <div>
-            <div id="vista-previa"></div>
-        </div>
 
-    </article>
+    </form>
 
-    <script src="static\js\create_ent.js"></script>
+
+
 
 </header>
 
-<section>
-    <button type="submit" class="btn">Guardar</button>
-</section>
 <br><br><br>
 
 

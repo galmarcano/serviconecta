@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Emprendedor, Emprendimiento, Producto, Servicio
+from .models import Emprendedor, Emprendimiento, Producto, Servicio, Comentario
 
 class EmprendedorAdmin(admin.ModelAdmin):
     list_display = ('id_emprendedor', 'nro_identificacion_emprendedor', 
@@ -19,7 +19,8 @@ admin.site.register(Emprendedor, EmprendedorAdmin)
 class EmprendimientoAdmin(admin.ModelAdmin):
     list_display = ('id_emprendimiento', 'nombre_emprendimiento',
                    'email_emprendimiento', 'telefono_emprendimiento', 
-                   'descripcion_emprendimiento', 'ubicacion_emprendimiento')
+                   'descripcion_emprendimiento', 'ubicacion_emprendimiento', 
+                   'img_emprendimiento')
     
     ordering = ('id_emprendimiento', )
 
@@ -32,7 +33,7 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display = ('id_producto', 'codigo_producto',
                    'nombre_producto', 'descripcion_producto', 
                    'precio_producto', 'stock_producto',
-                   'id_emprendimiento')
+                   'id_emprendimiento', 'img_producto')
     
     ordering = ('id_producto', )
 
@@ -53,3 +54,9 @@ class ServicioAdmin(admin.ModelAdmin):
 
     list_filter = ('id_servicio', 'codigo_servicio', 'id_emprendimiento')
 admin.site.register(Servicio, ServicioAdmin)
+
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'apellido', 'correo', 'mensaje')
+    ordering = ('nombre', 'apellido', 'correo')
+    search_fields = ('nombre', 'apellido', 'correo', 'mensaje')
+admin.site.register(Comentario, ComentarioAdmin)
