@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-fisv(%&0wnko@wqrev2^if-u-^@ad%oka1j#=m^mqporgp35@6
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+X_FRAME_OPTIONS = '*'
 
 
 # Application definition

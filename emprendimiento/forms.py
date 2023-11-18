@@ -33,3 +33,8 @@ class SupportForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ['nombre', 'apellido', 'correo', 'mensaje']
+
+
+class LoginForm(forms.Form):
+  username = forms.CharField()
+  password = forms.CharField(widget = forms.PasswordInput)
