@@ -9,7 +9,7 @@ class Emprendimiento(models.Model):
     descripcion_emprendimiento = models.TextField()
     ubicacion_emprendimiento = models.CharField(max_length=100)
     img_emprendimiento = models.ImageField(upload_to='ent_logo_images', null=True, blank=True) #para agg imagenes
-
+    fecha_creacion = models.DateTimeField(auto_now_add=True)  # para la fecha de creación
 
     def __str__(self):
         return self.nombre_emprendimiento

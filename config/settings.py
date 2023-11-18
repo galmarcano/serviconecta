@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-fisv(%&0wnko@wqrev2^if-u-^@ad%oka1j#=m^mqporgp35@6
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+X_FRAME_OPTIONS = '*'
 
 
 # Application definition
@@ -123,7 +124,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
 
 
 # Default primary key field type

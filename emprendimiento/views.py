@@ -75,8 +75,6 @@ def v_delete_ent(request, emprendimiento_id):
     return render(request, 'delete_ent.html', context)
 
 
-
-
 # para productos
 
 def v_list_prod(request):
@@ -156,3 +154,47 @@ def v_support(request):
         form = SupportForm()
 
     return render(request, 'support.html', {'form': form})
+
+
+def v_login(request):
+    from .forms import LoginForm  # Importando el formulario
+    from django.contrib.auth import authenticate, login
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():  # verifica los datos necesarios
+            # comprueba que la contraseña es valida
+            user = authenticate(
+                username=form.cleaned_data["username"], password=form.cleaned_data["password"])
+
+            if user is not None:  # usuario y contraseña bien
+                login(request, user)
+                return HttpResponseRedirect("/")
+            else:  # usuario y contraseña erróneos
+                return HttpResponseRedirect("/")
+        else:
+            # Los datos no son correctos
+            return HttpResponseRedirect("/")
+
+    else:
+        context = {
+            "form": LoginForm(request.POST)  # Envío de un form al html
+        }
+        return render(request, "login.html", context)
+
+
+def v_logout(request):
+    from django.contrib.auth import logout
+
+    if request.user.is_authenticated:
+        logout(request)  # Aquí se cierra la sesión
+
+    return HttpResponseRedirect("/")
+
+def v_home(request):
+    # Ordenando emprendimientos por fecha de creación en orden descendente y limitando a 3
+    emprendimientos = Emprendimiento.objects.all().order_by('-fecha_creacion')[:3]
+    context = {
+        'emprendimientos': emprendimientos,
+        'products': Producto.objects.all()
+    }
+    return render(request, 'home.html', context)
