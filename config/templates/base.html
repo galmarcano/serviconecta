@@ -31,18 +31,29 @@
     <nav class="navbar">
         <ul class="menu-horizontal">
 
-            <a class="active" href="#home">Inicio</a>
+            <a class="active" href="/">Inicio</a>
             <li><a href="{% url 'list_ent' %}">Emprendimientos</a></li>
             <li><a href="{% url 'list_prod' %}">Productos</a></li>
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="{% url 'support' %}">Soporte</a></li>
-            <li><a href="#ingresar">Ingresar</a>
+
+            {% if user.is_authenticated %}
+            <li><a href="#">Hola {{ user.username }}</a>
                 <ul class="menu-vertical">
-                    <li><a href="#">Iniciar Sesión</a></li>
+                    <li><a href="#">Mi cuenta</a></li>
+                    <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="/iniciar_sesion">Ingresar</a>
+                <ul class="menu-vertical">
+                    <li><a href="/iniciar_sesion">Iniciar Sesión</a></li>
                     <li><a href="#">Registrarse</a></li>
                     <li><a href="#">Mi cuenta</a></li>
                 </ul>
             </li>
+            {% endif %}
+
         </ul>
 
     </nav>
