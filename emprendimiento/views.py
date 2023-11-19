@@ -2,18 +2,20 @@ from django.shortcuts import render
 from .forms import EmprendimientoForm, ProductoForm, SupportForm
 from .models import Emprendimiento, Producto, Emprendedor, Comentario
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required, permission_required #para validaciones
 
 # Create your views here.
 
 
 def v_list_ent(request):
+    # No necesita permisos
     context = {
         'emprendis': Emprendimiento.objects.all()
     }
     return render(request, 'list_ent.html', context)
 
-
+@login_required(login_url = "/iniciar_sesion")
+@permission_required('emprendimiento.add_emprendimiento', login_url = "/")
 def v_create_ent(request):
     if request.method == 'POST':
         datos = request.POST.copy()
@@ -30,6 +32,8 @@ def v_create_ent(request):
     return render(request, 'create_ent.html', context)
 
 
+@login_required(login_url = "/iniciar_sesion")
+@permission_required('emprendimiento.change_emprendimiento', login_url = "/")
 def v_update_ent(request, emprendimiento_id):
     emprendi = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
     # para agregar el nombre_emprendedor en update_ent.html
@@ -57,6 +61,8 @@ def v_update_ent(request, emprendimiento_id):
         return render(request, 'update_ent.html', context)
 
 
+@login_required(login_url = "/iniciar_sesion")
+@permission_required('emprendimiento.delete_emprendimiento', login_url = "/")
 def v_delete_ent(request, emprendimiento_id):
     if request.method == 'POST':
         from .models import Emprendedor, Producto, Servicio
@@ -78,12 +84,16 @@ def v_delete_ent(request, emprendimiento_id):
 # para productos
 
 def v_list_prod(request):
+    # No necesita permisos
     context = {
         'products': Producto.objects.all()
     }
     return render(request, 'list_prod.html', context)
 
 
+
+@login_required(login_url = "/iniciar_sesion")
+@permission_required('emprendimiento.add_producto', login_url = "/")
 def v_create_prod(request, id_emprendimiento):
     if request.method == 'POST':
         datos = request.POST.copy()
@@ -100,6 +110,8 @@ def v_create_prod(request, id_emprendimiento):
     return render(request, 'create_prod.html', context)
 
 
+@login_required(login_url = "/iniciar_sesion")
+@permission_required('emprendimiento.update_producto', login_url = "/")
 def v_update_prod(request, emprendimiento_id, product_id):
     product = Producto.objects.get(
         id_emprendimiento=emprendimiento_id, id_producto=product_id)
@@ -124,6 +136,8 @@ def v_update_prod(request, emprendimiento_id, product_id):
         return render(request, 'update_prod.html', context)
 
 
+@login_required(login_url = "/iniciar_sesion")
+@permission_required('emprendimiento.delete_producto', login_url = "/")
 def v_delete_prod(request, emprendimiento_id, product_id):
     if request.method == 'POST':
         Producto.objects.filter(
@@ -138,6 +152,7 @@ def v_delete_prod(request, emprendimiento_id, product_id):
 
 
 def v_support(request):
+    # No necesita permisos
     if request.method == 'POST':
         form = SupportForm(request.POST)
         if form.is_valid():
@@ -157,23 +172,28 @@ def v_support(request):
 
 
 def v_login(request):
-    from .forms import LoginForm  # Importando el formulario
+    # No necesita permisos
+    from .forms import LoginForm
     from django.contrib.auth import authenticate, login
+    from django.contrib import messages
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():  # verifica los datos necesarios
             # comprueba que la contraseña es valida
             user = authenticate(
-                username=form.cleaned_data["username"], password=form.cleaned_data["password"])
+                username=form.cleaned_data["username"], 
+                password=form.cleaned_data["password"])
 
             if user is not None:  # usuario y contraseña bien
                 login(request, user)
                 return HttpResponseRedirect("/")
             else:  # usuario y contraseña erróneos
-                return HttpResponseRedirect("/")
+                messages.error(request, 'Usuario y/o contraseña incorrectos')
+                return render(request, "login.html", {"form": form})
         else:
             # Los datos no son correctos
-            return HttpResponseRedirect("/")
+            messages.error(request, 'Usuario y/o contraseña incorrectos')
+            return render(request, "login.html", {"form": form})
 
     else:
         context = {
@@ -183,6 +203,7 @@ def v_login(request):
 
 
 def v_logout(request):
+    # No necesita permisos
     from django.contrib.auth import logout
 
     if request.user.is_authenticated:
@@ -191,6 +212,7 @@ def v_logout(request):
     return HttpResponseRedirect("/")
 
 def v_home(request):
+    # No necesita permisos
     # Ordenando emprendimientos por fecha de creación en orden descendente y limitando a 3
     emprendimientos = Emprendimiento.objects.all().order_by('-fecha_creacion')[:3]
     context = {
