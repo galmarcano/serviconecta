@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import v_list_ent, v_create_ent, v_delete_ent, v_update_ent
 from .views import v_list_prod, v_create_prod, v_update_prod, v_delete_prod
-from .views import v_support, v_logout, v_login, v_home
+from .views import v_support, v_logout, v_login, v_home, v_detail_ent
 
 urlpatterns = [
     path('', v_home, name="home"),
@@ -18,5 +18,6 @@ urlpatterns = [
          v_delete_prod, name='delete_prod'),
     path('support', v_support, name='support'),
     path('cerrar_sesion', v_logout),
-    path('iniciar_sesion', v_login)
+    path('iniciar_sesion', v_login),
+    path('detalle_emprendimiento/<int:emprendimiento_id>/', v_detail_ent, name='detalle_emprendimiento'),
 ]
