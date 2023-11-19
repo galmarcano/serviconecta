@@ -2,6 +2,7 @@ from django import forms
 from .models import *
 from django.core.exceptions import ValidationError
 import imghdr
+from django.contrib.auth.forms import UserCreationForm
 
 class EmprendimientoForm(forms.ModelForm):
     class Meta:
@@ -10,6 +11,10 @@ class EmprendimientoForm(forms.ModelForm):
                   'telefono_emprendimiento', 'descripcion_emprendimiento', 
                   'ubicacion_emprendimiento', 'img_emprendimiento']
     
+        widgets = {
+            'usuario_emprendedor': forms.HiddenInput(),
+        }
+
     def clean_img_emprendimiento(self):
         img_emprendimiento = self.cleaned_data.get('img_emprendimiento')
         if img_emprendimiento:
@@ -38,3 +43,10 @@ class SupportForm(forms.ModelForm):
 class LoginForm(forms.Form):
   username = forms.CharField()
   password = forms.CharField(widget = forms.PasswordInput)
+
+
+class CustomUserCreationForm(UserCreationForm):
+    tipo_usuario = forms.ChoiceField(choices=[('cliente', 'Cliente'), ('emprendedor', 'Emprendedor')])
+
+    class Meta(UserCreationForm.Meta):
+        fields = UserCreationForm.Meta.fields + ('tipo_usuario',)

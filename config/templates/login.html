@@ -3,29 +3,13 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'js/login.js' %}">
 {% endblock %}
 
 
 {% block content %}
-<h1 class='text-center'>
-  Iniciar sesion
-</h1>
 
-{% if messages %}
-<div class="alert alert-danger">
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-</div>
-{% endif %}
+<!--Encargado: Ruy, puedes editar acá, archivos css y js ya enlazados 
+  y en sus respectivas carpetas-->
 
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <div>
-    <button type="submit" class="btn btn-primary">Iniciar sesion</button>
-  </div>
-</form>
 {% endblock %}

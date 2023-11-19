@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Emprendimiento(models.Model):
@@ -10,21 +11,11 @@ class Emprendimiento(models.Model):
     ubicacion_emprendimiento = models.CharField(max_length=100)
     img_emprendimiento = models.ImageField(upload_to='ent_logo_images', null=True, blank=True) #para agg imagenes
     fecha_creacion = models.DateTimeField(auto_now_add=True)  # para la fecha de creación
+    usuario_emprendedor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='emprendimientos') #para asociar user.emprendedor con emprendimiento
 
     def __str__(self):
         return self.nombre_emprendimiento
 
-class Emprendedor(models.Model):
-    id_emprendedor = models.AutoField(primary_key=True)
-    nro_identificacion_emprendedor = models.CharField(max_length=20)
-    nombre_emprendedor = models.CharField(max_length=128)
-    apellido_emprendedor = models.CharField(max_length=100)
-    email_emprendedor = models.EmailField()
-    telefono_emprendedor = models.CharField(max_length=15)
-    id_emprendimiento = models.OneToOneField(Emprendimiento, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.nombre_emprendedor
     
 class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True)
@@ -34,7 +25,7 @@ class Producto(models.Model):
     precio_producto = models.DecimalField(max_digits=12, decimal_places=2)
     stock_producto = models.PositiveIntegerField()
     img_producto = models.ImageField(upload_to='up_images/', null=True, blank=True) #para agg imagenes
-    id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.PROTECT)
+    id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre_producto
