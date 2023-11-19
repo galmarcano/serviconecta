@@ -5,7 +5,66 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/create_prod.css' %}">
 {% endblock %}
 
+<main id="encabezado_prod">
+    <h1>Registrate</h1>
+    <h2>Nombre del Emprendedor</h2>
+    <p>Nombre del Emprendimiento</p>
 
+</main>
+
+<header>
+    <form action="">
+
+        <section id="sectiondatos">
+            <div class="Nombre_prod">
+                <label for="producto"><b>Nombre del producto*:</b></label>
+                <input id="producto" type="text" name="producto">
+            </div>
+
+            <div class="cod_prod">
+                <label for="codigo"><b>Codigo del Producto*:</b></label>
+                <input id="codigo" type="number" name="codigo">
+            </div>
+
+            <div class="descr_prod">
+                <label for="descripcion_prod"><b>Descripcion del Producto*:</b></label>
+                <input id="descripcion_prod" type="text" name="descripcion_prod">
+            </div>
+
+            <div class="Precios">
+                <label for="precio"><b>Precio Producto*:</b></label>
+                <input id="precio" type="number" name="precio">
+            </div>
+
+            <div class="Stock">
+                <label for="stock"><b>Stook de Producto*:</b></label>
+                <input id="stock" type="number" name="stock">
+            </div>
+
+            <article id="boton">
+                <button type="submit" class="btn">
+                    <b>Guardar y Finalizar</b>
+                </button>
+            </article>
+        </section>
+
+        <section>
+            <h3>Agregar Producto</h3>
+
+            <div class="img_prod">
+                <input type="file" id="imageInput" accept="image/jpeg, image/png">
+                <div id="previewContainer"></div>
+            </div>
+
+            <article id="boton2">
+                <button type="submit" class="btn" id="boton2">
+                    <b>Guardar y Agregar otro</b>
+                </button>
+            </article>
+        </section>
+
+    </form>
+</header>
 
 
 {% block content %}
