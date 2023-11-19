@@ -1,0 +1,33 @@
+img {
+    height: 100%;
+    
+}
+
+.container {
+    display: flex;
+    margin: 5px;
+   flex-wrap: wrap;
+   align-content: flex-start;
+    gap: 100px;
+}
+ul {
+    list-style-type: none;
+    
+}
+
+.logo{
+    margin-top: auto;
+   width: 100px;
+}
+h1{
+   font-size: 30px; 
+   margin-top: 20px;
+}
+.card-group {
+    display: flex;
+    margin: 30px;
+   flex-wrap: wrap;
+   align-content: flex-start;
+    gap: 100px;
+    text-align: center;
+}
