@@ -220,3 +220,19 @@ def v_home(request):
         'products': Producto.objects.all()
     }
     return render(request, 'home.html', context)
+
+def v_detail_ent(request, emprendimiento_id):
+    from django.shortcuts import get_object_or_404
+    # No necesita permisos
+    # Obtengo el emprendimiento seleccionado por su ID
+    emprendimiento = get_object_or_404(Emprendimiento, id_emprendimiento=emprendimiento_id)
+
+    # Obtengo los productos asociados a ese emprendimiento
+    productos = Producto.objects.filter(id_emprendimiento=emprendimiento)
+
+    context = {
+        'emprendimiento': emprendimiento,
+        'productos': productos,
+    }
+
+    return render(request, 'detail_ent.html', context)
