@@ -7,6 +7,43 @@
 
 {% block content %}
 
+<section>
+    <article>
+        <h1><b>Bienvenidos al área de Soporte</b></h1>
+        <p>Estamos aquí para ayudarte con cualquier pregunta o problema.
+            Utiliza el formulario para compartir tus comentarios y permitirnos brindarte
+            la mejor asistencia.</p>
+        <h2><b>Gracias por tu Colaboración!!!</b></h2>
+    </article>
+
+    <form id="soporte-form">
+        <div class="soport1">
+            <div>
+                <label for="nombre_soporte"><b>Nombre*:</b></label>
+                <input id="nombre_soporte" type="text">
+            </div>
+            <div>
+                <label for="apellido_soporte"><b>Apellido*:</b></label>
+                <input id="apellido_soporte" type="text">
+            </div>
+        </div>
+        <div>
+            <label for="email_soporte"><b>Correo Electrónico*:</b></label>
+            <input class="correo_sop" id="email_soporte" type="email">
+        </div>
+
+        <div>
+            <label for="mensaje_soporte"><b>Mensaje*:</b></label>
+            <input class="mensaje_sop" id="mensaje_soporte" type="text">
+        </div>
+
+        <button type="submit" class="btn"><b>Enviar</b></button>
+
+    </form>
+
+
+</section>
+<script src="static/js/support.js"></script>
 <!-- encargado Ruy, puedes editar acá. Esto se hace con un form -->
 
 {% endblock %}
