@@ -11,8 +11,136 @@
 
 {% block content %}
 
-<!-- Encargada Caro. Puedes trabajar acá el carrusel. CSS y JS ya enlazados 
-    y archivos en la carpeta static para que los edites--> 
+
+<div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+
+            <div class="card-group">
+                <div class="card">
+                    <img src="/static/images/logoserviconecta2.png" class="card-img-top" alt="logoserviconecta2">
+                    <div class="card-body">
+                        <h5 class="card-title">Emprendi_1</h5>
+                        <p class="card-text">Breve descripción del producto/servicio</p>
+                        <button type="button" class="btn btn-primary"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+  Custom button
+</button>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <img src="/static/images/pasteleria.jpg" class="card-img-top" alt="pasteleria">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: obligatorio</h5>
+                        <p class="card-text">Descripción opcional</p>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <img src="/static/images/pastelero.jpeg" class="card-img-top" alt="pastelero">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: obligatorio</h5>
+                        <p class="card-text">Descripción opcional</p>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="carousel-item">
+
+
+            <div class="card-group">
+                <div class="card">
+                    <img src="/static/images/logoserviconecta2.png" class="card-img-top" alt="load">
+                    <div class="card-body">
+                        <h5 class="card-title">Emprendi_2</h5>
+                        <p class="card-text">Breve descripción del producto/servicio</p>
+                        <button type="button" class="btn btn-primary"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+  Custom button
+</button>
+                    </div>
+                    
+                           
+                </div>
+                <div class="card">
+                    <img src="/static/images/celulares.jpg" class="card-img-top" alt="celulares">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: obligatorio</h5>
+                        <p class="card-text">Descripción opcional</p>
+                    </div>
+                   
+                </div>
+                <div class="card">
+                    <img src="/static/images/serviciotecnicocelu.jpeg" class="card-img-top" alt="serviciotecnicocelu">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: obligatorio</h5>
+                        <p class="card-text">Descripción opcional</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
+        <div class="carousel-item">
+
+            <div class="card-group">
+                <div class="card">
+                    <img src="/static/images/logoserviconecta2.png" class="card-img-top" alt="logo">
+                    <div class="card-body">
+                        <h5 class="card-title">Emprendi_3</h5>
+                        <p class="card-text">Breve descripción del producto/servicio</p>
+                        <button type="button" class="btn btn-primary"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+  Custom button
+</button>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <img src="/static/images/ropa.jpg" class="card-img-top" alt="ropa">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: obligatorio</h5>
+                        <p class="card-text">Descripción opcional</p>
+                    </div>
+                   
+                </div>
+                <div class="card">
+                    <img src="/static/images/ventaderopa.jpeg" class="card-img-top" alt="ventaderopa">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: obligatorio</h5>
+                        <p class="card-text">Descripción opcional</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
 
 
 {% endblock %}
