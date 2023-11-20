@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+
+
+
+
+h1 {
+    
+    font-size:25px ;
+}
+
+
+.centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.my-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 16px;
+    background-color:#d9cf85 ;
+    border: 1px solid ;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px var(--aura);
+    min-width: 280px;
+    max-width: 460px;
+    width: 100%;
+    padding: 32px;
+}
+
+.login-welcome {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.login-welcome-row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+
+.text-field input {
+    font-size: 16px;
+    font-weight: 500;
+    max-width: 100%;
+    width: 100%;
+    border: 1px solid ;
+    height: 50px;
+    border-radius: 8px;
+    text-indent: 20px;
+    margin-top: 8px;
+}
+
+
+
+.text-field img {
+    position: absolute;
+    right: -2px;
+    bottom: -4px;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%,-50%);
+    transform-origin: center;
+}
+
+.text-field input:focus {
+    border: 1px solid ;
+}
+
+.text-field label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .03rem;
+    z-index: 10;
+}
+
+.input-icon {
+    position: absolute;
+    bottom: 0;
+    top: 55%;
+    right: 8px;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+}
+
+.my-form__actions {
+    display: flex;
+    flex-direction: column;
+    color: var(--secondary);
+    gap: 16px;
+    margin-top: 8px;
+}
+
+
+
+.my-form__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-form__signup {
+    display: flex;
+    justify-content: center;
+}
+
+.my-form__signup a {
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+  }
+  
+  .btn {
+    width: 130px;
+    height: 40px;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #69D0B3 0%, rgb(180, 223, 179) 100%);
+    box-shadow: 0 20px 30px -6px rgba(3, 3, 3, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    margin-left: 33%;
+  }
+  
+  .btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+  
+  .btn:active {
+    opacity: 0.5;
+  }
