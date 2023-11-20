@@ -16,36 +16,36 @@
 
         <div class="contenedor">
             <h1 id="h1_delete_ent">Hola</h1>
-            <h2 id="h2_delete_ent">Nombre_emprendedor</h2>
-            <h2 id="h3_delete_ent">Nombre_emprendimiento</h2>
+            <h2 id="h2_delete_ent">{{ nombre_emprendedor }}</h2>
+            <h2 id="h3_delete_ent">{{ nombre_emprendimiento }}</h2>
 
-            
+
         </div>
 
         <div>
             <ul class="contenedor">
                 <li>Mis productos</li>
-                <li>Nombre_producto</li>
-                <li>Código_producto</li>
+                <li>{{ nombre_producto }}</li>
+                <li>{{ codigo_producto }}</li>
             </ul>
         </div>
-            
-        
+
+
         <div class="eliminar">
             <p>Eliminar producto</p>
         </div>
-        <div class="codigo">
-            <h2>¿Estás seguro de eliminar este producto?</h2>
-            <h2>Código_producto: nombre_producto</h2>
-        </div>
-
-
-        {% if emprendi.img_emprendimiento %}
-        <img src="{{ emprendi.img_emprendimiento.url }}" alt="{{ emprendi.nombre_emprendimiento }}" id="logo_ent">
-        {% endif %}
-
-        <form method="post" action="{% url 'delete_ent' emprendimiento_id=emprendi.id_emprendimiento %}">
+        <form method="post">
             {% csrf_token %}
+            
+            <div class="codigo">
+                <h2>¿Estás seguro de eliminar este producto?</h2>
+                <h2>{{ codigo_producto }}: {{ nombre_producto }}</h2>
+                {% if producto.img_producto %}
+                <img src="{{ producto.img_producto.url }}" alt="{{ product.nombre_producto }}" id="logo_ent">
+                {% else %}
+                No hay imagen disponible
+                {% endif %}
+            </div>
 
             <div class="d-grid gap-2" id="delete_ent">
                 <button class="btn btn-primary" type="submit">Confirmar</button>

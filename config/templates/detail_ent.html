@@ -9,49 +9,37 @@
 
 {% block content %}
 
-<!--Encargado: . Puedes editar acá, con una card de producto basta, yo hago que se repita
-con el backend. CSS en su respectiva carpeta static, ya linkeado-->
 
 <nav class="container">
-
-    <img src="/static/images/logoserviconecta2.png" class="logo" alt="">
-    <h1>Nombre_emprendimiento</h1>
+    {% if emprendimiento.img_emprendimiento %}
+    <img src="{{ emprendimiento.img_emprendimiento.url }}" class="logo"
+        alt="{{ emprendimiento.nombre_emprendimiento }}">
+    {% endif %}
+    <h1>{{ emprendimiento.nombre_emprendimiento }}</h1>
 </nav>
-    
+
 <ul class="container">
-    <li>Descripción emprendimiento</li>
-    <li>Ubicación emprendimiento</li>
+    <li>{{ emprendimiento.descripcion_emprendimiento }}</li>
+    <li>{{ emprendimiento.ubicacion_emprendimiento }}</li>
 </ul>
 
-
-<div class="card-group">
-    <div class="card">
-        <img src="/static/images/pasteleria.jpg" class="card-img-top" alt="pasteleria">
-        <div class="card-body">
-            <h5 class="card-title">Nombre producto</h5>
-            <p class="card-text">Precio producto</p>
-            <button type="button" class="btn btn-primary btn-lg">Large button</button>
-
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            {% if producto.img_producto %}
+            <img src="{{ producto.img_producto.url }}" class="card-img-top" alt="{{ producto.nombre_producto }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                <p class="card-text">{{ producto.precio_producto }}</p>
+                <button type="button" class="btn btn-primary btn-lg">Large button</button>
+            </div>
         </div>
     </div>
-    <div class="card">
-        <img src="/static/images/pastelero.jpeg" class="card-img-top" alt="pastelero">
-        <div class="card-body">
-            <h5 class="card-title">Nombre producto</h5>
-            <p class="card-text">Precio producto</p>
-            <button type="button" class="btn btn-primary btn-lg">Large button</button>
-        </div>
-    </div>
-    <div class="card">
-        <img src="/static/images/pasteles.jpg" class="card-img-top" alt="pasteles">
-        <div class="card-body">
-            <h5 class="card-title">Nombre producto</h5>
-            <p class="card-text">Precio producto</p>
-            <button type="button" class="btn btn-primary btn-lg">Large button</button>
-
-        </div>
-    </div>
+    {% endfor %}
 </div>
+
 
 
 {% endblock %}
