@@ -54,29 +54,27 @@ def v_create_ent(request):
 @permission_required('emprendimiento.change_emprendimiento', login_url="/")
 def v_update_ent(request, emprendimiento_id):
     emprendi = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
-    # para agregar el nombre_emprendedor en update_ent.html
-    # Obtener el usuario emprendedor asociado al emprendimiento
     emprendedor = emprendi.usuario_emprendedor
 
     if request.method == 'POST':
-        datos = request.POST.copy()
-        formeditar = EmprendimientoForm(datos, instance=emprendi)
+        action = request.POST.get('action')
+        formeditar = EmprendimientoForm(request.POST, instance=emprendi)
+
         if formeditar.is_valid():
             formeditar.save()
-            print("Formulario válido, redirigiendo")
-            return HttpResponseRedirect("/")
-        else:
-            print("Formulario no válido")
+
+            if action == 'guardar-cambios':
+                return HttpResponseRedirect("/")
+            elif action == 'eliminar-emprendimiento':
+                emprendi.delete()
+                return HttpResponseRedirect("/")
 
     else:
         context = {
-            # para agregar Hola nombre_emprendimiento a template update_ent.html
             'id_emprendimiento': emprendi.nombre_emprendimiento,
-            # para agregar Hola nombre_emprendimiento a template update_ent.html
             'id_emprendedor': emprendedor.username,
             'formedicion': EmprendimientoForm(instance=emprendi)
         }
-        print("Mostrando formulario de edición")
         return render(request, 'update_ent.html', context)
 
 
@@ -84,7 +82,8 @@ def v_update_ent(request, emprendimiento_id):
 @permission_required('emprendimiento.delete_emprendimiento', login_url="/")
 def v_delete_ent(request, emprendimiento_id):
     from django.shortcuts import get_object_or_404
-    emprendi = get_object_or_404(Emprendimiento, id_emprendimiento=emprendimiento_id)
+    emprendi = get_object_or_404(
+        Emprendimiento, id_emprendimiento=emprendimiento_id)
 
     if request.method == 'POST':
         # Eliminar productos y servicios asociados
@@ -114,17 +113,29 @@ def v_list_prod(request):
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_producto', login_url="/")
 def v_create_prod(request, id_emprendimiento):
+    emprendimiento = Emprendimiento.objects.get(id_emprendimiento=id_emprendimiento)
+    emprendedor = emprendimiento.usuario_emprendedor
+
     if request.method == 'POST':
-        datos = request.POST.copy()
-        formcrear = ProductoForm(datos, request.FILES)
+        action = request.POST.get('action')
+        formcrear = ProductoForm(request.POST, request.FILES)
+
         if formcrear.is_valid():
             # Asignar el emprendimiento al producto antes de guardarlo
             formcrear.instance.id_emprendimiento_id = id_emprendimiento
             formcrear.save()
-            return HttpResponseRedirect("/")
+
+            if action == 'guardar-y-agregar':
+                # Si se hace clic en "Guardar y agregar otro", redirigir al mismo formulario
+                return HttpResponseRedirect(request.path_info)
+            elif action == 'finalizar':
+                # Si se hace clic en "Finalizar", redirigir a la página de inicio
+                return HttpResponseRedirect("/")
 
     context = {
-        'formulario': ProductoForm()
+        'formulario': ProductoForm(),
+        'nombre_emprendedor': emprendedor.username,
+        'nombre_emprendimiento': emprendimiento.nombre_emprendimiento,
     }
     return render(request, 'create_prod.html', context)
 
@@ -158,14 +169,21 @@ def v_update_prod(request, emprendimiento_id, product_id):
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.delete_producto', login_url="/")
 def v_delete_prod(request, emprendimiento_id, product_id):
+    emprendimiento = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
+    producto = Producto.objects.get(id_emprendimiento=emprendimiento_id, id_producto=product_id)
+    emprendedor = emprendimiento.usuario_emprendedor
+
     if request.method == 'POST':
         Producto.objects.filter(
             id_emprendimiento=emprendimiento_id, id_producto=product_id).delete()
         return HttpResponseRedirect("/")
 
     context = {
-        'emprendi': Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id),
-        'product': Producto.objects.get(id_emprendimiento=emprendimiento_id, id_producto=product_id)
+        'nombre_producto': producto.nombre_producto,
+        'codigo_producto': producto.codigo_producto,
+        'nombre_emprendedor': emprendedor.username,
+        'nombre_emprendimiento': emprendimiento.nombre_emprendimiento,
+        'producto': producto,
     }
     return render(request, 'delete_prod.html', context)
 

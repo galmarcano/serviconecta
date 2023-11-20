@@ -11,47 +11,53 @@
 <section>
     <h1>Actualizar Emprendimiento</h1>
 </section>
-<form action="">
+<form method="post">
+    {% csrf_token %}
     <article>
 
-        
+
         <div class="primeraparte">
             <div class="parte1">
                 <img src="logo" alt="logo">
             </div>
-            
+
             <div class="parte1">
-                <label for="nombre_act"><b>Nombre*:</b></label>
-                <input class="nombre1" id="nombre_act" type="text">
+                <label {{ formedicion.nombre_emprendimiento.id_for_label }}><b>Nombre*:</b></label>
+                {{ formedicion.nombre_emprendimiento }}
             </div>
 
             <div>
-                <label for="telefono_act"><b>Telefono*:</b></label>
-                <input class="telf_1" id="telefono_act" type="number">
+                <label for="{{ formedicion.telefono_emprendimiento.id_for_label }}"><b>Telefono*:</b></label>
+                {{ formedicion.telefono_emprendimiento }}
             </div>
         </div>
 
         <div class="segundaparte">
             <div>
-                <label for="correo_act"><b>Correo*:</b></label>
-                <input class="email1" id="correo_act" type="email">
+                <label for="{{ formedicion.email_emprendimiento.id_for_label }}"><b>Correo*:</b></label>
+                {{ formedicion.email_emprendimiento }}
             </div>
             <div>
-                <label for="ubicacion_act"><b>Ubicacion*:</b></label>
-                <input class="ubicacion1" id="ubicacion_act" type="text">
+                <label for="{{ formedicion.ubicacion_emprendimiento.id_for_label }}"><b>Ubicacion*:</b></label>
+                {{ formedicion.ubicacion_emprendimiento }}
             </div>
         </div>
 
         <div class="descripcion">
 
-            <label for="descripcion_act"><b>Descripcion*:</b></label>
-            <input id="descripcion_act" type="text">
+            <label for="{{ formedicion.descripcion_emprendimiento.id_for_label }}"><b>Descripcion*:</b></label>
+            {{ formedicion.descripcion_emprendimiento }}
         </div>
 
 
         <section id="boton_act">
-            <button type="submit" class="btn"><b>Guardar Cambios</b></button>
-            <button type="submit" class="btn"><b>Eliminar</b></button>
+            <button type="submit" class="btn" name="action" value="guardar-cambios">
+                <b>Guardar cambios</b>
+            </button>
+            <button type="submit" class="btn" name="action" value="eliminar-emprendimiento"
+                onclick="return confirm('¿Está seguro de eliminar este emprendimiento?');">
+                <b>Eliminar emprendimiento</b>
+            </button>
         </section>
 
     </article>

@@ -2,12 +2,12 @@
 
 
 
-main{
+main {
     display: flex;
     padding-top: 2%;
     padding-left: 2%;
     padding-bottom: 1%;
-   
+
 }
 
 
@@ -15,69 +15,66 @@ form {
     display: flex;
 }
 
-h1, h3{
+h1,
+h3 {
     font-size: 24px;
     padding-right: 38px;
     font-family: 'Inter', sans-serif;
-   
+
 }
 
-h2, p{
+h2,
+p {
     font-size: 18px;
     padding-left: 2%;
     font-family: 'Inter', sans-serif;
-      
+
 
 }
 
-#sectiondatos{
+#sectiondatos {
     padding-right: 9%;
 }
 
-section{
+section {
     padding-left: 3%;
-    
+
 }
 
-label{
+label {
     width: 280px;
     height: 50px;
     padding-bottom: 7%;
 
 }
 
-input{
+input {
     width: 380px;
-    
+
 }
 
-#boton{
+#boton {
+    font-size: 12px;
     margin: 4%;
     padding-bottom: 12%;
     padding-top: 14%;
-    
+
 }
 
-#boton2{
-    font-size: 12px;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    
-}
 
-button{
+button {
     display: none;
-    
+
 
 }
 
 .btn {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
-    
-  }
-  
-  .btn {
+
+}
+
+.btn {
     width: 200px;
     height: 40px;
     border-radius: 50px;
@@ -88,27 +85,27 @@ button{
     border: none;
     font-size: 18px;
     color: white;
-  }
-  
-  .btn:hover {
+}
+
+.btn:hover {
     transform: translateY(3px);
     box-shadow: none;
-  }
-  
-  .btn:active {
+}
+
+.btn:active {
     opacity: 0.5;
-  }
+}
 
-  @media (max-width: 850px) {
+@media (max-width: 850px) {
     header {
-      display: flex;
-      flex-direction: column;
-    }
-
-   main {
         display: flex;
         flex-direction: column;
-   }
+    }
 
-    
-  }
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+}
