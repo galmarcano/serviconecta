@@ -9,6 +9,34 @@
 
 {% block content %}
 
+  <div class="centering">
+      <form class="my-form">
+          <div class="login-welcome-row">
+              <img class="login-welcome" src="static/images/logoserviconecta2.png" alt="logo">
+              <h1>Bienvenidos de vuelta!</h1>
+          </div>
+
+          <div class="text-field">
+              <label for="email">Correo Electronico*:</label>
+              <input aria-label="Email" type="email" id="email" name="email" placeholder="Tu Correo" required>
+          </div>
+
+          <div class="text-field">
+              <label for="password">Contraseña*:</label>
+              <input id="password" type="password" aria-label="Password" name="password" placeholder="tu contraseña">
+          </div>
+
+          <input type="submit" class="btn"  value="Entrar">
+          <div class="my-form__actions">
+              <div class="my-form__row">
+                  <span><b>Aun no tienes cuenta?</b></span>
+                  <a href="#"><b>Registrate</b></a>
+              </div>
+          </div>
+      </form>
+  </div>
+
+
 <!--Encargado: Ruy, puedes editar acá, archivos css y js ya enlazados 
   y en sus respectivas carpetas-->
 
