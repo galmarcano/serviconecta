@@ -1,9 +1,11 @@
-const form = document.getElementById('soporte-form');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('soporte-form');
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
     
-    // Aquí puedes agregar el código para enviar el formulario
+        // Código para enviar el formulario (si es necesario)
     
-    alert('Mensaje enviado!');
+        alert('Mensaje enviado!');
+    });
 });

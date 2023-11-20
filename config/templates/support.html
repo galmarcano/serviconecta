@@ -3,47 +3,49 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/support.css' %}">
+<script src="{% static 'js/support.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
 <section>
     <article>
-        <h1><b>Bienvenidos al área de Soporte</b></h1>
+        <h1><b>¡Bienvenidos al área de soporte!</b></h1>
         <p>Estamos aquí para ayudarte con cualquier pregunta o problema.
             Utiliza el formulario para compartir tus comentarios y permitirnos brindarte
             la mejor asistencia.</p>
-        <h2><b>Gracias por tu Colaboración!!!</b></h2>
+        <h2><b>¡Gracias por tu colaboración!</b></h2>
     </article>
 
-    <form id="soporte-form">
+    <form id="soporte-form" method="post">
+        {% csrf_token %}
         <div class="soport1">
             <div>
-                <label for="nombre_soporte"><b>Nombre*:</b></label>
-                <input id="nombre_soporte" type="text">
+                <label for="{{ form.nombre.id_for_label }}"><b>Nombre*:</b></label>
+                {{ form.nombre }}
             </div>
             <div>
-                <label for="apellido_soporte"><b>Apellido*:</b></label>
-                <input id="apellido_soporte" type="text">
+                <label for="{{ form.apellido.id_for_label }}"><b>Apellido*:</b></label>
+                {{ form.apellido }}
             </div>
         </div>
         <div>
-            <label for="email_soporte"><b>Correo Electrónico*:</b></label>
-            <input class="correo_sop" id="email_soporte" type="email">
+            <label for="{{ form.correo.id_for_label }}"><b>Correo electrónico*:</b></label>
+            {{ form.correo }}
         </div>
 
         <div>
-            <label for="mensaje_soporte"><b>Mensaje*:</b></label>
-            <input class="mensaje_sop" id="mensaje_soporte" type="text">
+            <label for="{{ form.mensaje.id_for_label }}"><b>Mensaje*:</b></label>
+            {{ form.mensaje }}
         </div>
 
         <button type="submit" class="btn"><b>Enviar</b></button>
 
     </form>
 
+    
 
 </section>
-<script src="static/js/support.js"></script>
-<!-- encargado Ruy, puedes editar acá. Esto se hace con un form -->
+
 
 {% endblock %}
