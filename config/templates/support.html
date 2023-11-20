@@ -3,10 +3,49 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/support.css' %}">
+<script src="{% static 'js/support.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<!-- encargado Ruy, puedes editar acá. Esto se hace con un form -->
+<section>
+    <article>
+        <h1><b>¡Bienvenidos al área de soporte!</b></h1>
+        <p>Estamos aquí para ayudarte con cualquier pregunta o problema.
+            Utiliza el formulario para compartir tus comentarios y permitirnos brindarte
+            la mejor asistencia.</p>
+        <h2><b>¡Gracias por tu colaboración!</b></h2>
+    </article>
+
+    <form id="soporte-form" method="post">
+        {% csrf_token %}
+        <div class="soport1">
+            <div>
+                <label for="{{ form.nombre.id_for_label }}"><b>Nombre*:</b></label>
+                {{ form.nombre }}
+            </div>
+            <div>
+                <label for="{{ form.apellido.id_for_label }}"><b>Apellido*:</b></label>
+                {{ form.apellido }}
+            </div>
+        </div>
+        <div>
+            <label for="{{ form.correo.id_for_label }}"><b>Correo electrónico*:</b></label>
+            {{ form.correo }}
+        </div>
+
+        <div>
+            <label for="{{ form.mensaje.id_for_label }}"><b>Mensaje*:</b></label>
+            {{ form.mensaje }}
+        </div>
+
+        <button type="submit" class="btn"><b>Enviar</b></button>
+
+    </form>
+
+    
+
+</section>
+
 
 {% endblock %}
