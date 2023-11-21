@@ -9,33 +9,22 @@
 
 {% block content %}
 
-<!-- encargada Yilda, puedes editar acá -->
-
-<div class="container">
-    <imge src="{% static 'images/emprendimiento1.jpg' %}" alt="emprendimiento_1">
-    <h1>Nombre del producto</h1>
-    <p>Nombre del Emprendimiento</p>
-    <p>Precio del producto</p>
-    <a href="#" class="btn">Agregar al carrito</a>
+<div class="principal">
+    <!-- encargada Yilda, puedes editar acá -->
+    {% for e in products %}
+    <div class="container">
+        {% if e.img_producto %}
+        <image src="{{ e.img_producto.url }}" alt="{{ e.nombre_producto }}" class="img_prod">
+            {% else %}
+            No hay imagen disponible
+            {% endif %}
+            <h1>{{ e.nombre_producto }}</h1>
+            <p>{{ e.id_emprendimiento.nombre_emprendimiento }}</p>
+            <p>{{ e.precio_producto }}</p>
+            <a href="#" class="btn">Agregar al carrito</a>
+    </div>
+    {% endfor %}
 </div>
-<hr>
-
-<div class="container">
-    <imge src="{% static 'images/emprendimiento2.png' %}" alt="emprendimiento_2">
-    <h1>Nombre del producto</h1>
-    <p>Nombre del Emprendimiento</p>
-    <p>Precio del producto</p>
-    <a href="#" class="btn">Agregar al carrito</a>
-</div>
-
-<div class="container">
-<div class="container">
-    <imge src=" {% static 'images/emprendimiento3.jpg' %}" alt="emprendimiento_3">
-    <h1>Nombre del producto</h1>
-    <p>Nombre del Emprendimiento</p>
-    <p>Precio del producto</p>
-    <a href="#" class="btn">Agregar al carrito</a>
-</div> 
 
 
 

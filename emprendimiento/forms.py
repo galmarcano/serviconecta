@@ -47,6 +47,10 @@ class LoginForm(forms.Form):
 
 class CustomUserCreationForm(UserCreationForm):
     tipo_usuario = forms.ChoiceField(choices=[('cliente', 'Cliente'), ('emprendedor', 'Emprendedor')])
+    username = forms.CharField(max_length=150, label="Nombre de usuario")
+    phonenumber = forms.CharField(max_length=15, label="Teléfono")
+    email = forms.EmailField(label="Correo electrónico")
+
 
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ('tipo_usuario',)
+        fields = UserCreationForm.Meta.fields + ('tipo_usuario', 'username', 'phonenumber', 'email', 'password1', 'password2')

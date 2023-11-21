@@ -17,7 +17,7 @@
         <h2><b>¡Gracias por tu colaboración!</b></h2>
     </article>
 
-    <form id="soporte-form" method="post">
+    <form id="soporte-form" method="post" action="{% url 'support' %}">
         {% csrf_token %}
         <div class="soport1">
             <div>

@@ -2,7 +2,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 from django.shortcuts import redirect
 
@@ -113,7 +112,8 @@ def v_list_prod(request):
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_producto', login_url="/")
 def v_create_prod(request, id_emprendimiento):
-    emprendimiento = Emprendimiento.objects.get(id_emprendimiento=id_emprendimiento)
+    emprendimiento = Emprendimiento.objects.get(
+        id_emprendimiento=id_emprendimiento)
     emprendedor = emprendimiento.usuario_emprendedor
 
     if request.method == 'POST':
@@ -169,8 +169,10 @@ def v_update_prod(request, emprendimiento_id, product_id):
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.delete_producto', login_url="/")
 def v_delete_prod(request, emprendimiento_id, product_id):
-    emprendimiento = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
-    producto = Producto.objects.get(id_emprendimiento=emprendimiento_id, id_producto=product_id)
+    emprendimiento = Emprendimiento.objects.get(
+        id_emprendimiento=emprendimiento_id)
+    producto = Producto.objects.get(
+        id_emprendimiento=emprendimiento_id, id_producto=product_id)
     emprendedor = emprendimiento.usuario_emprendedor
 
     if request.method == 'POST':
@@ -223,7 +225,16 @@ def v_login(request):
 
             if user is not None:  # usuario y contraseña bien
                 login(request, user)
-                return HttpResponseRedirect("/")
+                
+                # Obtener el parámetro 'next' de la URL, que indica la página a la que se intentó acceder originalmente
+                next_url = request.GET.get('next')
+
+                if next_url:
+                    # Si 'next' está presente, redirige a esa página
+                    return redirect(next_url)
+                else:
+                    # Si 'next' no está presente, redirige a la página principal o la que desees
+                    return redirect("/")
             else:  # usuario y contraseña erróneos
                 messages.error(request, 'Usuario y/o contraseña incorrectos')
                 return render(request, "login.html", {"form": form})
@@ -297,7 +308,7 @@ def v_select_user(request):
 
 
 class RegistroUsuarioView(CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     template_name = 'registro_usuario_form.html'
 
     def get_context_data(self, **kwargs):
@@ -311,7 +322,8 @@ class RegistroUsuarioView(CreateView):
         print(f"Tipo de usuario seleccionado: {tipo_usuario}")
 
         try:
-            user = form.save()
+            user = form.save(commit=False)
+            user.save()
 
             # Asignar al grupo correspondiente según el tipo de usuario
             if tipo_usuario == 'cliente':
@@ -320,10 +332,18 @@ class RegistroUsuarioView(CreateView):
             elif tipo_usuario == 'emprendedor':
                 user.groups.add(Group.objects.get(name='emprendedor'))
                 print('paso2')
+
         except ObjectDoesNotExist as e:
             print(f"Error: {e}")
 
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        tipo_usuario = self.kwargs.get('tipo_usuario', '')
+
+        if tipo_usuario == 'emprendedor':
+            # Redirige a la vista 'create_ent'
+            return reverse_lazy('create_ent')
+        else:
+            # Otra vista para el tipo de usuario 'cliente'
+            return reverse_lazy('home')
