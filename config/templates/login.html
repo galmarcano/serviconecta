@@ -9,32 +9,34 @@
 
 {% block content %}
 
-  <div class="centering">
-      <form class="my-form">
-          <div class="login-welcome-row">
-              <img class="login-welcome" src="static/images/logoserviconecta2.png" alt="logo">
-              <h1>Bienvenidos de vuelta!</h1>
-          </div>
+<div class="centering">
+    <form class="my-form" method="POST">
+        {% csrf_token %}
 
-          <div class="text-field">
-              <label for="email">Correo Electronico*:</label>
-              <input aria-label="Email" type="email" id="email" name="email" placeholder="Tu Correo" required>
-          </div>
+        <div class="login-welcome-row">
+            <img class="login-welcome" src="static/images/logoserviconecta2.png" alt="logo">
+            <h1>¡Bienvenido de vuelta!</h1>
+        </div>
 
-          <div class="text-field">
-              <label for="password">Contraseña*:</label>
-              <input id="password" type="password" aria-label="Password" name="password" placeholder="tu contraseña">
-          </div>
+        <div class="text-field">
+            <label for="{{ form.username.id_for_label }}">Nombre de usuario*:</label>
+            {{ form.username }}
+        </div>
 
-          <input type="submit" class="btn"  value="Entrar">
-          <div class="my-form__actions">
-              <div class="my-form__row">
-                  <span><b>Aun no tienes cuenta?</b></span>
-                  <a href="#"><b>Registrate</b></a>
-              </div>
-          </div>
-      </form>
-  </div>
+        <div class="text-field">
+            <label for="{{ form.password.id_for_label }}">Contraseña*:</label>
+            {{ form.password }}
+        </div>
+
+        <a href="{% url 'iniciar_sesion' %}?next=/create_ent/"><input type="submit" class="btn" value="Entrar"></a>
+        <div class="my-form__actions">
+            <div class="my-form__row">
+                <span><b>¿Aún no tienes cuenta?</b></span>
+                <a href="{% url 'select_user' %}"><b>Regístrate</b></a>
+            </div>
+        </div>
+    </form>
+</div>
 
 
 <!--Encargado: Ruy, puedes editar acá, archivos css y js ya enlazados 

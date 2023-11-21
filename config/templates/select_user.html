@@ -12,23 +12,28 @@
 
 <div class="container">
     <div>
-        <a class="Registrate" href="Registrate">Registrate</a>
+        <h1>Regístrate</h1>
     </div>
     <div>
         <h1>Eres</h1>
-        <div id="titulos">
-            <h2><a href="Emprendedor">Emprendedor</a></h2>
-            <p>ó</p>
-            <h3><a href="Comprador">Comprador</a></h3>
-        </div>
+        <form method="post" action="{% url 'select_user' %}">
+            {% csrf_token %}
+            <div id="titulos">
+                <label>
+                    <input type="radio" name="tipo_usuario" value="cliente"> Cliente
+                </label>
+                <p>ó</p>
+                <label>
+                    <input type="radio" name="tipo_usuario" value="emprendedor"> Emprendedor
+                </label>
+            </div>
 
-        <button>
-            <span>Enviar</span>
-        </button>
-        
+            <button type="submit" id="select_user">Continuar</button>
+        </form>
+
     </div>
 
-  
+
 
 
 

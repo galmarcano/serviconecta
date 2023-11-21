@@ -19,7 +19,7 @@ urlpatterns = [
          v_delete_prod, name='delete_prod'),
     path('support', v_support, name='support'),
     path('cerrar_sesion', v_logout),
-    path('iniciar_sesion', v_login),
+    path('iniciar_sesion', v_login, name='iniciar_sesion'),
     path('detalle_emprendimiento/<int:emprendimiento_id>/', v_detail_ent, name='detalle_emprendimiento'),
     
     #probando para registro de usuarios:
