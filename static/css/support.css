@@ -24,9 +24,7 @@ p{
 }
 
 section{
-    margin-top: 2%;
-    display: flex;
-    align-items: center;
+    display: flex; 
 }
 
 article{
@@ -34,8 +32,7 @@ article{
     text-align: center;
     flex-direction: column;
     max-width: 470px;
-    padding-left: 4%;
-    margin-right: 8%;
+    margin: 2%;
     
 }
 
