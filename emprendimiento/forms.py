@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 import imghdr
 from django.contrib.auth.forms import UserCreationForm
 
+
 class EmprendimientoForm(forms.ModelForm):
     class Meta:
         model = Emprendimiento
@@ -46,11 +47,19 @@ class LoginForm(forms.Form):
 
 
 class CustomUserCreationForm(UserCreationForm):
-    tipo_usuario = forms.ChoiceField(choices=[('cliente', 'Cliente'), ('emprendedor', 'Emprendedor')])
-    username = forms.CharField(max_length=150, label="Nombre de usuario")
-    phonenumber = forms.CharField(max_length=15, label="Teléfono")
-    email = forms.EmailField(label="Correo electrónico")
+    tipo_usuario = forms.ChoiceField(
+        choices=[('cliente', 'Cliente'), ('emprendedor', 'Emprendedor')],
+        required=True,
+        widget=forms.HiddenInput(),  # Ocultar el campo en el formulario
+    )
+    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autocomplete': 'given-name'}))
+    last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'autocomplete': 'family-name'}))
+    username = forms.CharField(label='Nombre y apellido', widget=forms.TextInput(attrs={'autocomplete': 'username'}))
+    phonenumber = forms.CharField(label='Teléfono', widget=forms.TextInput(attrs={'autocomplete': 'tel'}))
+    email = forms.EmailField(label='Correo electrónico', widget=forms.EmailInput(attrs={'autocomplete': 'email'}))
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
+    password2 = forms.CharField(label='Repita contraseña', widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
 
 
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ('tipo_usuario', 'username', 'phonenumber', 'email', 'password1', 'password2')
+        fields = UserCreationForm.Meta.fields + ('tipo_usuario', 'first_name', 'last_name', 'phonenumber', 'email', 'password1', 'password2')

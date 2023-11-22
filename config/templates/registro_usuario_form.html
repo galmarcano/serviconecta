@@ -3,7 +3,6 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/registro_usuario_form.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'js/registro_usuario_form.js' %}">
 {% endblock %}
 
 
@@ -18,20 +17,25 @@
 
     <form method="post" action="{% url 'registro_usuario' tipo_usuario=tipo_usuario %}">
         {% csrf_token %}
-        <p>Nombre y apellido*</p>
+        <label for="{{ form.first_name.id_for_label }}">Nombre*</label>
+        {{ form.first_name }}
+        <label for="{{ form.last_name.id_for_label }}">Apellido*</label>
+        {{ form.last_name }}
+        <label for="{{ form.username.id_for_label }}">Nombre de usuario*</label>
         {{ form.username }}
-        <p>Telefono*</p>
+        <label for="{{ form.phonenumber.id_for_label }}">Telefono*</label>
         {{ form.phonenumber }}
-        <p>Correo electrónico*</p>
+        <label for="{{ form.email.id_for_label }}">Correo electrónico*</label>
         {{ form.email }}
-        <p>Contraseña*</p>
+        <label for="{{ form.password1.id_for_label }}">Contraseña*</label>
         {{ form.password1 }}
-        <p>Repita contraseña*</p>
+        <label for="{{ form.password2.id_for_label }}">Repita contraseña*</label>
         {{ form.password2 }}
-
+    
         <input type="hidden" name="tipo_usuario" value="{{ tipo_usuario }}">
         <button class="botons" type="submit">Registrarse</button>
     </form>
+
 
 </section>
 

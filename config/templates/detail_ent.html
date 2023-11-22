@@ -19,8 +19,8 @@
 </nav>
 
 <ul class="container">
-    <li>{{ emprendimiento.descripcion_emprendimiento }}</li>
-    <li>{{ emprendimiento.ubicacion_emprendimiento }}</li>
+    <li>Descripción: {{ emprendimiento.descripcion_emprendimiento }}</li>
+    <li>Ubicación: {{ emprendimiento.ubicacion_emprendimiento }}</li>
 </ul>
 
 <div class="row">
@@ -31,9 +31,12 @@
             <img src="{{ producto.img_producto.url }}" class="card-img-top" alt="{{ producto.nombre_producto }}">
             {% endif %}
             <div class="card-body">
-                <h5 class="card-title">{{ producto.nombre_producto }}</h5>
-                <p class="card-text">{{ producto.precio_producto }}</p>
-                <button type="button" class="btn btn-primary btn-lg">Large button</button>
+                <h5 class="card-title">Producto: {{ producto.nombre_producto }}</h5>
+                <p class="card-text">Código: {{ producto.codigo_producto }}</p>
+                <p class="card-text">Descripción: {{ producto.descripcion_producto }}</p>
+                <p class="card-text">Precio: {{ producto.precio_producto }} $</p>
+                <p class="card-text">Stock: {{ producto.stock_producto }} unidades</p>
+                <button type="button" class="btn btn-primary btn-lg">Añadir al carrito</button>
             </div>
         </div>
     </div>

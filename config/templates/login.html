@@ -3,18 +3,29 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'js/login.js' %}">
 {% endblock %}
 
 
 {% block content %}
 
+{% if messages %}
+<div class="alert alert-danger">
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+
 <div class="centering">
-    <form class="my-form" method="POST">
+    <form class="my-form" method="POST" action="{% url 'iniciar_sesion' %}?next={{ request.GET.next }}">
         {% csrf_token %}
 
         <div class="login-welcome-row">
-            <img class="login-welcome" src="static/images/logoserviconecta2.png" alt="logo">
+            <img class="login-welcome" src="{% static 'images/logoserviconecta.png' %}" alt="logo">
             <h1>¡Bienvenido de vuelta!</h1>
         </div>
 
@@ -26,9 +37,11 @@
         <div class="text-field">
             <label for="{{ form.password.id_for_label }}">Contraseña*:</label>
             {{ form.password }}
+
         </div>
 
-        <a href="{% url 'iniciar_sesion' %}?next=/create_ent/"><input type="submit" class="btn" value="Entrar"></a>
+
+        <input type="submit" class="btn" value="Entrar">
         <div class="my-form__actions">
             <div class="my-form__row">
                 <span><b>¿Aún no tienes cuenta?</b></span>
@@ -37,9 +50,19 @@
         </div>
     </form>
 </div>
+<!-- Muestra los errores del formulario -->
+
+{% if form.errors %}
+<div class="error">
+    <strong>Error en el formulario:</strong>
+    {{ form.errors }}
+</div>
+{% endif %}
 
 
 <!--Encargado: Ruy, puedes editar acá, archivos css y js ya enlazados 
   y en sus respectivas carpetas-->
+
+
 
 {% endblock %}

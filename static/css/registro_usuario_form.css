@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
  
-body {
+/*body {
     background-image: url(../img/fondo-cuadricula-digital-abstracto-negro.jpg);
-}
+}*/
 
 .form-register {
     width: 400px;
