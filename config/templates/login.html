@@ -21,7 +21,7 @@
 
 
 <div class="centering">
-    <form class="my-form" method="POST" action="{% url 'iniciar_sesion' %}?next={{ request.GET.next }}">
+    <form class="my-form" method="POST" action="{% url 'iniciar_sesion' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">
         {% csrf_token %}
 
         <div class="login-welcome-row">
