@@ -1,9 +1,14 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
-from django.core.exceptions import ObjectDoesNotExist
 from .forms import CustomUserCreationForm
 from django.shortcuts import redirect
+
+#para login
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
 
 from django.shortcuts import render
 from .forms import EmprendimientoForm, ProductoForm, SupportForm
@@ -26,11 +31,13 @@ def v_list_ent(request):
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_emprendimiento', login_url="/")
 def v_create_ent(request):
+    usuario_emprendedor = None  # Inicializa la variable con un valor por defecto
+
     if request.method == 'POST':
         datos = request.POST.copy()
         formcrear = EmprendimientoForm(datos, request.FILES)
         if formcrear.is_valid():
-            # Obtener el usuario emprendedor actual
+            # Obtener el usuario emprendedor actual solo si la solicitud es POST
             usuario_emprendedor = request.user
 
             # Crear el emprendimiento y asociarlo al usuario emprendedor
@@ -43,9 +50,15 @@ def v_create_ent(request):
             # Redirigir a la vista de creación de producto
             return HttpResponseRedirect("/create_prod/{}/".format(id_emprendimiento))
 
+    # Obtener el usuario emprendedor actual si la solicitud es GET
+    if request.user.is_authenticated:
+        usuario_emprendedor = request.user
+
     context = {
-        'formulario': EmprendimientoForm()
+        'formulario': EmprendimientoForm(),
+        'usuario_emprendedor': usuario_emprendedor,  # Incluye la variable en el contexto
     }
+
     return render(request, 'create_ent.html', context)
 
 
@@ -210,44 +223,36 @@ def v_support(request):
     return render(request, 'support.html', {'form': form})
 
 
+from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+
 def v_login(request):
-    # No necesita permisos
-    from .forms import LoginForm
-    from django.contrib.auth import authenticate, login
-    from django.contrib import messages
+    from .forms import LoginForm  # Importando el formulario
+
+    print(request.GET.get('next'))
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        if form.is_valid():  # verifica los datos necesarios
-            # comprueba que la contraseña es valida
-            user = authenticate(
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password"])
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
 
-            if user is not None:  # usuario y contraseña bien
+            if user is not None:
                 login(request, user)
-                
-                # Obtener el parámetro 'next' de la URL, que indica la página a la que se intentó acceder originalmente
-                next_url = request.GET.get('next')
 
-                if next_url:
-                    # Si 'next' está presente, redirige a esa página
-                    return redirect(next_url)
-                else:
-                    # Si 'next' no está presente, redirige a la página principal o la que desees
-                    return redirect("/")
-            else:  # usuario y contraseña erróneos
-                messages.error(request, 'Usuario y/o contraseña incorrectos')
-                return render(request, "login.html", {"form": form})
+                # Redirigir al usuario a la URL indicada en 'next' o a la página principal por defecto
+                next_url = request.GET.get('next', '/')
+                return HttpResponseRedirect(next_url)
+            else:
+                return HttpResponseRedirect("/")
         else:
             # Los datos no son correctos
-            messages.error(request, 'Usuario y/o contraseña incorrectos')
-            return render(request, "login.html", {"form": form})
-
+            return HttpResponseRedirect("/")
     else:
         context = {
             "form": LoginForm(request.POST)  # Envío de un form al html
         }
         return render(request, "login.html", context)
+
 
 
 def v_logout(request):
@@ -321,20 +326,19 @@ class RegistroUsuarioView(CreateView):
 
         print(f"Tipo de usuario seleccionado: {tipo_usuario}")
 
-        try:
+        if form.is_valid():
             user = form.save(commit=False)
             user.save()
 
-            # Asignar al grupo correspondiente según el tipo de usuario
+                # Asignar al grupo correspondiente según el tipo de usuario
             if tipo_usuario == 'cliente':
                 user.groups.add(Group.objects.get(name='cliente'))
-                print('paso1')
+                print('Usuario añadido al grupo cliente')
             elif tipo_usuario == 'emprendedor':
                 user.groups.add(Group.objects.get(name='emprendedor'))
-                print('paso2')
+                print('Usuario añadido al grupo emprendedor')
 
-        except ObjectDoesNotExist as e:
-            print(f"Error: {e}")
+            print('El formulario es válido y el usuario ha sido guardado.')
 
         return super().form_valid(form)
 

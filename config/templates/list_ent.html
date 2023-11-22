@@ -16,11 +16,11 @@
         {% if e.img_emprendimiento %}
         <img src="{{ e.img_emprendimiento.url }}" alt="{{ e.nombre_emprendimiento }}" class="img_ent">
         {% else %}
-        <img src="{% static 'images/emprendimiento_placeholder.jpg' %}" alt="{{ e.nombre_emprendimiento }}"
-            class="img_ent">
+        No hay imagen disponible
         {% endif %}
-        <h1  class="nombre_ent">{{ e.nombre_emprendimiento }}</h1>
-        <p class="desc_ent">{{ e.descripcion_emprendimiento }}</p>
+        <h1 class="nombre_ent">{{ e.nombre_emprendimiento }}</h1>
+        <p class="desc_ent">Descripción: {{ e.descripcion_emprendimiento }}</p>
+        <p class="desc_ent">Ubicación: {{ e.ubicacion_emprendimiento }}</p>
         <a href="{% url 'detalle_emprendimiento' e.id_emprendimiento %}" class="btn">Más Información</a>
     </div>
     {% endfor %}

@@ -18,9 +18,10 @@
             {% else %}
             No hay imagen disponible
             {% endif %}
-            <h1>{{ e.nombre_producto }}</h1>
-            <p>{{ e.id_emprendimiento.nombre_emprendimiento }}</p>
-            <p>{{ e.precio_producto }}</p>
+            <h1>Producto: {{ e.nombre_producto }}</h1>
+            <p>Vendido por: {{ e.id_emprendimiento.nombre_emprendimiento }}</p>
+            <p>Precio: {{ e.precio_producto }} $</p>
+            <p>Stock: {{ e.stock_producto }}</p>
             <a href="#" class="btn">Agregar al carrito</a>
     </div>
     {% endfor %}
