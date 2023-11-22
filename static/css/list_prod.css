@@ -13,7 +13,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display:flow-root;
     margin: 10px;
-    max-width: 250px;
+    max-width: 350px;
     max-height: 350px;
     flex: 1 0 auto;
     flex-direction: row-reverse; /* Cambiado a fila para que los elementos estén uno al lado del otro */
