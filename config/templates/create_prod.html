@@ -14,7 +14,6 @@
 
 </main>
 
-<header>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <section id="sectiondatos">
@@ -48,24 +47,26 @@
         </section>
 
         <section>
-            <h3>Agregar Producto</h3>
+            <h3><p>Agregar un producto</p></h3>
 
             <div class="img_prod">
                 {{ formulario.img_producto }}
             </div>
 
             <article id="boton">
-                <button type="submit" class="btn" name="action" value="guardar-y-agregar">
+
+                <button id="boton11" type="submit" class="btn" name="action" value="guardar-y-agregar">
                     <b>Guardar y agregar otro</b>
                 </button>
+
                 <button type="submit" class="btn" name="action" value="finalizar">
                     <b>Finalizar</b>
                 </button>
+
             </article>
         </section>
 
     </form>
-</header>
 
 
 
