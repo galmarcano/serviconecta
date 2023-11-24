@@ -1,0 +1,37 @@
+{% extends 'base_mi_cuenta.html' %}
+
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mis_productos.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="principal">
+    <!-- encargada Yilda, puedes editar acá -->
+    {% for e in products %}
+    <div class="container">
+        {% if e.img_producto %}
+        <image src="{{ e.img_producto.url }}" alt="{{ e.nombre_producto }}" class="img_prod">
+            {% else %}
+            No hay imagen disponible
+            {% endif %}
+            <h1>Producto: {{ e.nombre_producto }}</h1>
+            <p>Vendido por: {{ e.id_emprendimiento.nombre_emprendimiento }}</p>
+            <p>Precio: {{ e.precio_producto }} $</p>
+            <p>Stock: {{ e.stock_producto }}</p>
+            <a class="btn btn-danger" href="{% url 'update_prod' e.id_emprendimiento.id_emprendimiento e.id_producto %}">Actualizar</a>
+            <a class="btn btn-danger" href="{% url 'mi_cuenta_delete_prod' e.id_emprendimiento.id_emprendimiento e.id_producto %}">Eliminar</a>
+            </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

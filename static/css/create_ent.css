@@ -5,18 +5,16 @@
 
 }
 
-#header_create_ent {
-  margin: 2%;
-  margin-left: 4%;
+
+
+form{
   display: flex;
-  flex-direction: row;
-
-
+  margin: 2%;
 }
 
 #informacion {
-  padding-left: 5%;
-  padding-right: 9%;
+  width: 800px;
+  display: inline-block;
 }
 
 
@@ -51,25 +49,20 @@ p {
 
 .titulos {
   display: flex;
+  padding-bottom: 2%;
   align-items: center;
 }
 
 .titulos label {
-  width: 200px;
+  width: 700px;
   /* Ajusta el ancho según tus necesidades */
   font-size: 18px;
 
 }
 
 .titulos input {
-  width: 300px;
+  width: 350px;
   /* Ajusta el ancho según tus necesidades */
-}
-
-label {
-  padding-bottom: 2%;
-  /* Ajusta el ancho según tus necesidades */
-  overflow: hidden;
 }
 
 
@@ -125,7 +118,7 @@ section {
 }
 
 @media (max-width: 850px) {
-  #header_create_ent {
+  form {
     display: flex;
     flex-direction: column;
   }
@@ -136,10 +129,10 @@ section {
     align-items: baseline;
   }
 
-  .titulos label {
-    margin-bottom: px;
+  article {
+    display: flex;
+    flex-direction: column;
   }
-
 
 
 }

@@ -1,0 +1,41 @@
+{% extends 'base_mi_cuenta.html' %}
+
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mi_cuenta_delete_emprend.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<main id="main_delete_ent">
+
+    <div id="delete_ent">
+
+        <ol><a href="#emprendimientos">Actualizar emprendimiento</a></ol>
+        <a href="#productos">Eliminar emprendimiento</a>
+
+        <h1 id="h1_delete_ent">¿Estás seguro de eliminar tu emprendimiento?</h1>
+        <h2 id="h2_delete_ent">{{ emprendi.nombre_emprendimiento }}</h2>
+
+        {% if emprendi.img_emprendimiento %}
+            <img src="{{ emprendi.img_emprendimiento.url }}" alt="{{ emprendi.nombre_emprendimiento }}" id="logo_ent">
+        {% endif %}
+        
+        <form method="post" action="{% url 'delete_ent' emprendimiento_id=emprendi.id_emprendimiento %}">
+            {% csrf_token %}
+
+            <div class="d-grid gap-2" id="delete_ent">
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+{% endblock %}

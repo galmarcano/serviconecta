@@ -47,11 +47,6 @@ class LoginForm(forms.Form):
 
 
 class CustomUserCreationForm(UserCreationForm):
-    tipo_usuario = forms.ChoiceField(
-        choices=[('cliente', 'Cliente'), ('emprendedor', 'Emprendedor')],
-        required=True,
-        widget=forms.HiddenInput(),  # Ocultar el campo en el formulario
-    )
     first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autocomplete': 'given-name'}))
     last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'autocomplete': 'family-name'}))
     username = forms.CharField(label='Nombre y apellido', widget=forms.TextInput(attrs={'autocomplete': 'username'}))
@@ -62,4 +57,39 @@ class CustomUserCreationForm(UserCreationForm):
 
 
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ('tipo_usuario', 'first_name', 'last_name', 'phonenumber', 'email', 'password1', 'password2')
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'phonenumber', 'email', 'password1', 'password2')
+
+
+#para mi cuenta
+from .models import UserProfile
+from django.contrib.auth.models import User
+
+class UpdateUserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['phonenumber']  # Solo necesitas el campo 'phonenumber' de UserProfile
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateUserProfileForm, self).__init__(*args, **kwargs)
+
+        if self.instance.user:
+            self.fields['phonenumber'].initial = self.instance.get_phonenumber()
+
+    def save(self, commit=True):
+        if self.instance.user:
+            self.instance.user.save()  # No necesitas actualizar campos en User aquí
+
+        return super(UpdateUserProfileForm, self).save(commit)
+    
+class MiCuentaProductoForm(forms.ModelForm):
+    emprendimiento = forms.ModelChoiceField(queryset=Emprendimiento.objects.none(), empty_label=None)
+    id_emprendimiento = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    class Meta:
+        model = Producto
+        fields = ['codigo_producto', 'nombre_producto', 'descripcion_producto', 'precio_producto', 'stock_producto', 'img_producto']
+
+    def __init__(self, *args, **kwargs):
+        emprendimientos = kwargs.pop('emprendimientos', None)
+        super().__init__(*args, **kwargs)
+        if emprendimientos is not None:
+            self.fields['emprendimiento'].queryset = emprendimientos

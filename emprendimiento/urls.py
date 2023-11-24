@@ -2,7 +2,10 @@ from django.urls import path
 from .views import v_list_ent, v_create_ent, v_delete_ent, v_update_ent
 from .views import v_list_prod, v_create_prod, v_update_prod, v_delete_prod
 from .views import v_support, v_logout, v_login, v_home, v_detail_ent
-from .views import v_select_user, RegistroUsuarioView #probando para registro de usuarios
+from .views import v_registro_usuario #probando para registro de usuarios
+from .views import v_datos_usuario,v_mis_emprendimientos, v_mis_productos
+from .views import v_mi_cuenta_det_emprend, v_mi_cuenta_create_prod, v_mi_cuenta_act_emprend, v_mi_cuenta_delete_emprend
+from .views import v_mi_cuenta_delete_prod #para mi cuenta
 
 urlpatterns = [
     path('', v_home, name="home"),
@@ -23,7 +26,17 @@ urlpatterns = [
     path('detalle_emprendimiento/<int:emprendimiento_id>/', v_detail_ent, name='detalle_emprendimiento'),
     
     #probando para registro de usuarios:
-    #primero seleccionar tipo de usuario:
-    path('select_user/', v_select_user, name='select_user'),
-    path('registro/<str:tipo_usuario>/', RegistroUsuarioView.as_view(), name='registro_usuario'),
+    path('registro/', v_registro_usuario, name='registro_usuario'),
+
+    #para mi cuenta:
+    path('datos_usuario/', v_datos_usuario, name="datos_usuario"),
+    path('mis_emprendimientos/', v_mis_emprendimientos, name="mis_emprendimientos"),
+    path('mis_productos/', v_mis_productos, name="mis_productos"),
+    path('mi_cuenta_det_emprend/<int:emprendimiento_id>/', v_mi_cuenta_det_emprend, name='mi_cuenta_det_emprend'),
+    path('mi_cuenta_create_prod/', v_mi_cuenta_create_prod, name="mi_cuenta_create_prod"),
+    path('mi_cuenta_act_emprend/<int:emprendimiento_id>/', v_mi_cuenta_act_emprend, name="mi_cuenta_act_emprend"),
+    path('mi_cuenta_delete_emprend/<int:emprendimiento_id>/', v_mi_cuenta_delete_emprend, name="mi_cuenta_delete_emprend"),
+    path('mi_cuenta_delete_prod/<int:emprendimiento_id>/<int:product_id>/', v_mi_cuenta_delete_prod, name="mi_cuenta_delete_prod"),
+
+
 ]

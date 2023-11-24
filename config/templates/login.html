@@ -21,7 +21,7 @@
 
 
 <div class="centering">
-    <form class="my-form" method="POST" action="{% url 'iniciar_sesion' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">
+    <form class="my-form" method="POST" action="{% url 'iniciar_sesion' %}">
         {% csrf_token %}
 
         <div class="login-welcome-row">
@@ -45,7 +45,7 @@
         <div class="my-form__actions">
             <div class="my-form__row">
                 <span><b>¿Aún no tienes cuenta?</b></span>
-                <a href="{% url 'select_user' %}"><b>Regístrate</b></a>
+                <a href="{% url 'registro_usuario' %}"><b>Regístrate</b></a>
             </div>
         </div>
     </form>

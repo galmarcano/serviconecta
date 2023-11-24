@@ -1,0 +1,45 @@
+{% extends 'base_mi_cuenta.html' %}
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mi_cuenta_det_emprend.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<nav class="container">
+    {% if emprendimiento.img_emprendimiento %}
+    <img src="{{ emprendimiento.img_emprendimiento.url }}" class="logo"
+        alt="{{ emprendimiento.nombre_emprendimiento }}">
+    {% endif %}
+    <h1>{{ emprendimiento.nombre_emprendimiento }}</h1>
+</nav>
+
+<ul class="container">
+    <li>Descripción: {{ emprendimiento.descripcion_emprendimiento }}</li>
+    <li>Ubicación: {{ emprendimiento.ubicacion_emprendimiento }}</li>
+</ul>
+
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            {% if producto.img_producto %}
+            <img src="{{ producto.img_producto.url }}" class="card-img-top" alt="{{ producto.nombre_producto }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">Producto: {{ producto.nombre_producto }}</h5>
+                <p class="card-text">Código: {{ producto.codigo_producto }}</p>
+                <p class="card-text">Descripción: {{ producto.descripcion_producto }}</p>
+                <p class="card-text">Precio: {{ producto.precio_producto }} $</p>
+                <p class="card-text">Stock: {{ producto.stock_producto }} unidades</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

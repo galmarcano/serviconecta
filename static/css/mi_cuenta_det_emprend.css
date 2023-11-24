@@ -1,0 +1,35 @@
+
+img {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.logo {
+    margin-top: auto;
+    width: 100px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.card {
+    width: 100%;
+}
+
+.card-img-top {
+    height: 200px;
+    width: auto;
+    max-width: none;
+    margin: auto;
+}

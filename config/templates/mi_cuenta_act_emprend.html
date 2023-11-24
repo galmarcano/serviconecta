@@ -1,0 +1,68 @@
+{% extends 'base_mi_cuenta.html' %}
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mi_cuenta_act_emprend.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section>
+    <h1>Actualizar Emprendimiento</h1>
+</section>
+<form method="post">
+    {% csrf_token %}
+    <article>
+
+
+        <div class="primeraparte">
+            <div class="parte1">
+                <img src="logo" alt="logo">
+            </div>
+
+            <div class="parte1">
+                <label {{ formedicion.nombre_emprendimiento.id_for_label }}><b>Nombre de emprendimiento*:</b></label>
+                {{ formedicion.nombre_emprendimiento }}
+            </div>
+
+            <div>
+                <label for="{{ formedicion.telefono_emprendimiento.id_for_label }}"><b>Teléfono*:</b></label>
+                {{ formedicion.telefono_emprendimiento }}
+            </div>
+        </div>
+
+        <div class="segundaparte">
+            <div>
+                <label for="{{ formedicion.email_emprendimiento.id_for_label }}"><b>Correo electrónico*:</b></label>
+                {{ formedicion.email_emprendimiento }}
+            </div>
+            <div>
+                <label for="{{ formedicion.ubicacion_emprendimiento.id_for_label }}"><b>Ubicacion*:</b></label>
+                {{ formedicion.ubicacion_emprendimiento }}
+            </div>
+        </div>
+
+        <div class="descripcion">
+
+            <label for="{{ formedicion.descripcion_emprendimiento.id_for_label }}"><b>Descripcion*:</b></label>
+            {{ formedicion.descripcion_emprendimiento }}
+        </div>
+
+
+        <section id="boton_act">
+            <button type="submit" class="btn" name="action" value="guardar-cambios">
+                <b>Guardar cambios</b>
+            </button>
+            <button type="submit" class="btn" name="action" value="eliminar-emprendimiento"
+                onclick="return confirm('¿Está seguro de eliminar este emprendimiento?');">
+                <b>Eliminar emprendimiento</b>
+            </button>
+        </section>
+
+    </article>
+
+</form>
+
+
+{% endblock %}

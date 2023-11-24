@@ -1,0 +1,50 @@
+{% extends 'base_mi_cuenta.html' %}
+
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/datos_usuario.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<form method="post" action="{% url 'datos_usuario' %}">
+    {% csrf_token %}
+    <article>
+        <div class="parte1">
+            <div>
+                <label for="id_user_first_name"><b>Nombre*:</b></label>
+                <input type="text" id="id_user_first_name" name="user_first_name" value="{{ form.instance.user.first_name }}">
+            </div>
+            <div>
+                <label for="id_user_last_name"><b>Apellido*:</b></label>
+                <input type="text" id="id_user_last_name" name="user_last_name" value="{{ form.instance.user.last_name }}">
+            </div>
+        </div>
+
+        <div class="segundaparte">
+            <div>
+                <label for="id_user_username"><b>Usuario*:</b></label>
+                <input type="text" id="id_user_username" name="user_username" value="{{ form.instance.user.username }}">
+            </div>
+            <div>
+                <label for="id_phonenumber"><b>Teléfono*:</b></label>
+                <input type="text" id="id_phonenumber" name="phonenumber" value="{{ form.instance.phonenumber }}">
+            </div>
+        </div>
+
+        <div class="descripcion">
+            <label for="id_user_email"><b>Email*:</b></label>
+            <input type="text" id="id_user_email" name="user_email" value="{{ form.instance.user.email }}">
+        </div>
+
+        <button type="submit">Actualizar</button>
+    </article>
+</form>
+
+
+{% endblock %}
