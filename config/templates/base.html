@@ -41,7 +41,7 @@
             {% if user.is_authenticated %}
             <li><a href="#">Hola {{ user.username }}</a>
                 <ul class="menu-vertical">
-                    <li><a href="#">Mi cuenta</a></li>
+                    <li><a href="/datos_usuario">Mi cuenta</a></li>
                     <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -49,8 +49,8 @@
             <li><a href="/iniciar_sesion">Ingresar</a>
                 <ul class="menu-vertical">
                     <li><a href="/iniciar_sesion">Iniciar Sesión</a></li>
-                    <li><a href="/select_user">Registrarse</a></li>
-                    <li><a href="#">Mi cuenta</a></li>
+                    <li><a href="/registro">Registrarse</a></li>
+                    <li><a href="/datos_usuario">Mi cuenta</a></li>
                 </ul>
             </li>
             {% endif %}
@@ -59,6 +59,7 @@
 
     </nav>
 
+    {% block panel_lateral %}{% endblock %}
 
     {% block content %}
     {% endblock %}

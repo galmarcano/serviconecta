@@ -10,12 +10,8 @@
 
 <section class="form-register">
     <h2>Regístrate</h2>
-    <ul>
-        <li> <a href="{% url 'registro_usuario' tipo_usuario='emprendedor' %}">Emprendedor</a></li>
-        <li> <a href="{% url 'registro_usuario' tipo_usuario='cliente' %}">Cliente</a></li>
-    </ul>
 
-    <form method="post" action="{% url 'registro_usuario' tipo_usuario=tipo_usuario %}">
+    <form method="post" action="{% url 'registro_usuario' %}">
         {% csrf_token %}
         <label for="{{ form.first_name.id_for_label }}">Nombre*</label>
         {{ form.first_name }}
@@ -39,6 +35,11 @@
 
 </section>
 
-
+{% if form.errors %}
+<div class="error">
+    <strong>Error en el formulario:</strong>
+    {{ form.errors }}
+</div>
+{% endif %}
 
 {% endblock %}

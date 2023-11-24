@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/base_mi_cuenta.css' %}">
+{% endblock %}
+
+
+{% block panel_lateral %}
+
+<ul>
+    <li><a href="/datos_usuario">Datos usuario</a></li>
+    <li><a href="/mis_emprendimientos">Mis emprendimientos</a></li>
+    <li><a href="/create">Crear emprendimiento</a></li>
+    <li><a href="/mis_productos">Mis productos</a></li>
+    <li><a href="/mi_cuenta_create_prod">Crear producto</a></li>
+    <li><a href="#">Mis compras</a></li>
+    <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
+    <li><a href="#">Eliminar cuenta</a></li>
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}

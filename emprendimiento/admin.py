@@ -1,7 +1,27 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from .models import UserProfile
 
 # Register your models here.
 from .models import Emprendimiento, Producto, Comentario
+
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
+    verbose_name_plural = 'UserProfile'
+
+class CustomUserAdmin(UserAdmin):
+    inlines = (UserProfileInline, )
+    list_display = ('id', 'username', 'email', 'get_phonenumber', 'first_name', 'last_name', 'is_staff', 'is_active')
+
+    def get_phonenumber(self, obj):
+        return obj.userprofile.phonenumber if hasattr(obj, 'userprofile') else ''
+    
+    get_phonenumber.short_description = 'Phone Number'
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 
 

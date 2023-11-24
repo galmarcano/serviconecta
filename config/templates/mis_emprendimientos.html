@@ -1,0 +1,28 @@
+{% extends 'base_mi_cuenta.html' %}
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mis_emprendimientos.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+{% for e in emprendis %}
+<div class="container_list_ent">
+    {% if e.img_emprendimiento %}
+    <img src="{{ e.img_emprendimiento.url }}" alt="{{ e.nombre_emprendimiento }}" class="img_ent">
+    {% else %}
+    No hay imagen disponible
+    {% endif %}
+    <h1 class="nombre_ent">{{ e.nombre_emprendimiento }}</h1>
+    <p class="desc_ent">Descripción: {{ e.descripcion_emprendimiento }}</p>
+    <p class="desc_ent">Ubicación: {{ e.ubicacion_emprendimiento }}</p>
+    <a href="{% url 'mi_cuenta_det_emprend' e.id_emprendimiento %}" class="btn">Más Información</a>
+    <a class="btn btn-danger" href="{% url 'mi_cuenta_act_emprend' e.id_emprendimiento %}">Actualizar</a>
+    <a class="btn btn-danger" href="{% url 'mi_cuenta_delete_emprend' e.id_emprendimiento %}">Eliminar</a>
+</div>
+{% endfor %}
+
+
+{% endblock %}

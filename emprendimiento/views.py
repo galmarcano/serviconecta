@@ -34,8 +34,7 @@ def v_create_ent(request):
     usuario_emprendedor = None  # Inicializa la variable con un valor por defecto
 
     if request.method == 'POST':
-        datos = request.POST.copy()
-        formcrear = EmprendimientoForm(datos, request.FILES)
+        formcrear = EmprendimientoForm(request.POST, request.FILES)
         if formcrear.is_valid():
             # Obtener el usuario emprendedor actual solo si la solicitud es POST
             usuario_emprendedor = request.user
@@ -49,6 +48,8 @@ def v_create_ent(request):
 
             # Redirigir a la vista de creación de producto
             return HttpResponseRedirect("/create_prod/{}/".format(id_emprendimiento))
+        else:
+            print(formcrear.errors)  # Puedes imprimir los errores en la consola para depuración
 
     # Obtener el usuario emprendedor actual si la solicitud es GET
     if request.user.is_authenticated:
@@ -227,31 +228,27 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
 def v_login(request):
-    from .forms import LoginForm  # Importando el formulario
-
-    print(request.GET.get('next'))
-
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
-
-            if user is not None:
-                login(request, user)
-
-                # Redirigir al usuario a la URL indicada en 'next' o a la página principal por defecto
-                next_url = request.GET.get('next', '/')
-                return HttpResponseRedirect(next_url)
-            else:
-                return HttpResponseRedirect("/")
-        else:
-            # Los datos no son correctos
-            return HttpResponseRedirect("/")
+  from .forms import LoginForm #Importando el formulario
+  from django.contrib.auth import authenticate, login
+  if request.method == 'POST':
+    form = LoginForm(request.POST)
+    if form.is_valid(): #verifica los datos necesarios
+      user = authenticate(username = form.cleaned_data["username"], password = form.cleaned_data["password"]) #comprueba que la contraseña es valida
+      
+      if user is not None: #usuario y contraseña bien
+        login(request, user)
+        return HttpResponseRedirect("/")
+      else: #usuario y contraseña erróneos
+        return HttpResponseRedirect("/")
     else:
-        context = {
-            "form": LoginForm(request.POST)  # Envío de un form al html
-        }
-        return render(request, "login.html", context)
+      #Los datos no son correctos
+      return HttpResponseRedirect("/")
+        
+  else:
+    context = {
+      "form" : LoginForm(request.POST) #Envío de un form al html
+    }
+    return render(request, "login.html", context)
 
 
 
@@ -298,56 +295,231 @@ def v_detail_ent(request, emprendimiento_id):
 # Probando para registro de usuarios
 
 
-# Primero elegir el tipo de usuario:
 
-def v_select_user(request):
+# para el registro:
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
+def v_registro_usuario(request):
     if request.method == 'POST':
-        tipo_usuario = request.POST.get('tipo_usuario', '')
-        if tipo_usuario in ['cliente', 'emprendedor']:
-            # Redirige a la vista de registro con el tipo de usuario seleccionado
-            return redirect('registro_usuario', tipo_usuario=tipo_usuario)
-
-    return render(request, 'select_user.html')
-
-# Segundo hago el registro:
-
-
-class RegistroUsuarioView(CreateView):
-    form_class = CustomUserCreationForm
-    template_name = 'registro_usuario_form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tipo_usuario'] = self.kwargs.get('tipo_usuario', '')
-        return context
-
-    def form_valid(self, form):
-        tipo_usuario = self.kwargs.get('tipo_usuario', '')
-
-        print(f"Tipo de usuario seleccionado: {tipo_usuario}")
-
+        # Procesar el formulario de registro
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            # Después de crear el usuario, asignar permisos y realizar configuraciones adicionales
+            user = form.save()
+
+            # Obtener el grupo existente por su nombre
+            group_name = 'usuario'  # Reemplaza con el nombre que has asignado en Django admin
+            group = Group.objects.get(name=group_name)
+
+            # Asignar al usuario al grupo
+            user.groups.add(group)
+
+
+            # Restringir acceso a Django admin
+            user.is_staff = False
             user.save()
 
-                # Asignar al grupo correspondiente según el tipo de usuario
-            if tipo_usuario == 'cliente':
-                user.groups.add(Group.objects.get(name='cliente'))
-                print('Usuario añadido al grupo cliente')
-            elif tipo_usuario == 'emprendedor':
-                user.groups.add(Group.objects.get(name='emprendedor'))
-                print('Usuario añadido al grupo emprendedor')
+            # Crear un UserProfile asociado al nuevo usuario
+            UserProfile.objects.create(user=user, phonenumber=form.cleaned_data['phonenumber'])
 
-            print('El formulario es válido y el usuario ha sido guardado.')
+            login(request, user)
+            return HttpResponseRedirect("/")
+        
+    else:
+        # Lógica para mostrar el formulario de registro
+        form = CustomUserCreationForm()
 
-        return super().form_valid(form)
+    context = {'form': form}
+    return render(request, 'registro_usuario_form.html', context)
 
-    def get_success_url(self):
-        tipo_usuario = self.kwargs.get('tipo_usuario', '')
+#para mi cuenta
 
-        if tipo_usuario == 'emprendedor':
-            # Redirige a la vista 'create_ent'
-            return reverse_lazy('create_ent')
-        else:
-            # Otra vista para el tipo de usuario 'cliente'
-            return reverse_lazy('home')
+from .forms import UpdateUserProfileForm
+from .models import UserProfile
+
+# Vista protegida por login y por pertenecer al grupo "cliente"
+@login_required(login_url="/iniciar_sesion")
+def v_datos_usuario(request):
+    usuario = request.user
+
+    try:
+        user_profile = UserProfile.objects.get(user=usuario)
+    except UserProfile.DoesNotExist:
+        user_profile = None
+
+
+    if request.method == 'POST':
+        # Manejar la actualización de datos si se envía un formulario POST
+        form = UpdateUserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Los datos se han actualizado correctamente.')
+            return redirect('datos_usuario')
+    else:
+        # Mostrar la información actual si es una solicitud GET
+        form = UpdateUserProfileForm(instance=user_profile)
+
+    context = {
+        'usuario': usuario,
+        'form': form,
+    }
+
+    return render(request, 'datos_usuario.html', context)
+
+@login_required(login_url="/iniciar_sesion")
+def v_mis_emprendimientos(request):
+    # Obtén el usuario actual
+    usuario_actual = request.user
+
+    # Filtra los emprendimientos asociados al usuario actual
+    emprendimientos_del_usuario = Emprendimiento.objects.filter(usuario_emprendedor=usuario_actual)
+
+    # Verifica si hay emprendimientos asociados al usuario
+    if emprendimientos_del_usuario.exists():
+        # Pasa los emprendimientos filtrados al contexto
+        context = {
+            'emprendis': emprendimientos_del_usuario
+        }
+    else:
+        # Si no hay emprendimientos, asigna None al contexto
+        context = {
+            'emprendis': None
+        }
+
+    # Renderiza la plantilla con el contexto
+    return render(request, 'mis_emprendimientos.html', context)
+
+@login_required(login_url="/iniciar_sesion")
+def v_mis_productos(request):
+    usuario_actual = request.user
+
+    # Filtra los emprendimientos asociados al usuario actual
+    productos_del_usuario = Producto.objects.filter(id_emprendimiento__usuario_emprendedor=usuario_actual)
+    context = {
+        'products': productos_del_usuario
+      }  # Usar los productos filtrados en lugar de todos los productos    }
+    return render(request, 'mis_productos.html', context)
+
+@login_required(login_url="/iniciar_sesion")
+def v_mi_cuenta_det_emprend(request, emprendimiento_id):
+    from django.shortcuts import get_object_or_404
+    # Obtengo el emprendimiento seleccionado por su ID
+    emprendimiento = get_object_or_404(
+        Emprendimiento, id_emprendimiento=emprendimiento_id)
+
+    # Obtengo los productos asociados a ese emprendimiento
+    productos = Producto.objects.filter(id_emprendimiento=emprendimiento)
+
+    context = {
+        'emprendimiento': emprendimiento,
+        'productos': productos,
+    }
+
+    return render(request, 'mi_cuenta_det_emprend.html', context)
+
+from .forms import MiCuentaProductoForm
+from django.shortcuts import get_object_or_404
+@login_required(login_url="/iniciar_sesion")
+def v_mi_cuenta_create_prod(request):
+    emprendedor = None
+
+    # Filtra los emprendimientos asociados al usuario actual
+    emprendimientos_del_usuario = Emprendimiento.objects.filter(usuario_emprendedor=request.user)
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+
+        # Filtra los emprendimientos asociados al usuario actual y pasa ese queryset al formulario
+        formcrear = MiCuentaProductoForm(request.POST, request.FILES, emprendimientos=emprendimientos_del_usuario)
+
+        if formcrear.is_valid():
+            # Asignar el emprendimiento al producto antes de guardarlo
+            producto = formcrear.save(commit=False)
+
+            # Utiliza directamente el emprendimiento seleccionado en el formulario
+            emprendimiento_encontrado = formcrear.cleaned_data['emprendimiento']
+
+            if emprendimiento_encontrado:
+                producto.id_emprendimiento = emprendimiento_encontrado
+                producto.save()
+
+                if action == 'guardar-y-agregar':
+                    # Si se hace clic en "Guardar y agregar otro", redirigir al mismo formulario
+                    return HttpResponseRedirect(request.path_info)
+                elif action == 'finalizar':
+                    # Si se hace clic en "Finalizar", redirigir a la página de inicio
+                    return HttpResponseRedirect("/")
+
+    context = {
+        'formulario': MiCuentaProductoForm(emprendimientos=emprendimientos_del_usuario),
+        'nombre_emprendedor': emprendedor.username if emprendedor else None,
+    }
+    return render(request, 'mi_cuenta_create_prod.html', context)
+
+@login_required(login_url="/iniciar_sesion")
+def v_mi_cuenta_act_emprend(request, emprendimiento_id):
+    emprendi = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
+    emprendedor = emprendi.usuario_emprendedor
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        formeditar = EmprendimientoForm(request.POST, instance=emprendi)
+
+        if formeditar.is_valid():
+            formeditar.save()
+
+            if action == 'guardar-cambios':
+                return HttpResponseRedirect("/")
+            elif action == 'eliminar-emprendimiento':
+                emprendi.delete()
+                return HttpResponseRedirect("/")
+
+    else:
+        context = {
+            'id_emprendimiento': emprendi.nombre_emprendimiento,
+            'id_emprendedor': emprendedor.username,
+            'formedicion': EmprendimientoForm(instance=emprendi)
+        }
+        return render(request, 'mi_cuenta_act_emprend.html', context)
+
+@login_required(login_url="/iniciar_sesion")
+def v_mi_cuenta_delete_emprend(request, emprendimiento_id):
+    from django.shortcuts import get_object_or_404
+    emprendi = get_object_or_404(
+        Emprendimiento, id_emprendimiento=emprendimiento_id)
+
+    if request.method == 'POST':
+        # Eliminar productos y servicios asociados
+        Producto.objects.filter(id_emprendimiento=emprendimiento_id).delete()
+
+        # Eliminar el emprendimiento
+        emprendi.delete()
+
+        return HttpResponseRedirect("/")
+
+    context = {
+        'emprendi': emprendi
+    }
+    return render(request, 'mi_cuenta_delete_emprend.html', context)
+
+@login_required(login_url="/iniciar_sesion")
+def v_mi_cuenta_delete_prod(request, emprendimiento_id, product_id):
+    emprendimiento = Emprendimiento.objects.get(
+    id_emprendimiento=emprendimiento_id)
+    producto = Producto.objects.get(
+        id_emprendimiento=emprendimiento_id, id_producto=product_id)
+    emprendedor = emprendimiento.usuario_emprendedor
+
+    if request.method == 'POST':
+        Producto.objects.filter(
+            id_emprendimiento=emprendimiento_id, id_producto=product_id).delete()
+        return HttpResponseRedirect("/")
+
+    context = {
+        'nombre_producto': producto.nombre_producto,
+        'codigo_producto': producto.codigo_producto,
+        'nombre_emprendedor': emprendedor.username,
+        'nombre_emprendimiento': emprendimiento.nombre_emprendimiento,
+        'producto': producto,
+    }
+    return render(request, 'mi_cuenta_delete_prod.html', context)

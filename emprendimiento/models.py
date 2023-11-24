@@ -2,6 +2,32 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile', null=True, blank=True)
+    phonenumber = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f'{self.user.id} - {self.user.username} - {self.get_phonenumber()}'
+
+    def get_phonenumber(self):
+        return self.phonenumber
+
+    @property
+    def first_name(self):
+        return self.user.first_name
+
+    @property
+    def last_name(self):
+        return self.user.last_name
+
+    @property
+    def email(self):
+        return self.user.email
+
+    @property
+    def username(self):
+        return self.user.username
 class Emprendimiento(models.Model):
     id_emprendimiento = models.AutoField(primary_key=True)
     nombre_emprendimiento = models.CharField(max_length=128)

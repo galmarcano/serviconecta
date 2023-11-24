@@ -24,7 +24,7 @@
 
 
     <form method="post" enctype="multipart/form-data"
-        action="{% if id_emprendimiento %}{% url 'create_prod' id_emprendimiento=id_emprendimiento %}{% endif %}">
+        action="{% url 'create_ent' %}">
         {% csrf_token %}
 
         <article id="informacion">
