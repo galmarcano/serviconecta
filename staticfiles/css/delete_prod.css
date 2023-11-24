@@ -1,0 +1,55 @@
+#main_delete_ent {
+    min-width: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+button {
+    min-width: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+#delete_ent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#h1_delete_ent,
+#h2_delete_ent,
+#h3_delete_ent{
+    font-size: 100%;
+    flex-direction: column;
+}
+
+#logo_ent {
+    width: 20%; /* El 50% del ancho de su contenedor */
+    height: auto; /* Para mantener la proporción original de la imagen */
+}
+
+ul{
+    list-style-type: none;
+}
+.contenedor {
+    display: flex;
+    margin:15px auto;
+   align-content: flex-start;
+   gap: 100px;
+}
+.eliminar p {
+font-size: 60px;
+justify-content: left;
+}
+.codigo h2{
+    font-size: 30px;
+}
