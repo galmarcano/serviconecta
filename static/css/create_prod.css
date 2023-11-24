@@ -13,6 +13,7 @@ main {
 
 form {
     display: flex;
+    margin-bottom: 8%;
 }
 
 h1,
@@ -54,16 +55,25 @@ input {
 }
 
 #boton {
+    display: flex;
     font-size: 12px;
-    margin: 4%;
     padding-bottom: 12%;
     padding-top: 14%;
+
+}
+
+#boton11 {
+    display: flex;
+    font-size: 14px;
+    padding-bottom: 20px;
+    padding-top: 10px;
 
 }
 
 
 button {
     display: none;
+    margin: 2%;
 
 
 }
@@ -97,7 +107,7 @@ button {
 }
 
 @media (max-width: 850px) {
-    header {
+    form {
         display: flex;
         flex-direction: column;
     }
@@ -105,6 +115,11 @@ button {
     main {
         display: flex;
         flex-direction: column;
+    }
+
+    #boton {
+       flex-direction: column;
+    
     }
 
 

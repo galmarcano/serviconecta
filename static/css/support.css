@@ -25,6 +25,7 @@ p{
 
 section{
     display: flex; 
+    margin-bottom: 15%;
 }
 
 article{
@@ -102,9 +103,8 @@ form .correo_sop{
     width: 300px;
 }
 
-form .mensaje_sop{
-    width: 550px;
-    height: 150px;
-}
 
+#id_mensaje {
+    height: 100px;
+}
 

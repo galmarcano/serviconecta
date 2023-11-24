@@ -13,23 +13,26 @@
 
     <form method="post" action="{% url 'registro_usuario' %}">
         {% csrf_token %}
-        <label for="{{ form.first_name.id_for_label }}">Nombre*</label>
-        {{ form.first_name }}
-        <label for="{{ form.last_name.id_for_label }}">Apellido*</label>
-        {{ form.last_name }}
-        <label for="{{ form.username.id_for_label }}">Nombre de usuario*</label>
-        {{ form.username }}
-        <label for="{{ form.phonenumber.id_for_label }}">Telefono*</label>
-        {{ form.phonenumber }}
-        <label for="{{ form.email.id_for_label }}">Correo electrónico*</label>
-        {{ form.email }}
-        <label for="{{ form.password1.id_for_label }}">Contraseña*</label>
-        {{ form.password1 }}
-        <label for="{{ form.password2.id_for_label }}">Repita contraseña*</label>
-        {{ form.password2 }}
-    
+        <div><label for="{{ form.first_name.id_for_label }}">Nombre*</label>
+            {{ form.first_name }}</div>
+        <div><label for="{{ form.last_name.id_for_label }}">Apellido*</label>
+            {{ form.last_name }}</div>
+        <div><label for="{{ form.username.id_for_label }}">Nombre de usuario*</label>
+            {{ form.username }}</div>
+        <div><label for="{{ form.phonenumber.id_for_label }}">Telefono*</label>
+            {{ form.phonenumber }}</div>
+        <div><label for="{{ form.email.id_for_label }}">Correo electrónico*</label>
+            {{ form.email }}</div>
+        <div><label for="{{ form.password1.id_for_label }}">Contraseña*</label>
+            {{ form.password1 }}</div>
+        <div><label for="{{ form.password2.id_for_label }}">Repita contraseña*</label>
+            {{ form.password2 }}</div>
+
         <input type="hidden" name="tipo_usuario" value="{{ tipo_usuario }}">
-        <button class="botons" type="submit">Registrarse</button>
+        <article>
+            <button class="botons" type="submit">Registrarse</button>
+        </article>
+        
     </form>
 
 
