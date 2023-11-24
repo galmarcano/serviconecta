@@ -1,0 +1,34 @@
+
+.buttonEliminacion {
+
+    background-color: #69d0b3;
+    margin: 0 auto; 
+    display: block; 
+
+    }
+
+#base ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: aqua;
+    list-style-type: none;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 50px;
+
+}
+
+@media (max-width: 600px) {
+  
+    #base ul { 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 50px;
+        padding-bottom: 20px;
+        margin-left: 20px;
+        margin-right: 50px;
+     }
+}

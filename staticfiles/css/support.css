@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+h1, h2 , p {
+    font-family: 'Inter', sans-serif;
+    padding-top: 4%;
+}
+
+h1{
+    font-size: 24px;
+
+}
+
+h2{
+    font-size: 18px;
+
+}
+
+p{
+    font-size: 18px;   
+  
+}
+
+
+section{
+    max-width: 100%;
+    justify-content: center;
+    display: flex; 
+    margin: 6%;
+}
+
+article{
+    display: flex;  
+    text-align: center;
+    flex-direction: column;
+    width: 470px;
+    max-width: 100%;
+    margin: 2%;
+    
+}
+
+form .soport1{
+    display: flex;
+    margin: 4%;
+}
+
+
+button{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    justify-items: center;
+    display: none;
+
+}
+
+
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+    
+  }
+  
+  .btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #19b630 0%, rgb(84, 234, 129) 100%);
+    box-shadow: 0 20px 30px -6px rgba(3, 3, 3, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    color: white;
+  }
+  
+  .btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+  
+  .btn:active {
+    opacity: 0.5;
+  }
+
+label{
+    align-items: flex-start;
+    width: 165px;
+}
+
+form {
+    margin: 1%;
+    background-color:#d9cf85 ;
+    padding: 1%;
+    border-radius: 7%;
+
+}
+
+input{
+    margin-right: 20px;
+}
+form div{
+    margin-bottom: 2%;
+}
+
+form .correo_sop{
+    width: 300px;
+}
+
+
+#id_mensaje {
+    height: 100px;
+}
+
+
+@media (max-width: 850px) {
+    section {
+        display: flex;
+        flex-direction: column;
+      } 
+
+      form{
+        flex-direction: column;
+      }
+      
+    .soport1{
+        flex-direction: column;
+        margin-left: 3%;
+    }
+    
+    .soport2{
+        flex-direction: column;
+    }.soport3{
+        flex-direction: column;
+    }
+
+
+     }
