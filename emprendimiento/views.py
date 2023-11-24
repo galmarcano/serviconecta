@@ -17,50 +17,68 @@ from django.http import HttpResponseRedirect
 # para validaciones
 from django.contrib.auth.decorators import login_required, permission_required
 
+#para excepciones
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseServerError
+from django.core.exceptions import ValidationError
+
 # Create your views here.
 
 
 def v_list_ent(request):
-    # No necesita permisos
-    context = {
-        'emprendis': Emprendimiento.objects.all()
-    }
-    return render(request, 'list_ent.html', context)
-
+    try:
+        # No necesita permisos
+        context = {
+            'emprendis': Emprendimiento.objects.all()
+        }
+        return render(request, 'list_ent.html', context)
+    except ObjectDoesNotExist as e:
+        # Manejar la excepción si no se encuentra el objeto en la base de datos
+        return HttpResponseServerError("Objeto no encontrado: {}".format(str(e)))
+    except Exception as e:
+        # Manejar otras excepciones aquí
+        return HttpResponseServerError("Error desconocido: {}".format(str(e)))
 
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_emprendimiento', login_url="/")
 def v_create_ent(request):
-    usuario_emprendedor = None  # Inicializa la variable con un valor por defecto
+    try:
+        usuario_emprendedor = None  # Inicializa la variable con un valor por defecto
 
-    if request.method == 'POST':
-        formcrear = EmprendimientoForm(request.POST, request.FILES)
-        if formcrear.is_valid():
-            # Obtener el usuario emprendedor actual solo si la solicitud es POST
+        if request.method == 'POST':
+            formcrear = EmprendimientoForm(request.POST, request.FILES)
+            if formcrear.is_valid():
+                # Obtener el usuario emprendedor actual solo si la solicitud es POST
+                usuario_emprendedor = request.user
+
+                # Crear el emprendimiento y asociarlo al usuario emprendedor
+                emprendimiento = formcrear.save(commit=False)
+                emprendimiento.usuario_emprendedor = usuario_emprendedor
+                emprendimiento.save()
+
+                id_emprendimiento = emprendimiento.id_emprendimiento
+
+                # Redirigir a la vista de creación de producto
+                return HttpResponseRedirect("/create_prod/{}/".format(id_emprendimiento))
+            else:
+                print(formcrear.errors)  # Puedes imprimir los errores en la consola para depuración
+
+        # Obtener el usuario emprendedor actual si la solicitud es GET
+        if request.user.is_authenticated:
             usuario_emprendedor = request.user
 
-            # Crear el emprendimiento y asociarlo al usuario emprendedor
-            emprendimiento = formcrear.save(commit=False)
-            emprendimiento.usuario_emprendedor = usuario_emprendedor
-            emprendimiento.save()
+        context = {
+            'formulario': EmprendimientoForm(),
+            'usuario_emprendedor': usuario_emprendedor,  # Incluye la variable en el contexto
+        }
 
-            id_emprendimiento = emprendimiento.id_emprendimiento
-
-            # Redirigir a la vista de creación de producto
-            return HttpResponseRedirect("/create_prod/{}/".format(id_emprendimiento))
-        else:
-            print(formcrear.errors)  # Puedes imprimir los errores en la consola para depuración
-
-    # Obtener el usuario emprendedor actual si la solicitud es GET
-    if request.user.is_authenticated:
-        usuario_emprendedor = request.user
-
-    context = {
-        'formulario': EmprendimientoForm(),
-        'usuario_emprendedor': usuario_emprendedor,  # Incluye la variable en el contexto
-    }
-
-    return render(request, 'create_ent.html', context)
+        return render(request, 'create_ent.html', context)
+    except ValidationError as e:
+        # Manejar la excepción de validación aquí
+        return render(request, 'error.html', {'error_message': str(e)})
+    except Exception as e:
+        # Manejar otras excepciones aquí
+        return render(request, 'error.html', {'error_message': str(e)})
 
 
 @login_required(login_url="/iniciar_sesion")
@@ -71,7 +89,7 @@ def v_update_ent(request, emprendimiento_id):
 
     if request.method == 'POST':
         action = request.POST.get('action')
-        formeditar = EmprendimientoForm(request.POST, instance=emprendi)
+        formeditar = EmprendimientoForm(request.POST, request.FILES, instance=emprendi)
 
         if formeditar.is_valid():
             formeditar.save()
@@ -153,31 +171,45 @@ def v_create_prod(request, id_emprendimiento):
     }
     return render(request, 'create_prod.html', context)
 
-
+from django.urls import reverse
 @login_required(login_url="/iniciar_sesion")
-@permission_required('emprendimiento.update_producto', login_url="/")
 def v_update_prod(request, emprendimiento_id, product_id):
-    product = Producto.objects.get(
-        id_emprendimiento=emprendimiento_id, id_producto=product_id)
+
+    emprendimiento = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
+    producto = Producto.objects.get(id_emprendimiento=emprendimiento_id, id_producto=product_id)
 
     if request.method == 'POST':
+        action = request.POST.get('action')
         datos = request.POST.copy()
-        formeditar = ProductoForm(datos, instance=product)
+        formeditar = ProductoForm(datos, request.FILES, instance=producto)
+
         if formeditar.is_valid():
             formeditar.save()
-            print("Formulario válido, redirigiendo")
-            return HttpResponseRedirect("/")
+
+            if action == 'guardar-cambios':
+                print("Guardando cambios, redirigiendo")
+                return HttpResponseRedirect(reverse('mis_productos', args=[emprendimiento_id, product_id]))
+            elif action == 'eliminar-producto':
+                producto.delete()
+                print("Producto eliminado, redirigiendo")
+                return HttpResponseRedirect(reverse('mis_productos', args=[emprendimiento_id]))
+            else:
+                print("Acción no válida")
+
         else:
             print("Formulario no válido")
 
     else:
         context = {
-            'nombre_producto': product.nombre_producto,
-            'cod_producto': product.codigo_producto,
-            'formedicion': ProductoForm(instance=product)
-        }
+            'nombre_producto': producto.nombre_producto,
+            'cod_producto': producto.codigo_producto,
+            'formedicion': ProductoForm(instance=producto),
+            'nombre_emprendimiento': emprendimiento.nombre_emprendimiento,
+            'producto': producto,
+            }
         print("Mostrando formulario de edición")
         return render(request, 'update_prod.html', context)
+
 
 
 @login_required(login_url="/iniciar_sesion")
@@ -463,7 +495,7 @@ def v_mi_cuenta_act_emprend(request, emprendimiento_id):
 
     if request.method == 'POST':
         action = request.POST.get('action')
-        formeditar = EmprendimientoForm(request.POST, instance=emprendi)
+        formeditar = EmprendimientoForm(request.POST, request.FILES, instance=emprendi)
 
         if formeditar.is_valid():
             formeditar.save()

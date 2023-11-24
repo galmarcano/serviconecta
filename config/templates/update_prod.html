@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_mi_cuenta.html' %}
 
 {% load static %}
 {% block extrahead %}
@@ -7,8 +7,65 @@
 
 
 {% block content %}
+<section>
+    <h1>Actualizar Producto</h1>
+</section>
 
-<!-- encargada Carolina, puedes editar acá. Esto se hace con un form -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <article>
+
+        <div class="primeraparte">
+            <div class="parte1">
+                {% if formedicion.img_producto %}
+                <img src="{{ formedicion.img_producto.url }}" alt="{{ formedicion.nombre_producto }}" class="img_ent">
+                {% else %}
+                No hay imagen disponible
+                {% endif %}
+            </div>
+
+            <div class="parte1">
+                <label {{ formedicion.codigo_producto.id_for_label }}><b>Código*:</b></label>
+                {{ formedicion.codigo_producto }}
+            </div>
+
+            <div>
+                <label for="{{ formedicion.nombre_producto.id_for_label }}"><b>Producto*:</b></label>
+                {{ formedicion.nombre_producto }}
+            </div>
+        </div>
+
+        <div class="segundaparte">
+            <div>
+                <label for="{{ formedicion.descripcion_producto.id_for_label }}"><b>Descripción*:</b></label>
+                {{ formedicion.descripcion_producto }}
+            </div>
+            <div>
+                <label for="{{ formedicion.precio_producto.id_for_label }}"><b>Precio*:</b></label>
+                {{ formedicion.precio_producto }}
+            </div>
+        </div>
+
+        <div class="descripcion">
+
+            <label for="{{ formedicion.stock_producto.id_for_label }}"><b>Stock*:</b></label>
+            {{ formedicion.stock_producto }}
+        </div>
+
+
+        <section id="boton_act">
+            <button type="submit" class="btn" name="action" value="guardar-cambios">
+                <b>Guardar cambios</b>
+            </button>
+            <button type="submit" class="btn" name="action" value="eliminar-producto"
+                onclick="return confirm('¿Está seguro de eliminar este producto?');">
+                <b>Eliminar producto</b>
+            </button>
+        </section>
+
+    </article>
+
+</form>
 
 
 {% endblock %}
