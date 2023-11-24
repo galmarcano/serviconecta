@@ -11,14 +11,18 @@
 <section>
     <h1>Actualizar Emprendimiento</h1>
 </section>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <article>
 
 
         <div class="primeraparte">
             <div class="parte1">
-                <img src="logo" alt="logo">
+                {% if formedicion.img_emprendimiento %}
+                <img src="{{ formedicion.img_emprendimiento.url }}" alt="{{ formedicion.nombre_emprendimiento }}" class="img_ent">
+                {% else %}
+                No hay imagen disponible
+                {% endif %}
             </div>
 
             <div class="parte1">
