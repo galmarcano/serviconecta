@@ -1,0 +1,121 @@
+#body_base {
+    margin: 0;
+    
+}
+
+#logo_servi {
+    width: 100px;
+    height: 100px;
+    background: #d9cf85;
+}
+
+
+#header_base {
+
+    width: 100%;
+    padding: 1.3 rem 10%;
+    background: #d9cf85;
+    display: flex;
+    align-items: center;
+
+}
+
+#header_base .inputBuscar {
+    width: 800px;
+    padding: 10px;
+    padding-left: 40px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-left: 185px;
+
+}
+
+.buscarContainer {
+    position: relative;
+    padding: 10px;
+
+}
+
+.buscar-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    margin-left: 194px;
+
+}
+
+.cart-icon {
+    position: absolute;
+    right: 10px;
+    z-index: 10;
+    font-size: 58px;
+}
+
+.navbar {
+
+    font-family: 'Franklin Gothic Medium';
+    background: #69d0b3;
+    justify-content: space-between;
+    display: flex;
+    align-content: center;
+
+
+}
+
+.navbar a {
+
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 18px;
+
+}
+
+.navbar a:hover {
+    color: black;
+    background-color: #77c2a3;
+}
+
+.menu-horizontal {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-horizontal>li>a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.menu-vertical {
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 200px;
+    background-color: #d9cf85;
+}
+
+.menu-horizontal li:hover .menu-vertical {
+    display: block;
+}
+
+footer {
+    padding: 10px;
+    width: 100%;
+    height: 100px;
+    background-color: #69d0b3;
+    bottom: 0;
+    position: fixed;
+}
+
+footer p {
+   
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
