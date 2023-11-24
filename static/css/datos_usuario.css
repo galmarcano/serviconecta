@@ -12,6 +12,8 @@ article {
 button {
 
     background-color: #69d0b3;
+    margin: 0 auto; /* Establece márgenes automáticos para centrar horizontalmente */
+    display: block; /* Hace que el botón sea un bloque para que los márgenes automáticos tengan efecto */
 
 }
 
