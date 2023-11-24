@@ -24,6 +24,8 @@ p{
 }
 
 section{
+    max-width: 100%;
+    justify-content: center;
     display: flex; 
     margin-bottom: 15%;
 }
@@ -32,13 +34,15 @@ article{
     display: flex;  
     text-align: center;
     flex-direction: column;
-    max-width: 470px;
+    width: 470px;
+    max-width: 100%;
     margin: 2%;
     
 }
 
 form .soport1{
     display: flex;
+    margin: 4%;
 }
 
 
@@ -108,3 +112,13 @@ form .correo_sop{
     height: 100px;
 }
 
+
+@media (max-width: 850px) {
+    section {
+        display: flex;
+        flex-direction: column;
+      } 
+
+     
+
+     }

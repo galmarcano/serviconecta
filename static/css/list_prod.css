@@ -71,7 +71,7 @@ p {
 @media (max-width: 850px) {
     .principal {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
     
     }
   
