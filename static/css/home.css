@@ -1,8 +1,34 @@
-.card-img-top {
-    height: 200px;
-    width: auto; /* Ancho ajustado automáticamente */
-    max-width: none; /* Permitir que el ancho sea mayor si es necesario */
-    margin: auto; 
+.tarjetas{
+    
+    flex-direction: row;
+    margin: 30px;
+}
+
+.tarjeta_conocenos .subtarjeta{
+    
+    border: solid;
+    width:120px ;
+    height:130px ;
 }
 
 
+
+img{
+    
+    height: 100px;
+    width: 130px;
+    border-radius: 10px;
+}
+
+.titulos{
+    text-align: center;
+}
+
+h5{
+    font-size: 24px;
+
+}
+
+p{
+    font-size: 18px;
+}
