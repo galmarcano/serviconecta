@@ -18,16 +18,15 @@ h2{
 
 p{
     font-size: 18px;   
-    
-    
   
 }
+
 
 section{
     max-width: 100%;
     justify-content: center;
     display: flex; 
-    margin-bottom: 15%;
+    margin: 6%;
 }
 
 article{
@@ -119,6 +118,20 @@ form .correo_sop{
         flex-direction: column;
       } 
 
-     
+      form{
+        flex-direction: column;
+      }
+      
+    .soport1{
+        flex-direction: column;
+        margin-left: 3%;
+    }
+    
+    .soport2{
+        flex-direction: column;
+    }.soport3{
+        flex-direction: column;
+    }
+
 
      }
