@@ -1,0 +1,8 @@
+.card-img-top {
+    height: 200px;
+    width: auto; /* Ancho ajustado automáticamente */
+    max-width: none; /* Permitir que el ancho sea mayor si es necesario */
+    margin: auto; 
+}
+
+
