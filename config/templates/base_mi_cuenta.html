@@ -9,8 +9,8 @@
 {% block panel_lateral %}
 <main>
 
-    <div id="base">
-        <ul>
+    <div id="baseMicuenta">
+        <ul class="miCuenta">
             <li><a href="/datos_usuario">Datos usuario</a></li>
             <li><a href="/mis_emprendimientos">Mis emprendimientos</a></li>
             <li><a href="/create">Crear emprendimiento</a></li>
@@ -23,12 +23,10 @@
     </div>
     <form id="eliminar-cuenta-form" method="post" action="{% url 'eliminar_cuenta' %}">
         {% csrf_token %}
-        <button type="button" onclick="confirmarEliminacion()">Eliminar cuenta</button>
+        <button  class="buttonEliminacion" type="button" onclick="confirmarEliminacion()">Eliminar cuenta</button>
         <input type="hidden" name="confirmar_eliminar" value="True">
     </form>
 </main>
-
-
 
 
 

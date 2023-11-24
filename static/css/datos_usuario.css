@@ -9,15 +9,15 @@ article {
 
 }
 
-button {
+.buttonEliminacion {
 
     background-color: #69d0b3;
-    margin: 0 auto; /* Establece márgenes automáticos para centrar horizontalmente */
-    display: block; /* Hace que el botón sea un bloque para que los márgenes automáticos tengan efecto */
+    margin: 0 auto; 
+    display: block;
 
 }
 
-#base ul {
+#baseMicuenta ul{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -40,6 +40,9 @@ button {
     list-style-type: none;
     padding-bottom: 40px;
 }
+.buttonDatos {
+background-color:#69d0b3;
+}
 
 .descripcion {
     padding-bottom: 20px;
@@ -47,7 +50,7 @@ button {
 
 @media (max-width: 600px) {
   
-#base ul { 
+#baseMicuenta ul{ 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
