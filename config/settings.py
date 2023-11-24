@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fisv(%&0wnko@wqrev2^if-u-^@ad%oka1j#=m^mqporgp35@6
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 X_FRAME_OPTIONS = '*'
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -77,14 +78,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'delmmarc_serviconecta',
+#        'HOST': 'postgresql-delmmarc.alwaysdata.net',
+#        'USER': 'delmmarc_serviconecta',
+#        'PASSWORD': 'ConecT4.2!'
+#    }
+#}
+
+#PARA DEPLOY EN HEROKU
+import dj_database_url
+from decouple import config
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'delmmarc_serviconecta',
-        'HOST': 'postgresql-delmmarc.alwaysdata.net',
-        'USER': 'delmmarc_serviconecta',
-        'PASSWORD': 'ConecT4.2!'
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+
 }
 
 
@@ -125,11 +136,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 #STATIC_URL = '/static/'
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
