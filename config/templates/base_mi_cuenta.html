@@ -7,32 +7,42 @@
 
 
 {% block panel_lateral %}
+<main>
 
-<ul>
-    <li><a href="/datos_usuario">Datos usuario</a></li>
-    <li><a href="/mis_emprendimientos">Mis emprendimientos</a></li>
-    <li><a href="/create">Crear emprendimiento</a></li>
-    <li><a href="/mis_productos">Mis productos</a></li>
-    <li><a href="/mi_cuenta_create_prod">Crear producto</a></li>
-    <li><a href="#">Mis compras</a></li>
-    <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
+    <div id="base">
+        <ul>
+            <li><a href="/datos_usuario">Datos usuario</a></li>
+            <li><a href="/mis_emprendimientos">Mis emprendimientos</a></li>
+            <li><a href="/create">Crear emprendimiento</a></li>
+            <li><a href="/mis_productos">Mis productos</a></li>
+            <li><a href="/mi_cuenta_create_prod">Crear producto</a></li>
+            <li><a href="#">Mis compras</a></li>
+            <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
+        </ul>
+     
+    </div>
     <form id="eliminar-cuenta-form" method="post" action="{% url 'eliminar_cuenta' %}">
         {% csrf_token %}
         <button type="button" onclick="confirmarEliminacion()">Eliminar cuenta</button>
         <input type="hidden" name="confirmar_eliminar" value="True">
     </form>
+</main>
 
-    <script>
-        function confirmarEliminacion() {
-            var confirmacion = confirm('¿Estás seguro de eliminar tu cuenta?\nEsta acción eliminará todos tus emprendimientos y productos asociados, si los hay');
-            
-            if (confirmacion) {
-                document.getElementById('eliminar-cuenta-form').submit();
-            }
+
+
+
+
+<script>
+    function confirmarEliminacion() {
+        var confirmacion = confirm('¿Estás seguro de eliminar tu cuenta?\nEsta acción eliminará todos tus emprendimientos y productos asociados, si los hay');
+
+        if (confirmacion) {
+            document.getElementById('eliminar-cuenta-form').submit();
         }
-    </script>
+    }
+</script>
 
-    {% endblock %}
+{% endblock %}
 
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
