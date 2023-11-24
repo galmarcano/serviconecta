@@ -523,3 +523,23 @@ def v_mi_cuenta_delete_prod(request, emprendimiento_id, product_id):
         'producto': producto,
     }
     return render(request, 'mi_cuenta_delete_prod.html', context)
+
+def v_eliminar_cuenta(request):
+    if request.method == 'POST':
+        # Si se envió el formulario de confirmación, entonces proceder con la eliminación
+        if request.POST.get('confirmar_eliminar') == 'True':
+            # Obtener el UserProfile asociado al usuario
+            user_profile = request.user.user_profile
+
+            # Eliminar el Emprendimiento asociado al usuario
+            Emprendimiento.objects.filter(usuario_emprendedor=request.user).delete()
+
+            # Eliminar los Productos asociados a los emprendimientos del usuario
+            Producto.objects.filter(id_emprendimiento__usuario_emprendedor=request.user).delete()
+
+            # Eliminar el UserProfile y la cuenta de usuario
+            user_profile.delete()
+            request.user.delete()
+
+            return redirect("/")
+    return render(request, 'eliminar_cuenta.html', {'confirmar_eliminar': True})

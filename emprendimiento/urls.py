@@ -5,7 +5,7 @@ from .views import v_support, v_logout, v_login, v_home, v_detail_ent
 from .views import v_registro_usuario #probando para registro de usuarios
 from .views import v_datos_usuario,v_mis_emprendimientos, v_mis_productos
 from .views import v_mi_cuenta_det_emprend, v_mi_cuenta_create_prod, v_mi_cuenta_act_emprend, v_mi_cuenta_delete_emprend
-from .views import v_mi_cuenta_delete_prod #para mi cuenta
+from .views import v_mi_cuenta_delete_prod, v_eliminar_cuenta #para mi cuenta
 
 urlpatterns = [
     path('', v_home, name="home"),
@@ -37,6 +37,8 @@ urlpatterns = [
     path('mi_cuenta_act_emprend/<int:emprendimiento_id>/', v_mi_cuenta_act_emprend, name="mi_cuenta_act_emprend"),
     path('mi_cuenta_delete_emprend/<int:emprendimiento_id>/', v_mi_cuenta_delete_emprend, name="mi_cuenta_delete_emprend"),
     path('mi_cuenta_delete_prod/<int:emprendimiento_id>/<int:product_id>/', v_mi_cuenta_delete_prod, name="mi_cuenta_delete_prod"),
+    path('eliminar_cuenta/', v_eliminar_cuenta, name="eliminar_cuenta"),
+   
 
 
 ]

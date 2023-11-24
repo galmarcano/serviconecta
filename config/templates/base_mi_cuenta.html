@@ -16,9 +16,23 @@
     <li><a href="/mi_cuenta_create_prod">Crear producto</a></li>
     <li><a href="#">Mis compras</a></li>
     <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
-    <li><a href="#">Eliminar cuenta</a></li>
+    <form id="eliminar-cuenta-form" method="post" action="{% url 'eliminar_cuenta' %}">
+        {% csrf_token %}
+        <button type="button" onclick="confirmarEliminacion()">Eliminar cuenta</button>
+        <input type="hidden" name="confirmar_eliminar" value="True">
+    </form>
 
-{% endblock %}
+    <script>
+        function confirmarEliminacion() {
+            var confirmacion = confirm('¿Estás seguro de eliminar tu cuenta?\nEsta acción eliminará todos tus emprendimientos y productos asociados, si los hay');
+            
+            if (confirmacion) {
+                document.getElementById('eliminar-cuenta-form').submit();
+            }
+        }
+    </script>
 
-{% block content %}
-{% endblock %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
