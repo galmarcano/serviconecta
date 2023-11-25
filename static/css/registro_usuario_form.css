@@ -7,17 +7,28 @@
 
 
 .form-register {
-    width: 400px;
-    background:#d9cf85 ;
-    padding: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    border-radius: 18px;
-    border: solid 2px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    box-shadow: 7px 13 px 37px #000;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 16px;
+    background-color:#d9cf85 ;
+    border: 1px solid ;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px var(--aura);
+    min-width: 280px;
+    max-width: 400px;
+    width: 100%;
+    padding: 32px;
 }
+
+.centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+
+
 .form-register h2 {
  
     font-size: 24px;

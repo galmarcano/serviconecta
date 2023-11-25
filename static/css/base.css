@@ -1,4 +1,6 @@
 base{
+    margin: 0;
+    padding: 0;
     width: 100%;
 }
 
@@ -7,7 +9,6 @@ base{
 #logo_servi {
     width: 100px;
     height: 100px;
-    background: #d9cf85;
 }
 
 
@@ -38,9 +39,11 @@ base{
     justify-content: space-between;
     display: flex;
     align-content: center;
+    background-color: #d9cf85 !important;
 
 
 }
+
 
 .navbar a {
     font-size: 18px;
@@ -81,6 +84,7 @@ base{
     display: block;
 }
 
+/*
 footer {
     display: flex;
     justify-content: center;
@@ -93,7 +97,20 @@ footer {
     text-align: center;
     margin-top: 2%;
 }
+*/
 
+.base_footer {
+    text-align: center !important;
+    padding: 10px !important;
+    background-color: #d9cf85 !important;
+    width: 100% !important;
+    margin-top: auto !important;
+
+}
+
+#nombre_app_servi {
+    font-weight: bold;
+}
 
 
 
