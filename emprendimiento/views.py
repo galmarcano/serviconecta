@@ -214,7 +214,7 @@ def v_update_prod(request, emprendimiento_id, product_id):
 
             if action == 'guardar-cambios':
                 print("Guardando cambios, redirigiendo")
-                return HttpResponseRedirect(reverse('mis_productos', args=[emprendimiento_id, product_id]))
+                return HttpResponseRedirect(reverse('mis_productos'))
             elif action == 'eliminar-producto':
                 producto.delete()
                 print("Producto eliminado, redirigiendo")
