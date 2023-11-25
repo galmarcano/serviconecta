@@ -8,11 +8,11 @@
 
 {% block content %}
 
-<section class="form-register">
-    <h2>Regístrate</h2>
-
-    <form method="post" action="{% url 'registro_usuario' %}">
+<div class="centering">
+    <form method="post" action="{% url 'registro_usuario' %}" class="form-register">
         {% csrf_token %}
+        <h2>Regístrate</h2>
+
         <div><label for="{{ form.first_name.id_for_label }}">Nombre*</label>
             {{ form.first_name }}</div>
         <div><label for="{{ form.last_name.id_for_label }}">Apellido*</label>
@@ -32,11 +32,10 @@
         <article>
             <button class="botons" type="submit">Registrarse</button>
         </article>
-        
+
     </form>
+</div>
 
-
-</section>
 
 {% if form.errors %}
 <div class="error">
