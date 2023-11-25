@@ -23,11 +23,14 @@
             alt="{{ emprendimiento.nombre_emprendimiento }}">
         {% endif %}
         <div class="titulos">
-            <h5 class="card-title">{{ emprendimiento.nombre_emprendimiento }}</h5>
-            <p class="card-text">{{ emprendimiento.descripcion_emprendimiento }}</p>
+            <h5 class="titulosh">{{ emprendimiento.nombre_emprendimiento }}</h5>
+            <p class="titulosp">{{ emprendimiento.descripcion_emprendimiento }}</p>
         </div>
-        <a class="btn btn-primary" href="{% url 'detalle_emprendimiento' emprendimiento.id_emprendimiento %}"
-            role="button">Conócenos</a>
+
+        <button><b><a class="conocenos" href="{% url 'detalle_emprendimiento' emprendimiento.id_emprendimiento %}"
+            >Conócenos</a></b> <span></span>
+        </button>
+        
     </div>
 
     {% for product in emprendimiento.producto_set.all|slice:":3" %}
@@ -38,15 +41,14 @@
         No hay imagen disponible
         {% endif %}
         <div class="titulos">
-            <h5 class="card-title">{{ product.nombre_producto }}</h5>
-            <p class="card-text">{{ product.descripcion_producto }}</p>
+            <h5 class="titulosh">{{ product.nombre_producto }}</h5>
+            <p class="titulosp">{{ product.descripcion_producto }}</p>
         </div>
     </div>
     {% endfor %}
 
 
     {% endfor %}
-
 
 </div>
 
