@@ -140,6 +140,32 @@ def v_list_prod(request):
     }
     return render(request, 'list_prod.html', context)
 
+@login_required(login_url="/iniciar_sesion")
+def v_agregar_al_carrito(request, producto_id):
+    try:
+        # Obtén el producto por su ID
+        producto = Producto.objects.get(id_producto=producto_id)
+        usuario_emprendedor = request.user
+
+        # Verifica si el producto pertenece al usuario actual
+        if producto.id_emprendimiento.usuario_emprendedor == usuario_emprendedor:
+            messages.warning(request, 'No puedes adquirir tus propios productos')
+            return redirect('list_prod')
+
+        # Lógica para agregar el producto al carrito
+        # ...
+
+        messages.success(request, 'Producto agregado al carrito exitosamente.')
+        return redirect('list_prod')
+
+    except Producto.DoesNotExist:
+        messages.error(request, 'El producto no existe.')
+        return redirect('list_prod')
+        
+
+from django.http import HttpResponse
+def v_compra_productos(request):
+    return HttpResponse('<script>alert("Debes iniciar sesión para comprar productos."); window.location.href = "/iniciar_sesion";</script>')
 
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_producto', login_url="/")

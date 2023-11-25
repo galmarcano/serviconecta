@@ -57,9 +57,9 @@
             <button type="submit" class="btn" name="action" value="guardar-cambios">
                 <b>Guardar cambios</b>
             </button>
-            <button type="submit" class="btn" name="action" value="eliminar-producto"
-                onclick="return confirm('¿Está seguro de eliminar este producto?');">
-                <b>Eliminar producto</b>
+            <button type="button" class="btn">
+                <a
+                    href="{% url 'mi_cuenta_delete_prod' producto.id_emprendimiento.id_emprendimiento producto.id_producto %}">Eliminar</a>
             </button>
         </section>
 
