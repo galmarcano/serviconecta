@@ -4,14 +4,17 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/mis_productos.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/base_mi_cuenta.css' %}">
+
 {% endblock %}
 
 {% block content %}
 
 <div class="principal">
     <!-- encargada Yilda, puedes editar acá -->
+    {% if products %}
     {% for e in products %}
-    <div class="container">
+    <div class="container" id="container_mis_productos">
         {% if e.img_producto %}
         <image src="{{ e.img_producto.url }}" alt="{{ e.nombre_producto }}" class="img_prod">
             {% else %}
@@ -21,10 +24,17 @@
             <p>Vendido por: {{ e.id_emprendimiento.nombre_emprendimiento }}</p>
             <p>Precio: {{ e.precio_producto }} $</p>
             <p>Stock: {{ e.stock_producto }}</p>
-            <a class="btn btn-danger" href="{% url 'update_prod' e.id_emprendimiento.id_emprendimiento e.id_producto %}">Actualizar</a>
-            <a class="btn btn-danger" href="{% url 'mi_cuenta_delete_prod' e.id_emprendimiento.id_emprendimiento e.id_producto %}">Eliminar</a>
-            </div>
+            <a class="btn btn-danger"
+                href="{% url 'update_prod' e.id_emprendimiento.id_emprendimiento e.id_producto %}">Actualizar</a>
+            <a class="btn btn-danger"
+                href="{% url 'mi_cuenta_delete_prod' e.id_emprendimiento.id_emprendimiento e.id_producto %}">Eliminar</a>
+    </div>
     {% endfor %}
+    {% else %}
+    <div id="centrar_no_registros">
+        <p class="text-center">Aún no has registrado emprendimientos y/o productos en tu cuenta.</p>
+    {% endif %}
+    </div>
 </div>
 
 
