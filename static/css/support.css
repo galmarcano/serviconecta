@@ -92,6 +92,8 @@ label{
     background-color:#d9cf85 ;
     padding: 1%;
     border-radius: 7%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 
 }
 
@@ -120,6 +122,8 @@ input{
 
     #soporte-form{
         flex-direction: column;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
       }
       
     .soport1{

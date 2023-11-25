@@ -12,27 +12,32 @@
 
 <main class="mainhome">
 
-   <article>
+    <article>
 
-    <span> SERVICONECTA: "DE LA WEB A TUS MANOS"</span>
-    
-   </article>
-       
-    <p class="parrafo">En nuestra app contarás con la facilidad de encontrar el producto ó servicio que 
-        buscas desde la comodidad de tu hogar con ¡tan solo un click!</p> 
+        <span> SERVICONECTA: "DE LA WEB A TUS MANOS"</span>
 
-        <section>
-  
-            <img src="/static/images/logoserviconecta.png" alt="SERVICONECTA">
+    </article>
+
+    <p class="parrafo">En nuestra app contarás con la facilidad de encontrar el producto ó servicio que
+        buscas desde la comodidad de tu hogar con ¡tan solo un click!</p>
+
+    <section>
+        {% for emprendimiento in emprendimientos %} 
+        {% if emprendimiento.img_emprendimiento %}
+        <img src="{{ emprendimiento.img_emprendimiento.url }}"
+            alt="{{ emprendimiento.nombre_emprendimiento }}">
+        {% endif %}
+        {% endfor %}
+        <!-- <img src="/static/images/logoserviconecta.png" alt="SERVICONECTA">
             <img src="/static/images/Logocarolscake.jpg" alt="Logocarolscake">
             <img src="/static/images/logolamasa.jpg" alt="logolamasa">
-            <img src="/static/images/logodaniela.jpg" alt="logodaniela">
-            
-        </section>  
+            <img src="/static/images/logodaniela.jpg" alt="logodaniela">-->
+
+    </section>
 </main>
 
 
-   
 
 
-    {% endblock %}
+
+{% endblock %}

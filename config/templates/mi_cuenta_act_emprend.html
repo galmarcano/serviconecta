@@ -3,23 +3,26 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/mi_cuenta_act_emprend.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/base_mi_cuenta.css' %}">
+
 {% endblock %}
 
 
 {% block content %}
 
-<section>
-    <h1>Actualizar Emprendimiento</h1>
-</section>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <article>
 
+        <section>
+            <h1>Actualizar Emprendimiento</h1>
+        </section>
 
         <div class="primeraparte">
             <div class="parte1">
-                {% if formedicion.img_emprendimiento %}
-                <img src="{{ formedicion.img_emprendimiento.url }}" alt="{{ formedicion.nombre_emprendimiento }}" class="img_ent">
+                {% if img_emprendimiento_url %}
+                <img src="{{ img_emprendimiento_url }}" alt="{{ id_emprendimiento }}" class="img_ent">
                 {% else %}
                 No hay imagen disponible
                 {% endif %}

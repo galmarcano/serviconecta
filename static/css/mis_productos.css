@@ -16,9 +16,9 @@ h1{
 p{
     font-size: 18px;
 }
-.container_mis_productos {
+#container_mis_productos {
     text-align: center;
-    background-color: rgba(155, 218, 179, 0.5);
+    background-color: rgba(155, 218, 179, 0.5) !important;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display:flow-root;
@@ -29,7 +29,6 @@ p{
     flex-direction: row-reverse; /* Cambiado a fila para que los elementos estén uno al lado del otro */
     align-items: center; /* Centra los elementos verticalmente en el contenedor */
     border-radius: 7%;
-    border: solid;
 }
 
 .img_prod {
@@ -38,6 +37,13 @@ p{
     margin-bottom: 10px; /* Añadido margen inferior para separar la imagen del texto */
 }
 
+.nombre_prod {
+    color: #333;
+}
+
+.desc_prod {
+    color: #666;
+}
 
 .btn {
     display: inline-block;

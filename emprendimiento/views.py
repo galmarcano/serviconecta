@@ -188,7 +188,7 @@ def v_create_prod(request, id_emprendimiento):
                 return HttpResponseRedirect(request.path_info)
             elif action == 'finalizar':
                 # Si se hace clic en "Finalizar", redirigir a la página de inicio
-                return HttpResponseRedirect("/")
+                return redirect('mis_productos')
 
     context = {
         'formulario': ProductoForm(),
@@ -232,6 +232,8 @@ def v_update_prod(request, emprendimiento_id, product_id):
             'formedicion': ProductoForm(instance=producto),
             'nombre_emprendimiento': emprendimiento.nombre_emprendimiento,
             'producto': producto,
+            'img_producto_url': producto.img_producto.url if producto.img_producto else None,
+
             }
         print("Mostrando formulario de edición")
         return render(request, 'update_prod.html', context)
@@ -324,7 +326,7 @@ def v_home(request):
     # No necesita permisos
     # Ordenando emprendimientos por fecha de creación en orden descendente y limitando a 3
     emprendimientos = Emprendimiento.objects.all().order_by(
-        '-fecha_creacion')[:3]
+        '-fecha_creacion')[:6]
     context = {
         'emprendimientos': emprendimientos,
         'products': Producto.objects.all()
@@ -536,7 +538,8 @@ def v_mi_cuenta_act_emprend(request, emprendimiento_id):
         context = {
             'id_emprendimiento': emprendi.nombre_emprendimiento,
             'id_emprendedor': emprendedor.username,
-            'formedicion': EmprendimientoForm(instance=emprendi)
+            'formedicion': EmprendimientoForm(instance=emprendi),
+            'img_emprendimiento_url': emprendi.img_emprendimiento.url if emprendi.img_emprendimiento else None,
         }
         return render(request, 'mi_cuenta_act_emprend.html', context)
 

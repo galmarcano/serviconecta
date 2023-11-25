@@ -7,18 +7,19 @@
 
 
 {% block content %}
-<section>
-    <h1 class="h1producto" >Actualizar Producto</h1>
-</section>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <article>
+        <section>
+            <h1 class="h1producto" >Actualizar Producto</h1>
+        </section>
+        
 
         <div class="primeraparte">
             <div class="parte1">
-                {% if formedicion.img_producto %}
-                <img class="imagenlogocaro" src="/static/images/Logocarolscake.jpg" alt="Logocarolscake" class="img_ent">
+                {% if img_producto_url %}
+                <img class="imagenlogocaro" src="{{ img_producto_url }}" alt="{{ nombre_producto }} " >
                 {% else %}
                 No hay imagen disponible
                 {% endif %}

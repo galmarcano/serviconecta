@@ -21,11 +21,11 @@
     padding: 32px;
 }
 
-.centering {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2%;
+div .centering {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 2% !important;
 }
 
 

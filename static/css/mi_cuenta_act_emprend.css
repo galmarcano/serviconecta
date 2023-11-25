@@ -1,21 +1,47 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-h1{
-    font-size: 20px;
-    font-family: 'Inter', sans-serif;
-    padding-top: 40px;
-    padding-bottom: 30px;
-    padding-left: 3%;
+.h1producto{
+    color: #69d0b3;
+    font-size: 40px;
+     text-shadow: 8px 8px 8px rgb(16, 17, 17);
+     font-style: italic;
+     text-align: center;
+     font-size: 40px;
+     padding-right: 20%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+   
 }
 
 article{
-    padding-left: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color:#d9cf85;
+    justify-content: center;
+    border-radius: 5%;
+    margin-bottom: 5%;
+   
 }
+
+@media (max-width: 600px) {
+    article {
+        display: flex;
+        flex-direction: column;
+      }
+}
+.imagenlogocaro{
+    max-width: 100px;
+    margin-top: 50%;
+}
+
+
 
 form, article .primeraparte{
     display: flex;
     align-items: flex-end;
+    
     
     
 }
@@ -59,6 +85,10 @@ article img{
     border: solid 2px;
 }
 
+.img_ent {
+    max-width: 100px;
+    margin-top: 50%;
+}
 label{
     width: 100px;
 
@@ -148,6 +178,7 @@ button{
     background-color: #69d0b3;
     margin: 0 auto; /* Establece márgenes automáticos para centrar horizontalmente */
     display: block; /* Hace que el botón sea un bloque para que los márgenes automáticos tengan efecto */
+   
 
 }
 
@@ -175,76 +206,4 @@ button{
         margin-left: 20px;
         margin-right: 50px;
      }
-}
-article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: aqua;
-
-
-}
-
-.buttonEliminacion {
-
-    background-color: #69d0b3;
-    margin: 0 auto; 
-    display: block;
-
-}
-
-#baseMicuenta ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: aqua;
-    list-style-type: none;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-
-}
-
-#eliminar-cuenta-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: aqua;
-    list-style-type: none;
-    padding-bottom: 40px;
-}
-.buttonDatos {
-background-color:#69d0b3;
-}
-
-.descripcion {
-    padding-bottom: 20px;
-}
-
-@media (max-width: 600px) {
-  
-#baseMicuenta ul{ 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
- }
-#eliminar-cuenta-form  {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-}
-
 }
