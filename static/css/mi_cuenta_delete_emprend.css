@@ -5,8 +5,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+ 
 }
 
+.btn-primary {
+    background-color:#69d0b3 ;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
 
 button {
     min-width: 40vh;
@@ -16,6 +22,7 @@ button {
     justify-content: center;
     margin-top: 10%;
     margin-bottom: 10%;
+    
 }
 
 #delete_ent {
@@ -24,6 +31,8 @@ button {
     align-items: center;
     justify-content: center;
     text-align: center;
+   background-color: #d9cf85;
+   border-radius: 5%;
 }
 
 article {
@@ -98,9 +107,24 @@ background-color:#69d0b3;
 }
 
 }
-#h1_delete_ent,
+#h1_delete_ent
+
+{  
+    color: #69d0b3;
+    font-size: 40px;
+     text-shadow: 8px 8px 8px rgb(16, 17, 17);
+     font-style: italic;
+     text-align: center;
+     padding-right: 10%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+
+}
 #h2_delete_ent{
-    font-size: 100%;
+color: #69b3d0;
+
 }
 
 #logo_ent {

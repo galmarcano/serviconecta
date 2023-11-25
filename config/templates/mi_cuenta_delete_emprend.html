@@ -14,17 +14,19 @@
 <main id="main_delete_ent">
 
     <div id="delete_ent">
+        <ul class="eliminar">
+            <ol><a href="#emprendimientos">Actualizar emprendimiento</a></ol>
+            <ol><a href="#productos">Eliminar emprendimiento</a></ol>
+        </ul>
 
-        <ol><a href="#emprendimientos">Actualizar emprendimiento</a></ol>
-        <a href="#productos">Eliminar emprendimiento</a>
 
         <h1 id="h1_delete_ent">¿Estás seguro de eliminar tu emprendimiento?</h1>
         <h2 id="h2_delete_ent">{{ emprendi.nombre_emprendimiento }}</h2>
 
         {% if emprendi.img_emprendimiento %}
-            <img src="{{ emprendi.img_emprendimiento.url }}" alt="{{ emprendi.nombre_emprendimiento }}" id="logo_ent">
+        <img src="{{ emprendi.img_emprendimiento.url }}" alt="{{ emprendi.nombre_emprendimiento }}" id="logo_ent">
         {% endif %}
-        
+
         <form method="post" action="{% url 'delete_ent' emprendimiento_id=emprendi.id_emprendimiento %}">
             {% csrf_token %}
 
@@ -38,4 +40,4 @@
 
 
 
-{% endblock %}
+    {% endblock %}
