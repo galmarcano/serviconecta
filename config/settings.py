@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fisv(%&0wnko@wqrev2^if-u-^@ad%oka1j#=m^mqporgp35@6
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 X_FRAME_OPTIONS = '*'
