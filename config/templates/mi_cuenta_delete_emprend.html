@@ -12,8 +12,33 @@
 
 {% block content %}
 
+<div class="card text-center">
+    <div class="card-header">
+        {{ nombre_emprendimiento }}
+    </div>
+    <div class="card-body">
+            <div class="codigo">
+                <h5>¿Estás seguro de eliminar este emprendimiento?</h5>
+                <h6>{{ emprendi.nombre_emprendimiento }}</h6>
+                {% if emprendi.img_emprendimiento %}
+                <img src="{{ emprendi.img_emprendimiento.url }}" alt="{{ emprendi.nombre_emprendimiento }}" id="logo_ent">
+                {% else %}
+                No hay imagen disponible
+                {% endif %}
+            </div>
 
-<main id="main_delete_ent">
+            <form method="post" action="{% url 'delete_ent' emprendimiento_id=emprendi.id_emprendimiento %}">
+                {% csrf_token %}
+    
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Confirmar</button>
+                </div>
+            </form>
+        </div>
+</div>
+
+
+<!--<main id="main_delete_ent">
 
     <div id="delete_ent">
         <ul class="eliminar">
@@ -38,7 +63,7 @@
         </form>
 
     </div>
-
+-->
 
 
 

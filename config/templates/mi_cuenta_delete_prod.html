@@ -1,4 +1,3 @@
-
 {% extends 'base_mi_cuenta.html' %}
 
 
@@ -12,7 +11,34 @@
 {% block content %}
 
 
-<main id="main_delete_ent">
+<div class="card text-center">
+    <div class="card-header">
+        {{ nombre_emprendimiento }}
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Mis productos</h4>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="codigo">
+                <h5>¿Estás seguro de eliminar este producto?</h5>
+                <h6>{{ codigo_producto }}: {{ nombre_producto }}</h6>
+                {% if producto.img_producto %}
+                <img src="{{ producto.img_producto.url }}" alt="{{ product.nombre_producto }}" id="logo_ent">
+                {% else %}
+                No hay imagen disponible
+                {% endif %}
+            </div>
+
+            <div class="d-grid gap-2" id="delete_ent">
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!--<main id="main_delete_ent">
 
     <div id="delete_ent">
 
@@ -39,7 +65,7 @@
         </div>
         <form method="post">
             {% csrf_token %}
-            
+
             <div class="codigo">
                 <h2>¿Estás seguro de eliminar este producto?</h2>
                 <h2>{{ codigo_producto }}: {{ nombre_producto }}</h2>
@@ -56,8 +82,8 @@
         </form>
 
     </div>
+-->
 
 
 
-
-{% endblock %}
+    {% endblock %}
