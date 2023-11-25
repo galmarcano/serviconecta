@@ -8,7 +8,7 @@
 
 {% block content %}
 <section>
-    <h1>Actualizar Producto</h1>
+    <h1 class="h1producto" >Actualizar Producto</h1>
 </section>
 
 <form method="post" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
         <div class="primeraparte">
             <div class="parte1">
                 {% if formedicion.img_producto %}
-                <img src="{{ formedicion.img_producto.url }}" alt="{{ formedicion.nombre_producto }}" class="img_ent">
+                <img class="imagenlogocaro" src="/static/images/Logocarolscake.jpg" alt="Logocarolscake" class="img_ent">
                 {% else %}
                 No hay imagen disponible
                 {% endif %}
