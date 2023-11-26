@@ -125,12 +125,12 @@ h1 {
 }
 
 
-.btn {
+.login_button {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
   }
   
-  .btn {
+  .login_button {
     width: 130px;
     height: 40px;
     border-radius: 50px;
@@ -146,11 +146,11 @@ h1 {
     margin-left: 29%;
   }
   
-  .btn:hover {
+  .login_button:hover {
     transform: translateY(3px);
     box-shadow: none;
   }
   
-  .btn:active {
+  .login_button:active {
     opacity: 0.5;
   }

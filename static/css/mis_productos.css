@@ -1,49 +1,54 @@
 .principal {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', 'Franklin Gothic Medium';
+    background-color:white ;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    
     flex-wrap: wrap;
-    max-width: auto;
-
+}
+h1{
+    font-size: 24px;
 }
 
-.container {
+p{
+    font-size: 18px;
+}
+#container_mis_productos {
     text-align: center;
-    font-size: 10px;
-    background-color: rgba(155, 218, 179, 0.5);
+    background-color: rgba(155, 218, 179, 0.5) !important;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display:flow-root;
     margin: 10px;
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 300px;
+    max-height: 550px;
     flex: 1 0 auto;
     flex-direction: row-reverse; /* Cambiado a fila para que los elementos estén uno al lado del otro */
     align-items: center; /* Centra los elementos verticalmente en el contenedor */
     border-radius: 7%;
-    border: solid;
-    
-
 }
-    
 
 .img_prod {
-    width: 50px; /* Ajustado para ocupar el ancho completo del contenedor */
+    width: 100; /* Ajustado para ocupar el ancho completo del contenedor */
     height: 100px;
     margin-bottom: 10px; /* Añadido margen inferior para separar la imagen del texto */
 }
 
-h1 {
-    font-size: 24px;
+.nombre_prod {
     color: #333;
 }
 
-p {
-    font-size: 18px;
+.desc_prod {
     color: #666;
 }
 
 .btn {
     display: inline-block;
-    background-color:#69d0b3;
+    padding: 10px 20px;
+    background-color:#69D0B3;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -54,20 +59,7 @@ p {
     background-color:#69d0b3;
 }
 
-
-@media (max-width: 850px) {
-    .principal {
-        display: flex;
-        flex-direction: column;
-    
-    }
-  
-   
-  
-  
-  }
-
-  button {
+button {
 
     background-color: #69d0b3;
     margin: 0 auto; /* Establece márgenes automáticos para centrar horizontalmente */

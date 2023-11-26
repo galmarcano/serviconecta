@@ -7,25 +7,44 @@
 
 
 .form-register {
-    width: 400px;
-    background:#d9cf85 ;
-    padding: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    border-radius: 18px;
-    border: solid 2px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    box-shadow: 7px 13 px 37px #000;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 16px;
+    background-color:#d9cf85 ;
+    border: 1px solid ;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px var(--aura);
+    min-width: 280px;
+    max-width: 400px;
+    width: 100%;
+    padding: 32px;
+    text-align: center;
 }
+.form-group {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    margin-bottom: 16px;
+}
+
+
+div .centering {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 2% !important;
+}
+
+
 .form-register h2 {
  
     font-size: 24px;
     text-align: center;
 }
-div{
+div .centering{
     display: flex;
     margin-bottom: 5px;
+    align-items: center;
 }
 
 .controls {
@@ -51,6 +70,7 @@ li{
     text-align: center;
     font-size: 20 px;
     line-height: 40px;
+    justify-content: center;
    
 
 }
@@ -79,14 +99,6 @@ article{
        
 }
 
-label{
-    width: 160px;
-}
-
-input{
-    width: 190px;
-    border-radius: 4%;
-}
 
 
 ul {

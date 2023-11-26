@@ -39,13 +39,13 @@ article{
     
 }
 
-form .soport1{
+soporte-form .soport1{
     display: flex;
     margin: 4%;
 }
 
 
-button{
+button #support-submit-button{
     margin-top: 5%;
     margin-bottom: 5%;
     justify-items: center;
@@ -54,13 +54,13 @@ button{
 }
 
 
-.btn {
+button #support-submit-button {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
     
   }
   
-  .btn {
+.support-submit-button {
     width: 150px;
     height: 40px;
     border-radius: 50px;
@@ -73,12 +73,12 @@ button{
     color: white;
   }
   
-  .btn:hover {
+.support-submit-button:hover {
     transform: translateY(3px);
     box-shadow: none;
   }
   
-  .btn:active {
+.support-submit-button:active {
     opacity: 0.5;
   }
 
@@ -87,22 +87,24 @@ label{
     width: 165px;
 }
 
-form {
+#soporte-form {
     margin: 1%;
     background-color:#d9cf85 ;
     padding: 1%;
     border-radius: 7%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 
 }
 
 input{
     margin-right: 20px;
 }
-form div{
+#soporte-form div{
     margin-bottom: 2%;
 }
 
-form .correo_sop{
+#soporte-form .correo_sop{
     width: 300px;
 }
 
@@ -118,8 +120,10 @@ form .correo_sop{
         flex-direction: column;
       } 
 
-      form{
+    #soporte-form{
         flex-direction: column;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
       }
       
     .soport1{

@@ -10,47 +10,34 @@
 
 {% block content %}
 
+<main class="mainhome">
 
+    <article>
 
-{% for emprendimiento in emprendimientos %}
+        <span> SERVICONECTA: "DE LA WEB A TUS MANOS"</span>
 
-<div class="tarjetas">
+    </article>
 
+    <p class="parrafo">
+        En nuestra app, disfrutarás de la conveniencia de descubrir productos excepcionales desde la comodidad de tu hogar con tan solo un clic. ¡Explora nuestra exclusiva selección de productos y encuentra justo lo que necesitas!</p>
 
-    <div class="tarjeta_conocenos">
+    <section>
+        {% for emprendimiento in emprendimientos %} 
         {% if emprendimiento.img_emprendimiento %}
-        <img src="{{ emprendimiento.img_emprendimiento.url }}" class="imagentarjeta"
+        <img src="{{ emprendimiento.img_emprendimiento.url }}"
             alt="{{ emprendimiento.nombre_emprendimiento }}">
         {% endif %}
-        <div class="titulos">
-            <h5 class="titulosh">{{ emprendimiento.nombre_emprendimiento }}</h5>
-            <p class="titulosp">{{ emprendimiento.descripcion_emprendimiento }}</p>
-        </div>
+        {% endfor %}
+        <!-- <img src="/static/images/logoserviconecta.png" alt="SERVICONECTA">
+            <img src="/static/images/Logocarolscake.jpg" alt="Logocarolscake">
+            <img src="/static/images/logolamasa.jpg" alt="logolamasa">
+            <img src="/static/images/logodaniela.jpg" alt="logodaniela">-->
 
-        <button><b><a class="conocenos" href="{% url 'detalle_emprendimiento' emprendimiento.id_emprendimiento %}"
-            >Conócenos</a></b> <span></span>
-        </button>
-        
-    </div>
-
-    {% for product in emprendimiento.producto_set.all|slice:":3" %}
-    <div class="subtarjeta">
-        {% if product.img_producto %}
-        <img src="{{ product.img_producto.url }}" class="imagensub" alt="{{ product.nombre_producto }}">
-        {% else %}
-        No hay imagen disponible
-        {% endif %}
-        <div class="titulos">
-            <h5 class="titulosh">{{ product.nombre_producto }}</h5>
-            <p class="titulosp">{{ product.descripcion_producto }}</p>
-        </div>
-    </div>
-    {% endfor %}
+    </section>
+</main>
 
 
-    {% endfor %}
 
-</div>
 
 
 {% endblock %}

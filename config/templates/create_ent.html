@@ -1,9 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base_mi_cuenta.html' %}
 
 
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/create_ent.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/base_mi_cuenta.css' %}">
+
 {% endblock %}
 
 
@@ -12,7 +14,7 @@
 {% block content %}
 
 
-<div id="encabezado">
+<div class="div_create_ent">
 
     <h1>Regístrate</h1>
     <p>{{ usuario_emprendedor }}</p>
@@ -22,7 +24,7 @@
 
 
     <form method="post" enctype="multipart/form-data"
-        action="{% url 'create_ent' %}">
+        action="{% url 'create_ent' %}" id="form_create_ent">
         {% csrf_token %}
 
         <article id="informacion">
@@ -56,7 +58,7 @@
         </article>
 
         <article id="imagenlogo">
-            <div>
+            <div class="div_create_ent">
                 <label for="{{ formulario.img_emprendimiento.id_for_label }}"><b>Seleccionar logo</b></label>
             {{ formulario.img_emprendimiento }}
             </div>

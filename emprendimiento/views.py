@@ -140,6 +140,32 @@ def v_list_prod(request):
     }
     return render(request, 'list_prod.html', context)
 
+@login_required(login_url="/iniciar_sesion")
+def v_agregar_al_carrito(request, producto_id):
+    try:
+        # Obtén el producto por su ID
+        producto = Producto.objects.get(id_producto=producto_id)
+        usuario_emprendedor = request.user
+
+        # Verifica si el producto pertenece al usuario actual
+        if producto.id_emprendimiento.usuario_emprendedor == usuario_emprendedor:
+            messages.warning(request, 'No puedes adquirir tus propios productos')
+            return redirect('list_prod')
+
+        # Lógica para agregar el producto al carrito
+        # ...
+
+        messages.success(request, 'Producto agregado al carrito exitosamente.')
+        return redirect('list_prod')
+
+    except Producto.DoesNotExist:
+        messages.error(request, 'El producto no existe.')
+        return redirect('list_prod')
+        
+
+from django.http import HttpResponse
+def v_compra_productos(request):
+    return HttpResponse('<script>alert("Debes iniciar sesión para comprar productos."); window.location.href = "/iniciar_sesion";</script>')
 
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_producto', login_url="/")
@@ -162,7 +188,7 @@ def v_create_prod(request, id_emprendimiento):
                 return HttpResponseRedirect(request.path_info)
             elif action == 'finalizar':
                 # Si se hace clic en "Finalizar", redirigir a la página de inicio
-                return HttpResponseRedirect("/")
+                return redirect('mis_productos')
 
     context = {
         'formulario': ProductoForm(),
@@ -188,7 +214,7 @@ def v_update_prod(request, emprendimiento_id, product_id):
 
             if action == 'guardar-cambios':
                 print("Guardando cambios, redirigiendo")
-                return HttpResponseRedirect(reverse('mis_productos', args=[emprendimiento_id, product_id]))
+                return HttpResponseRedirect(reverse('mis_productos'))
             elif action == 'eliminar-producto':
                 producto.delete()
                 print("Producto eliminado, redirigiendo")
@@ -206,6 +232,8 @@ def v_update_prod(request, emprendimiento_id, product_id):
             'formedicion': ProductoForm(instance=producto),
             'nombre_emprendimiento': emprendimiento.nombre_emprendimiento,
             'producto': producto,
+            'img_producto_url': producto.img_producto.url if producto.img_producto else None,
+
             }
         print("Mostrando formulario de edición")
         return render(request, 'update_prod.html', context)
@@ -298,7 +326,7 @@ def v_home(request):
     # No necesita permisos
     # Ordenando emprendimientos por fecha de creación en orden descendente y limitando a 3
     emprendimientos = Emprendimiento.objects.all().order_by(
-        '-fecha_creacion')[:3]
+        '-fecha_creacion')[:6]
     context = {
         'emprendimientos': emprendimientos,
         'products': Producto.objects.all()
@@ -510,7 +538,8 @@ def v_mi_cuenta_act_emprend(request, emprendimiento_id):
         context = {
             'id_emprendimiento': emprendi.nombre_emprendimiento,
             'id_emprendedor': emprendedor.username,
-            'formedicion': EmprendimientoForm(instance=emprendi)
+            'formedicion': EmprendimientoForm(instance=emprendi),
+            'img_emprendimiento_url': emprendi.img_emprendimiento.url if emprendi.img_emprendimiento else None,
         }
         return render(request, 'mi_cuenta_act_emprend.html', context)
 

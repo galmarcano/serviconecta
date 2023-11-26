@@ -29,7 +29,6 @@ p{
     flex-direction: row-reverse; /* Cambiado a fila para que los elementos estén uno al lado del otro */
     align-items: center; /* Centra los elementos verticalmente en el contenedor */
     border-radius: 7%;
-    border: solid;
 }
 
 .img_ent {

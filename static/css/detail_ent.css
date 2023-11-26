@@ -2,6 +2,20 @@ img {
     height: 100%;
 }
 
+.btn {
+    display: inline-block;
+    background-color:#69d0b3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color:#d9cf85;
+}
+
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -32,3 +46,15 @@ h1 {
     max-width: none;
     margin: auto;
 }
+
+@media (max-width: 850px) {
+    .principal {
+        display: flex;
+        flex-direction: row;
+    
+    }
+  
+   
+  
+  
+  }

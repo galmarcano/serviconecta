@@ -7,18 +7,19 @@
 
 
 {% block content %}
-<section>
-    <h1>Actualizar Producto</h1>
-</section>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <article>
+        <section>
+            <h1 class="h1producto" >Actualizar Producto</h1>
+        </section>
+        
 
         <div class="primeraparte">
             <div class="parte1">
-                {% if formedicion.img_producto %}
-                <img src="{{ formedicion.img_producto.url }}" alt="{{ formedicion.nombre_producto }}" class="img_ent">
+                {% if img_producto_url %}
+                <img class="imagenlogocaro" src="{{ img_producto_url }}" alt="{{ nombre_producto }} " >
                 {% else %}
                 No hay imagen disponible
                 {% endif %}
@@ -57,9 +58,9 @@
             <button type="submit" class="btn" name="action" value="guardar-cambios">
                 <b>Guardar cambios</b>
             </button>
-            <button type="submit" class="btn" name="action" value="eliminar-producto"
-                onclick="return confirm('¿Está seguro de eliminar este producto?');">
-                <b>Eliminar producto</b>
+            <button type="button" class="btn">
+                <a
+                    href="{% url 'mi_cuenta_delete_prod' producto.id_emprendimiento.id_emprendimiento producto.id_producto %}">Eliminar</a>
             </button>
         </section>
 

@@ -1,5 +1,5 @@
 
-.buttonEliminacion {
+/*.buttonEliminacion {
 
     background-color: #69d0b3;
     margin: 0 auto; 
@@ -31,4 +31,9 @@
         margin-left: 20px;
         margin-right: 50px;
      }
+}
+*/
+
+#base_mi_cuenta {
+    background-color: #cde4b3 !important;
 }
