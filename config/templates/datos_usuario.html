@@ -11,10 +11,48 @@
 
 
 {% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center align-items-center">
+            <form method="post" action="{% url 'datos_usuario' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_user_first_name" class="form-label">Nombre de usuario*:</label>
+                    <input type="text" class="form-control" id="id_user_first_name" name="user_first_name"
+                        value="{{ form.instance.user.first_name }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_user_last_name" class="form-label">Apellido*:</label>
+                    <input type="text" class="form-control" id="id_user_last_name" name="user_last_name"
+                        value="{{ form.instance.user.last_name }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_user_username" class="form-label">Usuario*:</label>
+                    <input type="text" class="form-control" id="id_user_username" name="user_username"
+                        value="{{ form.instance.user.username }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_phonenumber" class="form-label">Teléfono*:</label>
+                    <input type="text" class="form-control" id="id_phonenumber" name="phonenumber"
+                        value="{{ form.instance.phonenumber }}">
+
+                </div>
+                <div class="mb-3">
+                    <label for="id_user_email" class="form-label">Email*:</label>
+                    <input type="email" class="form-control" id="id_user_email" name="user_email"
+                        value="{{ form.instance.user.email }}">
+                </div>
 
 
-
-<form method="post" action="{% url 'datos_usuario' %}">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--<form method="post" action="{% url 'datos_usuario' %}">
     {% csrf_token %}
     <article>
         <div class="parte1">
@@ -47,6 +85,7 @@
         <button class="buttonDatos" type="submit">Actualizar</button>
     </article>
 </form>
+-->
 
 
 {% endblock %}

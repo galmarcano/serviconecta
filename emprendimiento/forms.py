@@ -67,7 +67,7 @@ from django.contrib.auth.models import User
 class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['phonenumber']  # Solo necesitas el campo 'phonenumber' de UserProfile
+        fields = ['phonenumber']
 
     def __init__(self, *args, **kwargs):
         super(UpdateUserProfileForm, self).__init__(*args, **kwargs)
@@ -75,12 +75,23 @@ class UpdateUserProfileForm(forms.ModelForm):
         if self.instance.user:
             self.fields['phonenumber'].initial = self.instance.get_phonenumber()
 
+        # Agrega los campos faltantes al formulario
+        self.fields['user_first_name'] = forms.CharField(initial=self.instance.user.first_name, required=False)
+        self.fields['user_last_name'] = forms.CharField(initial=self.instance.user.last_name, required=False)
+        self.fields['user_username'] = forms.CharField(initial=self.instance.user.username, required=False)
+        self.fields['user_email'] = forms.EmailField(initial=self.instance.user.email, required=False)
+
     def save(self, commit=True):
+        # Actualiza los datos del usuario antes de guardar el formulario
         if self.instance.user:
-            self.instance.user.save()  # No necesitas actualizar campos en User aquí
+            self.instance.user.first_name = self.cleaned_data['user_first_name']
+            self.instance.user.last_name = self.cleaned_data['user_last_name']
+            self.instance.user.username = self.cleaned_data['user_username']
+            self.instance.user.email = self.cleaned_data['user_email']
+            self.instance.user.save()
 
         return super(UpdateUserProfileForm, self).save(commit)
-    
+
 class MiCuentaProductoForm(forms.ModelForm):
     emprendimiento = forms.ModelChoiceField(queryset=Emprendimiento.objects.none(), empty_label=None)
     id_emprendimiento = forms.IntegerField(widget=forms.HiddenInput(), required=False)
