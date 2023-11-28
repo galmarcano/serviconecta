@@ -3,11 +3,26 @@ article {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-   
-
+    
 
 }
+
+.container3{
+  margin-top: 5%;
+
+}
+
+.mb-3{
+  display: flex;
+  margin: 2%;
+
+}
+
+.mb-3 label {
+  width: 240px;
+}
+
+
 
 button #support-submit-button{
     margin-top: 5%;
