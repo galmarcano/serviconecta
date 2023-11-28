@@ -12,6 +12,8 @@
     <link rel="icon" href="{% static 'images/logoserviconecta.ico' %}">
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+
     {% block extrahead %}{% endblock %}
 
 </head>
@@ -80,7 +82,7 @@
 
                     <form class="d-flex" role="search" method="get"  action="{% url 'search' %}">
                         <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" name="q" value="{{ query|escape }}" title="Ingrese el nombre de un producto o emprendimiento para buscar">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        <button type="submit"><i class="fas fa-search"></i></button> <!--arreglar integrar lupa con fontawesome-->
                     </form>
 
                 </div>
