@@ -154,3 +154,11 @@ h1 {
   .login_button:active {
     opacity: 0.5;
   }
+
+  footer {
+    display: none;
+  }
+
+  header{
+    display: none;
+  }
