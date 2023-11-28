@@ -57,11 +57,11 @@
             {{ formulario.id_emprendimiento }}
         </div>
 
-        <article id="boton">
-            <button type="submit" class="btn" name="action" value="guardar-y-agregar">
+        <article id="botonproducto">
+            <button type="submit" class="botonproducto" name="action" value="guardar-y-agregar">
                 <b>Guardar y agregar otro</b>
             </button>
-            <button type="submit" class="btn" name="action" value="finalizar">
+            <button type="submit" class="botonproducto" name="action" value="finalizar">
                 <b>Finalizar</b>
             </button>
         </article>
@@ -69,6 +69,18 @@
 
 </form>
 </header>
+
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <strong>{{ message.tags }}:</strong> {{ message }}<br>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+</div>
 
 
 

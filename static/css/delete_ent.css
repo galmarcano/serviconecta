@@ -4,6 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color:#d9cf85 ;
+   
 }
 
 
@@ -23,11 +25,19 @@ button {
     align-items: center;
     justify-content: center;
     text-align: center;
+    
 }
 
 #h1_delete_ent,
 #h2_delete_ent{
     font-size: 100%;
+    font-size: 40px;
+    text-shadow: 8px 8px 8px rgb(16, 17, 17);
+    animation-duration: 5s;
+    animation-name: initial;
+    font-style: italic;
+    text-align: center;
+    font-size: 40px;
 }
 
 #logo_ent {

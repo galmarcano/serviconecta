@@ -18,7 +18,7 @@ p{
 }
 .container_list_ent {
     text-align: center;
-    background-color: rgba(155, 218, 179, 0.5);
+  background-color:#d9cf85 ;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display:flow-root;
@@ -67,6 +67,8 @@ button {
 
 }
 
+
+
 #base ul {
     display: flex;
     flex-direction: row;
@@ -79,6 +81,7 @@ button {
     margin-right: 50px;
 
 }
+
 
 @media (max-width: 600px) {
   
