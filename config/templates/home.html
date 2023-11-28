@@ -19,13 +19,14 @@
     </article>
 
     <p class="parrafo">
-        En nuestra app, disfrutarás de la conveniencia de descubrir productos excepcionales desde la comodidad de tu hogar con tan solo un clic. ¡Explora nuestra exclusiva selección de productos y encuentra justo lo que necesitas!</p>
+        En nuestra app, disfrutarás de la conveniencia de descubrir productos excepcionales desde la comodidad de tu
+        hogar con tan solo un clic. ¡Explora nuestra exclusiva selección de productos y encuentra justo lo que
+        necesitas!</p>
 
     <section>
-        {% for emprendimiento in emprendimientos %} 
+        {% for emprendimiento in emprendimientos %}
         {% if emprendimiento.img_emprendimiento %}
-        <img src="{{ emprendimiento.img_emprendimiento.url }}"
-            alt="{{ emprendimiento.nombre_emprendimiento }}">
+        <img src="{{ emprendimiento.img_emprendimiento.url }}" alt="{{ emprendimiento.nombre_emprendimiento }}">
         {% endif %}
         {% endfor %}
         <!-- <img src="/static/images/logoserviconecta.png" alt="SERVICONECTA">
@@ -35,6 +36,17 @@
 
     </section>
 </main>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <strong>{{ message.tags }}:</strong> {{ message }}<br>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+</div>
 
 
 

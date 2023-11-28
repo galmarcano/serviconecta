@@ -57,6 +57,10 @@ def v_create_ent(request):
                 emprendimiento.save()
 
                 id_emprendimiento = emprendimiento.id_emprendimiento
+                nombre_emprendimiento = emprendimiento.nombre_emprendimiento
+                
+                messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" creado con éxito.')
+
 
                 # Redirigir a la vista de creación de producto
                 return HttpResponseRedirect("/create_prod/{}/".format(id_emprendimiento))
@@ -82,7 +86,6 @@ def v_create_ent(request):
 
 
 @login_required(login_url="/iniciar_sesion")
-@permission_required('emprendimiento.change_emprendimiento', login_url="/")
 def v_update_ent(request, emprendimiento_id):
     emprendi = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
     emprendedor = emprendi.usuario_emprendedor
@@ -92,13 +95,15 @@ def v_update_ent(request, emprendimiento_id):
         formeditar = EmprendimientoForm(request.POST, request.FILES, instance=emprendi)
 
         if formeditar.is_valid():
-            formeditar.save()
 
             if action == 'guardar-cambios':
-                return HttpResponseRedirect("/")
+                formeditar.save()
+                print("guardó")
+                return redirect('mis_emprendimientos')
             elif action == 'eliminar-emprendimiento':
                 emprendi.delete()
-                return HttpResponseRedirect("/")
+                print("eliminó")
+                return redirect('mis_emprendimientos')
 
     else:
         context = {
@@ -106,7 +111,7 @@ def v_update_ent(request, emprendimiento_id):
             'id_emprendedor': emprendedor.username,
             'formedicion': EmprendimientoForm(instance=emprendi)
         }
-        return render(request, 'update_ent.html', context)
+        return render(request, 'mi_cuenta_act_emprend.html', context)
 
 
 @login_required(login_url="/iniciar_sesion")
@@ -526,13 +531,16 @@ def v_mi_cuenta_act_emprend(request, emprendimiento_id):
         formeditar = EmprendimientoForm(request.POST, request.FILES, instance=emprendi)
 
         if formeditar.is_valid():
+            nombre_emprendimiento = emprendi.nombre_emprendimiento
             formeditar.save()
 
             if action == 'guardar-cambios':
-                return HttpResponseRedirect("/")
+                messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" actualizado con éxito.')
+                return redirect('mis_emprendimientos')
             elif action == 'eliminar-emprendimiento':
                 emprendi.delete()
-                return HttpResponseRedirect("/")
+                messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" eliminado con éxito.')
+                return redirect('mis_emprendimientos')
 
     else:
         context = {
@@ -620,7 +628,13 @@ def v_search(request):
         # Consulta para buscar emprendimientos
         emprendimientos_qset = Q(nombre_emprendimiento__icontains=query)
         emprendimientos = Emprendimiento.objects.filter(emprendimientos_qset).distinct()
-        
+
+        # Verificar si no se encontraron resultados y mostrar mensaje
+        if not productos and not emprendimientos:
+            messages.warning(request, f'No se encontraron resultados para "{query}".')
+            return redirect('home')
+
+
     # Verificar si la búsqueda está vacía y redirigir a home
     elif not query.strip():
         return redirect('home')
