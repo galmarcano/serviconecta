@@ -21,7 +21,8 @@
             No hay imagen disponible
             {% endif %}
             <h1 class="nombre_prod">Producto: {{ e.nombre_producto }}</h1>
-            <p class="desc_prod">Vendido por: {{ e.id_emprendimiento.nombre_emprendimiento }}</p>
+            <p class="desc_prod">Emprendimiento: {{ e.id_emprendimiento.nombre_emprendimiento }}</p>
+            <p class="desc_prod">Código: {{ e.codigo_producto }}</p>
             <p class="desc_prod">Precio: {{ e.precio_producto }} $</p>
             <p class="desc_prod">Stock: {{ e.stock_producto }}</p>
             <a class="btn btn-danger"
@@ -32,11 +33,22 @@
     {% endfor %}
     {% else %}
     <div id="centrar_no_registros">
-        <p class="text-center">Aún no has registrado productos en tu cuenta. Debes registrar un emprendimiento primero</p>
-    {% endif %}
+        <p class="text-center">Aún no has registrado productos en tu cuenta. Debes registrar un emprendimiento primero
+        </p>
+        {% endif %}
     </div>
 </div>
 
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <strong>{{ message.tags }}:</strong> {{ message }}<br>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+</div>
 
 
 

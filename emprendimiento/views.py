@@ -124,11 +124,12 @@ def v_delete_ent(request, emprendimiento_id):
     if request.method == 'POST':
         # Eliminar productos y servicios asociados
         Producto.objects.filter(id_emprendimiento=emprendimiento_id).delete()
-
+        nombre_emprendimiento = emprendi.nombre_emprendimiento
         # Eliminar el emprendimiento
         emprendi.delete()
 
-        return HttpResponseRedirect("/")
+        messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" eliminado con éxito.')
+        return redirect('mis_emprendimientos')
 
     context = {
         'emprendi': emprendi
@@ -186,13 +187,16 @@ def v_create_prod(request, id_emprendimiento):
         if formcrear.is_valid():
             # Asignar el emprendimiento al producto antes de guardarlo
             formcrear.instance.id_emprendimiento_id = id_emprendimiento
-            formcrear.save()
+            producto_creado = formcrear.save()
+            nombre_producto = producto_creado.nombre_producto
 
             if action == 'guardar-y-agregar':
                 # Si se hace clic en "Guardar y agregar otro", redirigir al mismo formulario
+                messages.success(request, f'Producto "{nombre_producto}" creado con éxito.')
                 return HttpResponseRedirect(request.path_info)
             elif action == 'finalizar':
                 # Si se hace clic en "Finalizar", redirigir a la página de inicio
+                messages.success(request, f'Producto "{nombre_producto}" creado con éxito.')
                 return redirect('mis_productos')
 
     context = {
@@ -216,13 +220,16 @@ def v_update_prod(request, emprendimiento_id, product_id):
 
         if formeditar.is_valid():
             formeditar.save()
+            nombre_producto = producto.nombre_producto
 
             if action == 'guardar-cambios':
                 print("Guardando cambios, redirigiendo")
+                messages.success(request, f'Producto "{nombre_producto}" actualizado con éxito.')
                 return HttpResponseRedirect(reverse('mis_productos'))
             elif action == 'eliminar-producto':
                 producto.delete()
                 print("Producto eliminado, redirigiendo")
+                messages.success(request, f'Producto "{nombre_producto}" eliminado con éxito.')
                 return HttpResponseRedirect(reverse('mis_productos', args=[emprendimiento_id]))
             else:
                 print("Acción no válida")
@@ -507,13 +514,16 @@ def v_mi_cuenta_create_prod(request):
             if emprendimiento_encontrado:
                 producto.id_emprendimiento = emprendimiento_encontrado
                 producto.save()
+                nombre_producto = producto.nombre_producto
 
                 if action == 'guardar-y-agregar':
                     # Si se hace clic en "Guardar y agregar otro", redirigir al mismo formulario
+                    messages.success(request, f'Producto "{nombre_producto}" creado con éxito.')
                     return HttpResponseRedirect(request.path_info)
                 elif action == 'finalizar':
                     # Si se hace clic en "Finalizar", redirigir a la página de inicio
-                    return HttpResponseRedirect("/")
+                    messages.success(request, f'Producto "{nombre_producto}" creado con éxito.')
+                    return redirect('mis_productos')
 
     context = {
         'formulario': MiCuentaProductoForm(emprendimientos=emprendimientos_del_usuario),
@@ -560,11 +570,12 @@ def v_mi_cuenta_delete_emprend(request, emprendimiento_id):
     if request.method == 'POST':
         # Eliminar productos y servicios asociados
         Producto.objects.filter(id_emprendimiento=emprendimiento_id).delete()
-
+        nombre_emprendimiento = emprendi.nombre_emprendimiento
         # Eliminar el emprendimiento
         emprendi.delete()
 
-        return HttpResponseRedirect("/")
+        messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" eliminado con éxito.')
+        return redirect('mis_emprendimientos')
 
     context = {
         'emprendi': emprendi
@@ -578,11 +589,14 @@ def v_mi_cuenta_delete_prod(request, emprendimiento_id, product_id):
     producto = Producto.objects.get(
         id_emprendimiento=emprendimiento_id, id_producto=product_id)
     emprendedor = emprendimiento.usuario_emprendedor
+    nombre_producto = producto.nombre_producto
 
     if request.method == 'POST':
         Producto.objects.filter(
             id_emprendimiento=emprendimiento_id, id_producto=product_id).delete()
-        return HttpResponseRedirect("/")
+        messages.success(request, f'Producto "{nombre_producto}" eliminado con éxito.')
+        return redirect('mis_productos')
+
 
     context = {
         'nombre_producto': producto.nombre_producto,
