@@ -1,16 +1,9 @@
-.parrafo{
-    
-    color:#d9cf85 ;
-    font-size: 40px;
-     text-shadow: 8px 8px 8px rgb(16, 17, 17);
-     animation-duration: 5s;
-     animation-name: initial;
-     font-style: italic;
-     text-align: center;
-     font-size: 40px;
-   
+body{
+    background-color: aquamarine;
 }
-span {
+
+
+h1 {
     text-align: center;
     font-size:300%;
     display: block;
@@ -18,11 +11,26 @@ span {
     white-space: nowrap;
     border-right: 4px solid;
     width: 142ch;
-
     animation: typing 7s steps(12), blink .10s infinite step-end alternate;
     overflow: hidden;
     max-width: 100%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
+
+.parrafo{
+    color:#000000 ;
+    font-style: italic;
+    text-align: center;
+    font-size: 30px;
+    margin-left: 2%;
+    margin-right: 2%;
+   
+}
+
+
+
 
 @keyframes typing {
     from { width: 0
@@ -33,13 +41,25 @@ span {
 50% { border-color: transparent;}
 }
 
-section {
+.mainhome section {
     display: flex;
-    width: 600px;
-    height: 430px; 
-    margin-bottom: 5%;
+    max-width: 100%;
+    width: 900px;
+    padding: 0 auto ;
+    height: 430px;
+    margin: 0 auto;
+    margin-top: 5%;
+    justify-content: center;
+    
    
 }
+
+section{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+
 section img {
     width: 0px;
     flex-grow: 1;
@@ -49,17 +69,27 @@ section img {
 }
 
 section img:hover {
-    cursor: crosshair;
+    cursor: pointer;
     width: 300px;
     opacity: 1;
     filter: contrast(120%);
 }
+
 .mainhome{
-background-color:#69d0b3;
+    
     margin-bottom: 0%;
-    min-height: 100vh;
-    display: flex;
+    width: 100%;
+    height: 100%;
+    
     flex-direction: column;
     align-items: center;
 }
+
+@media (max-width: 850px) {
+   
+   
+  
+  
+  }
+
 
