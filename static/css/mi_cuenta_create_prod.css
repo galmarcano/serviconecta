@@ -16,8 +16,7 @@ form {
     display: flex;
 }
 
-h1,
-h3 {
+h1 {
     font-size: 24px;
     padding-right: 38px;
     font-family: 'Inter', sans-serif;
@@ -31,6 +30,20 @@ p {
     font-family: 'Inter', sans-serif;
 
 
+}
+
+.h3agregarproducto {
+    color: #69d0b3;
+    font-size: 40px;
+     text-shadow: 8px 8px 8px rgb(16, 17, 17);
+     font-style: italic;
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     margin-top: 10%;
+  margin-bottom: 15%;
 }
 
 #sectiondatos {
@@ -54,30 +67,9 @@ input {
 
 }
 
-#boton {
-    font-size: 12px;
-    margin: 4%;
-    padding-bottom: 12%;
-    padding-top: 14%;
-
-}
-
-
-button {
-    display: none;
-
-
-}
-
-.btn {
-    transition: all 0.3s ease-in-out;
-    font-family: "Dosis", sans-serif;
-
-}
-
-.btn {
-    width: 200px;
-    height: 40px;
+.botonproducto {
+    width: 300px;
+    height: 50px;
     border-radius: 50px;
     background-image: linear-gradient(135deg, #19b630 0%, rgb(84, 234, 129) 100%);
     box-shadow: 0 20px 30px -6px rgba(3, 3, 3, 0.5);
@@ -86,6 +78,7 @@ button {
     border: none;
     font-size: 18px;
     color: white;
+    margin-top: 10%;
 }
 
 .btn:hover {
@@ -111,13 +104,6 @@ button {
 
 }
 
-button {
-
-    background-color: #69d0b3;
-    margin: 0 auto; /* Establece márgenes automáticos para centrar horizontalmente */
-    display: block; /* Hace que el botón sea un bloque para que los márgenes automáticos tengan efecto */
-
-}
 
 #base ul {
     display: flex;
@@ -155,14 +141,6 @@ article {
 
 }
 
-.buttonEliminacion {
-
-    background-color: #69d0b3;
-    margin: 0 auto; 
-    display: block;
-
-}
-
 #baseMicuenta ul{
     display: flex;
     flex-direction: row;
@@ -186,9 +164,7 @@ article {
     list-style-type: none;
     padding-bottom: 40px;
 }
-.buttonDatos {
-background-color:#69d0b3;
-}
+
 
 .descripcion {
     padding-bottom: 20px;

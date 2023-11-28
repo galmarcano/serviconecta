@@ -1,11 +1,14 @@
-#encabezado {
+.div_create_ent {
   padding: 3%;
   padding-bottom: 1%;
-  padding-left: 4%;
+  margin: 2%;
 
 }
 
-
+#imagenlogo{
+  margin-left: 4%;
+  margin: 2%;
+}
 
 #form_create_ent{
   display: flex;
@@ -13,9 +16,14 @@
 }
 
 #informacion {
-  width: 800px;
+ max-width: 100%;
   display: inline-block;
 }
+
+#id_descripcion_emprendimiento{
+  width:350px ;
+  height:100px ;
+ }
 
 
 .titulos {
@@ -24,11 +32,6 @@
 
 }
 
-
-div .div_create_ent {
-  padding-right: 20%;
-  padding-bottom: 2%;
-}
 
 h1 {
   display: inline-block;
@@ -54,7 +57,7 @@ p {
 }
 
 .titulos label {
-  width: 700px;
+  width: 400px;
   /* Ajusta el ancho según tus necesidades */
   font-size: 18px;
 

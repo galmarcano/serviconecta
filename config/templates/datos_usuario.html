@@ -11,7 +11,7 @@
 
 
 {% block content %}
-<div class="container">
+<div class="container3">
     <div class="row justify-content-center">
         <div class="col-md-6 text-center align-items-center">
             <form method="post" action="{% url 'datos_usuario' %}">
@@ -47,11 +47,26 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <button type="submit" class="support-submit-button"
+                    id="support-submit-button"><b>Actualizar</b></button>
+
             </form>
         </div>
     </div>
 </div>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <strong>{{ message.tags }}:</strong> {{ message }}<br>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+</div>
+
+
 <!--<form method="post" action="{% url 'datos_usuario' %}">
     {% csrf_token %}
     <article>

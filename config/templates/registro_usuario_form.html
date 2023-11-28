@@ -38,14 +38,14 @@
 
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
     {% if form.errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {% for field, error_list in form.errors.items %}
-                {% for error in error_list %}
-                    {{ error }}<br>
-                {% endfor %}
-            {% endfor %}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {% for field, error_list in form.errors.items %}
+        {% for error in error_list %}
+        {{ error }}<br>
+        {% endfor %}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     {% endif %}
 </div>
 
@@ -57,5 +57,16 @@
     {{ form.errors }}
 </div>
 {% endif %}-->
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <strong>{{ message.tags }}:</strong> {{ message }}<br>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+</div>
 
 {% endblock %}

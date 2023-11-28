@@ -3,20 +3,64 @@ article {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: aqua;
+    
 
+}
+
+.container3{
+  margin-top: 5%;
+
+}
+
+.mb-3{
+  display: flex;
+  margin: 2%;
+
+}
+
+.mb-3 label {
+  width: 240px;
+}
+
+
+
+button #support-submit-button{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    justify-items: center;
+    display: none;
 
 }
 
 
-.buttonDatos {
-background-color:#69d0b3;
-}
-
-.descripcion {
-    padding-bottom: 20px;
-}
+button #support-submit-button {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+    
+  }
+  
+.support-submit-button {
+    width: 150px;
+    height: 40px;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #19b630 0%, rgb(84, 234, 129) 100%);
+    box-shadow: 0 20px 30px -6px rgba(3, 3, 3, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    color: white;
+  }
+  
+.support-submit-button:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+  
+.support-submit-button:active {
+    opacity: 0.5;
+  }
+  
 
 
   

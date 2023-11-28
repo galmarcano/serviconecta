@@ -11,67 +11,78 @@
 
 <main id="encabezado_prod">
     <h1>Regístrate</h1>
-    <h2>{{ nombre_emprendedor }}</h2> 
-    <p>{{ nombre_emprendimiento }}</p> 
+    <h2>{{ nombre_emprendedor }}</h2>
+    <p>{{ nombre_emprendimiento }}</p>
 
 </main>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <section id="sectiondatos">
-            <div class="Nombre_prod">
-                <label for="{{ formulario.nombre_producto.id_for_label }}"><b>Nombre del producto*:</b></label>
-                {{ formulario.nombre_producto }}
-            </div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <section id="sectiondatos">
+        <div class="Nombre_prod">
+            <label for="{{ formulario.nombre_producto.id_for_label }}"><b>Nombre del producto*:</b></label>
+            {{ formulario.nombre_producto }}
+        </div>
 
-            <div class="cod_prod">
-                <label for="{{ formulario.codigo_producto.id_for_label }}"><b>Código del Producto*:</b></label>
-                {{ formulario.codigo_producto }}
-            </div>
+        <div class="cod_prod">
+            <label for="{{ formulario.codigo_producto.id_for_label }}"><b>Código del Producto*:</b></label>
+            {{ formulario.codigo_producto }}
+        </div>
 
-            <div class="descr_prod">
-                <label for="{{ formulario.descripcion_producto.id_for_label }}"><b>Descripción del
-                        Producto*:</b></label>
-                {{ formulario.descripcion_producto }}
-            </div>
+        <div class="descr_prod">
+            <label for="{{ formulario.descripcion_producto.id_for_label }}"><b>Descripción del
+                    Producto*:</b></label>
+            {{ formulario.descripcion_producto }}
+        </div>
 
-            <div class="Precios">
-                <label for="{{ formulario.precio_producto.id_for_label }}"><b>Precio Producto ($)*:</b></label>
-                {{ formulario.precio_producto }}
-            </div>
+        <div class="Precios">
+            <label for="{{ formulario.precio_producto.id_for_label }}"><b>Precio Producto ($)*:</b></label>
+            {{ formulario.precio_producto }}
+        </div>
 
-            <div class="Stock">
-                <label for="{{ formulario.stock_producto.id_for_label }}"><b>Stock de Producto*:</b></label>
-                {{ formulario.stock_producto }}
-            </div>
-
-
-        </section>
-
-        <section>
-            <h3><p>Agregar un producto</p></h3>
-
-            <div class="img_prod">
-                {{ formulario.img_producto }}
-            </div>
-
-            <article id="boton">
-
-                <button id="boton11" type="submit" class="btn" name="action" value="guardar-y-agregar">
-                    <b>Guardar y agregar otro</b>
-                </button>
-
-                <button type="submit" class="btn" name="action" value="finalizar">
-                    <b>Finalizar</b>
-                </button>
-
-            </article>
-        </section>
-
-    </form>
+        <div class="Stock">
+            <label for="{{ formulario.stock_producto.id_for_label }}"><b>Stock de Producto*:</b></label>
+            {{ formulario.stock_producto }}
+        </div>
 
 
+    </section>
 
+    <section>
+        <h3>
+            <p>Agregar un producto</p>
+        </h3>
+
+        <div class="img_prod">
+            {{ formulario.img_producto }}
+        </div>
+
+        <article id="boton">
+
+            <button id="boton11" type="submit" class="btn" name="action" value="guardar-y-agregar">
+                <b>Guardar y agregar otro</b>
+            </button>
+
+            <button type="submit" class="btn" name="action" value="finalizar">
+                <b>Finalizar</b>
+            </button>
+
+        </article>
+    </section>
+
+</form>
+
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <strong>{{ message.tags }}:</strong> {{ message }}<br>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+</div>
 
 <!-- encargado Ruy, puedes editar acá. Esto se hace con un form -->
 

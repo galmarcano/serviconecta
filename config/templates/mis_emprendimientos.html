@@ -23,6 +23,7 @@
         <p class="desc_ent">Ubicación: {{ e.ubicacion_emprendimiento }}</p>
         <a class="btn btn-danger" href="{% url 'mi_cuenta_act_emprend' e.id_emprendimiento %}">Actualizar</a>
         <a class="btn btn-danger" href="{% url 'mi_cuenta_delete_emprend' e.id_emprendimiento %}">Eliminar</a>
+  
     </div>
     {% endfor %}
     {% else %}
@@ -34,4 +35,17 @@
 
 
 </div>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+    {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <strong>{{ message.tags }}:</strong> {{ message }}<br>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+</div>
+
+
 {% endblock %}

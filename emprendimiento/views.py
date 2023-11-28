@@ -57,6 +57,10 @@ def v_create_ent(request):
                 emprendimiento.save()
 
                 id_emprendimiento = emprendimiento.id_emprendimiento
+                nombre_emprendimiento = emprendimiento.nombre_emprendimiento
+                
+                messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" creado con éxito')
+
 
                 # Redirigir a la vista de creación de producto
                 return HttpResponseRedirect("/create_prod/{}/".format(id_emprendimiento))
@@ -82,7 +86,6 @@ def v_create_ent(request):
 
 
 @login_required(login_url="/iniciar_sesion")
-@permission_required('emprendimiento.change_emprendimiento', login_url="/")
 def v_update_ent(request, emprendimiento_id):
     emprendi = Emprendimiento.objects.get(id_emprendimiento=emprendimiento_id)
     emprendedor = emprendi.usuario_emprendedor
@@ -92,13 +95,15 @@ def v_update_ent(request, emprendimiento_id):
         formeditar = EmprendimientoForm(request.POST, request.FILES, instance=emprendi)
 
         if formeditar.is_valid():
-            formeditar.save()
 
             if action == 'guardar-cambios':
-                return HttpResponseRedirect("/")
+                formeditar.save()
+                print("guardó")
+                return redirect('mis_emprendimientos')
             elif action == 'eliminar-emprendimiento':
                 emprendi.delete()
-                return HttpResponseRedirect("/")
+                print("eliminó")
+                return redirect('mis_emprendimientos')
 
     else:
         context = {
@@ -106,7 +111,7 @@ def v_update_ent(request, emprendimiento_id):
             'id_emprendedor': emprendedor.username,
             'formedicion': EmprendimientoForm(instance=emprendi)
         }
-        return render(request, 'update_ent.html', context)
+        return render(request, 'mi_cuenta_act_emprend.html', context)
 
 
 @login_required(login_url="/iniciar_sesion")
@@ -119,11 +124,12 @@ def v_delete_ent(request, emprendimiento_id):
     if request.method == 'POST':
         # Eliminar productos y servicios asociados
         Producto.objects.filter(id_emprendimiento=emprendimiento_id).delete()
-
+        nombre_emprendimiento = emprendi.nombre_emprendimiento
         # Eliminar el emprendimiento
         emprendi.delete()
 
-        return HttpResponseRedirect("/")
+        messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" eliminado con éxito')
+        return redirect('mis_emprendimientos')
 
     context = {
         'emprendi': emprendi
@@ -155,17 +161,17 @@ def v_agregar_al_carrito(request, producto_id):
         # Lógica para agregar el producto al carrito
         # ...
 
-        messages.success(request, 'Producto agregado al carrito exitosamente.')
+        messages.success(request, 'Producto agregado al carrito exitosamente')
         return redirect('list_prod')
 
     except Producto.DoesNotExist:
-        messages.error(request, 'El producto no existe.')
+        messages.error(request, 'El producto no existe')
         return redirect('list_prod')
         
 
 from django.http import HttpResponse
 def v_compra_productos(request):
-    return HttpResponse('<script>alert("Debes iniciar sesión para comprar productos."); window.location.href = "/iniciar_sesion";</script>')
+    return HttpResponse('<script>alert("Debes iniciar sesión para comprar productos"); window.location.href = "/iniciar_sesion";</script>')
 
 @login_required(login_url="/iniciar_sesion")
 @permission_required('emprendimiento.add_producto', login_url="/")
@@ -181,13 +187,16 @@ def v_create_prod(request, id_emprendimiento):
         if formcrear.is_valid():
             # Asignar el emprendimiento al producto antes de guardarlo
             formcrear.instance.id_emprendimiento_id = id_emprendimiento
-            formcrear.save()
+            producto_creado = formcrear.save()
+            nombre_producto = producto_creado.nombre_producto
 
             if action == 'guardar-y-agregar':
                 # Si se hace clic en "Guardar y agregar otro", redirigir al mismo formulario
+                messages.success(request, f'Producto "{nombre_producto}" creado con éxito')
                 return HttpResponseRedirect(request.path_info)
             elif action == 'finalizar':
                 # Si se hace clic en "Finalizar", redirigir a la página de inicio
+                messages.success(request, f'Producto "{nombre_producto}" creado con éxito')
                 return redirect('mis_productos')
 
     context = {
@@ -211,13 +220,16 @@ def v_update_prod(request, emprendimiento_id, product_id):
 
         if formeditar.is_valid():
             formeditar.save()
+            nombre_producto = producto.nombre_producto
 
             if action == 'guardar-cambios':
                 print("Guardando cambios, redirigiendo")
+                messages.success(request, f'Producto "{nombre_producto}" actualizado con éxito')
                 return HttpResponseRedirect(reverse('mis_productos'))
             elif action == 'eliminar-producto':
                 producto.delete()
                 print("Producto eliminado, redirigiendo")
+                messages.success(request, f'Producto "{nombre_producto}" eliminado con éxito')
                 return HttpResponseRedirect(reverse('mis_productos', args=[emprendimiento_id]))
             else:
                 print("Acción no válida")
@@ -288,26 +300,39 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
 def v_login(request):
-  from .forms import LoginForm #Importando el formulario
-  from django.contrib.auth import authenticate, login
-  if request.method == 'POST':
-    form = LoginForm(request.POST)
-    if form.is_valid(): #verifica los datos necesarios
-      user = authenticate(username = form.cleaned_data["username"], password = form.cleaned_data["password"]) #comprueba que la contraseña es valida
-      
-      if user is not None: #usuario y contraseña bien
-        login(request, user)
-        return HttpResponseRedirect("/")
-      else: #usuario y contraseña erróneos
-        return HttpResponseRedirect("/")
-    else:
-      #Los datos no son correctos
-      return HttpResponseRedirect("/")
+    from .forms import LoginForm #Importando el formulario
+    from django.contrib.auth import authenticate, login
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user_exists = User.objects.filter(username=username).exists()
+
+            if user_exists:
+                user = authenticate(username=username, password=password)
+
+                if user is not None:
+                    login(request, user)
+                    return HttpResponseRedirect("/")
+                else:
+                    # Usuario existe pero contraseña incorrecta
+                    messages.error(request, 'Contraseña incorrecta')
+                    return HttpResponseRedirect(request.path_info)
+            else:
+                # Usuario no registrado
+                messages.error(request, 'El usuario no está registrado')
+                return redirect('registro_usuario')
+
+        else:
+            # Formulario no válido
+            messages.error(request, 'Por favor, corrige los errores en el formulario')
+            return HttpResponseRedirect(request.path_info)
         
-  else:
-    context = {
-      "form" : LoginForm(request.POST) #Envío de un form al html
-    }
+    else:
+        context = {
+        "form" : LoginForm(request.POST) #Envío de un form al html
+        }
     return render(request, "login.html", context)
 
 
@@ -413,7 +438,7 @@ def v_datos_usuario(request):
         form = UpdateUserProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Los datos se han actualizado correctamente.')
+            messages.success(request, 'Los datos se han actualizado correctamente')
             return redirect('datos_usuario')
     else:
         # Mostrar la información actual si es una solicitud GET
@@ -502,13 +527,16 @@ def v_mi_cuenta_create_prod(request):
             if emprendimiento_encontrado:
                 producto.id_emprendimiento = emprendimiento_encontrado
                 producto.save()
+                nombre_producto = producto.nombre_producto
 
                 if action == 'guardar-y-agregar':
                     # Si se hace clic en "Guardar y agregar otro", redirigir al mismo formulario
+                    messages.success(request, f'Producto "{nombre_producto}" creado con éxito')
                     return HttpResponseRedirect(request.path_info)
                 elif action == 'finalizar':
                     # Si se hace clic en "Finalizar", redirigir a la página de inicio
-                    return HttpResponseRedirect("/")
+                    messages.success(request, f'Producto "{nombre_producto}" creado con éxito')
+                    return redirect('mis_productos')
 
     context = {
         'formulario': MiCuentaProductoForm(emprendimientos=emprendimientos_del_usuario),
@@ -526,13 +554,16 @@ def v_mi_cuenta_act_emprend(request, emprendimiento_id):
         formeditar = EmprendimientoForm(request.POST, request.FILES, instance=emprendi)
 
         if formeditar.is_valid():
+            nombre_emprendimiento = emprendi.nombre_emprendimiento
             formeditar.save()
 
             if action == 'guardar-cambios':
-                return HttpResponseRedirect("/")
+                messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" actualizado con éxito')
+                return redirect('mis_emprendimientos')
             elif action == 'eliminar-emprendimiento':
                 emprendi.delete()
-                return HttpResponseRedirect("/")
+                messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" eliminado con éxito')
+                return redirect('mis_emprendimientos')
 
     else:
         context = {
@@ -552,11 +583,12 @@ def v_mi_cuenta_delete_emprend(request, emprendimiento_id):
     if request.method == 'POST':
         # Eliminar productos y servicios asociados
         Producto.objects.filter(id_emprendimiento=emprendimiento_id).delete()
-
+        nombre_emprendimiento = emprendi.nombre_emprendimiento
         # Eliminar el emprendimiento
         emprendi.delete()
 
-        return HttpResponseRedirect("/")
+        messages.success(request, f'Emprendimiento "{nombre_emprendimiento}" eliminado con éxito')
+        return redirect('mis_emprendimientos')
 
     context = {
         'emprendi': emprendi
@@ -570,11 +602,14 @@ def v_mi_cuenta_delete_prod(request, emprendimiento_id, product_id):
     producto = Producto.objects.get(
         id_emprendimiento=emprendimiento_id, id_producto=product_id)
     emprendedor = emprendimiento.usuario_emprendedor
+    nombre_producto = producto.nombre_producto
 
     if request.method == 'POST':
         Producto.objects.filter(
             id_emprendimiento=emprendimiento_id, id_producto=product_id).delete()
-        return HttpResponseRedirect("/")
+        messages.success(request, f'Producto "{nombre_producto}" eliminado con éxito')
+        return redirect('mis_productos')
+
 
     context = {
         'nombre_producto': producto.nombre_producto,
@@ -604,3 +639,35 @@ def v_eliminar_cuenta(request):
 
             return redirect("/")
     return render(request, 'eliminar_cuenta.html', {'confirmar_eliminar': True})
+
+#para buscar por nombre de producto o emprendimiento   
+from django.db.models import Q
+def v_search(request):
+    query = request.GET.get('q', '')
+    productos = []
+    emprendimientos = []
+
+    if query:
+        # Consulta para buscar productos
+        productos_qset = Q(nombre_producto__icontains=query)
+        productos = Producto.objects.filter(productos_qset).distinct()
+
+        # Consulta para buscar emprendimientos
+        emprendimientos_qset = Q(nombre_emprendimiento__icontains=query)
+        emprendimientos = Emprendimiento.objects.filter(emprendimientos_qset).distinct()
+
+        # Verificar si no se encontraron resultados y mostrar mensaje
+        if not productos and not emprendimientos:
+            messages.warning(request, f'No se encontraron resultados para "{query}"')
+            return redirect('home')
+
+
+    # Verificar si la búsqueda está vacía y redirigir a home
+    elif not query.strip():
+        return redirect('home')
+
+    return render(request, "search.html", {
+        "productos": productos,
+        "emprendimientos": emprendimientos,
+        "query": query
+    })
