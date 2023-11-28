@@ -116,8 +116,38 @@ footer {
     font-weight: bold;
 }
 
+/* Estilo similar a btn-light de Bootstrap sin usar Bootstrap */
+button.btn-light {
+    display: inline-block !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    user-select: none !important;
+    border: 1px solid #f8f9fa !important; /* Color del borde */
+    padding: 0.375rem 0.75rem !important; /* Espaciado interno */
+    font-size: 1rem !important; /* Tamaño del texto */
+    line-height: 1.5 !important; /* Altura de línea */
+    border-radius: 0.25rem !important; /* Radio de borde */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+    color: #495057 !important; /* Color del texto */
+    background-color: #f8f9fa !important; /* Color de fondo */
+    min-width: auto !important;
+}
 
+/* Estilo al pasar el ratón sobre el botón */
+button.btn-light:hover {
+    background-color: #e2e6ea !important;
+    color: #495057 !important;
+    border-color: #d6d8db !important;
+}
 
+/* Estilo cuando el botón está activo (clicado) */
+button.btn-light:active {
+    background-color: #dae0e5 !important;
+    color: #495057 !important;
+    border-color: #c8ccd1 !important;
+}
 
  
 
