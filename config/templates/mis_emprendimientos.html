@@ -23,6 +23,7 @@
         <p class="desc_ent">Ubicación: {{ e.ubicacion_emprendimiento }}</p>
         <a class="btn btn-danger" href="{% url 'mi_cuenta_act_emprend' e.id_emprendimiento %}">Actualizar</a>
         <a class="btn btn-danger" href="{% url 'mi_cuenta_delete_emprend' e.id_emprendimiento %}">Eliminar</a>
+  
     </div>
     {% endfor %}
     {% else %}
