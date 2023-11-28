@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!--
+{% for producto in productos %}
+    <p>{{ producto.nombre_producto }}</p>
+     Puedes mostrar otros detalles del producto aquí 
+{% endfor %}-->
+
+<div class="principal_search">
+    <!-- encargada Yilda, puedes editar acá -->
+    {% for producto in productos %}
+    <div class="container_search">
+        {% if producto.img_producto %}
+        <image src="{{ producto.img_producto.url }}" alt="{{ producto.nombre_producto }}" class="img_search">
+            {% else %}
+            No hay imagen disponible
+            {% endif %}
+            <h1 class="h1_search">Producto: {{ producto.nombre_producto }}</h1>
+            <div>
+                <p class="p_search"><b>Vendido por: {{ producto.id_emprendimiento.nombre_emprendimiento }}</b></p>
+            </div>
+            <div>
+                <p class="p_search"><b>Precio: {{ producto.precio_producto }} $</b></p>
+            </div>
+            <div>
+                <p class="p_search"><b>Stock: {{ producto.stock_producto }}</b></p>
+            </div>
+
+            {% if request.alert_messages %}
+            <div class="alert alert-info" role="alert">
+                {% for message in request.alert_messages %}
+                {{ message }}<br>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'agregar_al_carrito' producto_id=producto.id_producto %}" class="btn_search" role="button">Agregar al
+                carrito</a>
+            {% else %}
+            <a href="{% url 'compra_productos' %}" class="btn_search" role="button">Agregar
+                al carrito</a>
+            {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+        {% if messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    <strong>{{ message.tags }}:</strong> {{ message }}<br>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    </div>
+    
+
+
+</div>
+
+<!-- Mostrar resultados de emprendimientos 
+{% for emprendimiento in emprendimientos %}
+    <p>{{ emprendimiento.nombre_emprendimiento }}</p>
+Puedes mostrar otros detalles del emprendimiento aquí
+{% endfor %}
+-->
+
+
+
+<div class="principal_search">
+
+    {% for emprendimiento in emprendimientos %}
+    <div class="container_search">
+        {% if emprendimiento.img_emprendimiento %}
+        <img src="{{ emprendimiento.img_emprendimiento.url }}" alt="{{ emprendimiento.nombre_emprendimiento }}" class="img_search">
+        {% else %}
+        No hay imagen disponible
+        {% endif %}
+        <h1 class="h1_search">{{ emprendimiento.nombre_emprendimiento }}</h1>
+        <p class="p_search">Descripción: {{ emprendimiento.descripcion_emprendimiento }}</p>
+        <p class="p_search">Ubicación: {{ emprendimiento.ubicacion_emprendimiento }}</p>
+        <a href="{% url 'detalle_emprendimiento' emprendimiento.id_emprendimiento %}" class="btn_search">Más Información</a>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

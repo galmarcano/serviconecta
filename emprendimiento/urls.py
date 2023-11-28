@@ -7,6 +7,7 @@ from .views import v_datos_usuario,v_mis_emprendimientos, v_mis_productos
 from .views import v_mi_cuenta_det_emprend, v_mi_cuenta_create_prod, v_mi_cuenta_act_emprend, v_mi_cuenta_delete_emprend
 from .views import v_mi_cuenta_delete_prod, v_eliminar_cuenta #para mi cuenta
 from .views import v_agregar_al_carrito, v_compra_productos
+from .views import v_search #para filtros de busqueda 
 
 urlpatterns = [
      path('', v_home, name="home"),
@@ -43,6 +44,9 @@ urlpatterns = [
      #para aggregar al carrito
      path('agregar_al_carrito/<int:producto_id>/', v_agregar_al_carrito, name='agregar_al_carrito'),
      path('compra_productos/', v_compra_productos, name="compra_productos"),
+
+     #para filtro de búsqueda
+     path('search/', v_search, name="search"),
 ]
 
 

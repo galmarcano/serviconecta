@@ -604,3 +604,29 @@ def v_eliminar_cuenta(request):
 
             return redirect("/")
     return render(request, 'eliminar_cuenta.html', {'confirmar_eliminar': True})
+
+#para buscar por nombre de producto o emprendimiento   
+from django.db.models import Q
+def v_search(request):
+    query = request.GET.get('q', '')
+    productos = []
+    emprendimientos = []
+
+    if query:
+        # Consulta para buscar productos
+        productos_qset = Q(nombre_producto__icontains=query)
+        productos = Producto.objects.filter(productos_qset).distinct()
+
+        # Consulta para buscar emprendimientos
+        emprendimientos_qset = Q(nombre_emprendimiento__icontains=query)
+        emprendimientos = Emprendimiento.objects.filter(emprendimientos_qset).distinct()
+        
+    # Verificar si la búsqueda está vacía y redirigir a home
+    elif not query.strip():
+        return redirect('home')
+
+    return render(request, "search.html", {
+        "productos": productos,
+        "emprendimientos": emprendimientos,
+        "query": query
+    })
