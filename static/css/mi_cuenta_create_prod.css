@@ -1,8 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
-
-
 main {
     display: flex;
     padding-top: 2%;
@@ -12,8 +8,11 @@ main {
 }
 
 
-form {
+.carol {
     display: flex;
+    margin: 2%;
+    margin-top: 25px;
+    margin-bottom: 35px;
 }
 
 h1 {
@@ -33,17 +32,11 @@ p {
 }
 
 .h3agregarproducto {
-    color: #69d0b3;
-    font-size: 40px;
-     text-shadow: 8px 8px 8px rgb(16, 17, 17);
-     font-style: italic;
-     text-align: center;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     margin-top: 10%;
-  margin-bottom: 15%;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column; 
+    margin-top: 10%;
+    margin-bottom: 15%;
 }
 
 #sectiondatos {
@@ -56,19 +49,32 @@ section {
 }
 
 label {
-    width: 280px;
+    width: 250px;
     height: 50px;
     padding-bottom: 7%;
 
 }
 
-input {
-    width: 380px;
+#id_descripcion_producto{
+    height: 100px;
+    max-width: 380px;
+    width: 350px;
 
 }
 
+input {
+    max-width: 380px;
+    width: 350px;
+
+}
+
+#botonproducto{
+    display: flex;
+    flex-direction: column;
+}
+
 .botonproducto {
-    width: 300px;
+    width: 190px;
     height: 50px;
     border-radius: 50px;
     background-image: linear-gradient(135deg, #19b630 0%, rgb(84, 234, 129) 100%);
@@ -76,9 +82,10 @@ input {
     outline: none;
     cursor: pointer;
     border: none;
-    font-size: 18px;
+    font-size: 14px;
     color: white;
     margin-top: 10%;
+
 }
 
 .btn:hover {
@@ -90,105 +97,14 @@ input {
     opacity: 0.5;
 }
 
+
+
 @media (max-width: 850px) {
-    header {
+    form{
         display: flex;
         flex-direction: column;
     }
 
-    main {
-        display: flex;
-        flex-direction: column;
-    }
-
-
 }
-
-
-#base ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: aqua;
-    list-style-type: none;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-
-}
-
-@media (max-width: 600px) {
   
-    #base ul { 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding-top: 50px;
-        padding-bottom: 20px;
-        margin-left: 20px;
-        margin-right: 50px;
-     }
-}
-article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: aqua;
-
-
-}
-
-#baseMicuenta ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: aqua;
-    list-style-type: none;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-
-}
-
-#eliminar-cuenta-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: aqua;
-    list-style-type: none;
-    padding-bottom: 40px;
-}
-
-
-.descripcion {
-    padding-bottom: 20px;
-}
-
-@media (max-width: 600px) {
-  
-#baseMicuenta ul{ 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
- }
-#eliminar-cuenta-form  {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-}
-
-}
+ 

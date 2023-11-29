@@ -9,13 +9,14 @@
 
 
 button {
-    min-width: 40vh;
+    max-width: 400px;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 20%;
+    margin-bottom: 20%;
 }
 
 #delete_ent {
@@ -33,9 +34,10 @@ button {
     flex-direction: column;
 }
 
-#logo_ent {
-    width: 20%; /* El 50% del ancho de su contenedor */
-    height: auto; /* Para mantener la proporción original de la imagen */
+#logoeliminar {
+    max-width: 350px;
+    ; /* El 50% del ancho de su contenedor */
+    height: 200px; /* Para mantener la proporción original de la imagen */
 }
 
 ul{
@@ -76,86 +78,3 @@ button {
 
 }
 
-@media (max-width: 600px) {
-  
-    #base ul { 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding-top: 50px;
-        padding-bottom: 20px;
-        margin-left: 20px;
-        margin-right: 50px;
-     }
-}article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: aqua;
-
-
-}
-
-.buttonEliminacion {
-
-    background-color: #69d0b3;
-    margin: 0 auto; 
-    display: block;
-
-}
-
-#baseMicuenta ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: aqua;
-    list-style-type: none;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-
-}
-
-#eliminar-cuenta-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: aqua;
-    list-style-type: none;
-    padding-bottom: 40px;
-}
-.buttonDatos {
-background-color:#69d0b3;
-}
-
-.descripcion {
-    padding-bottom: 20px;
-}
-
-@media (max-width: 600px) {
-  
-#baseMicuenta ul{ 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
- }
-#eliminar-cuenta-form  {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 50px;
-}
-
-}
