@@ -79,25 +79,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'delmmarc_serviconecta',
-#        'HOST': 'postgresql-delmmarc.alwaysdata.net',
-#        'USER': 'delmmarc_serviconecta',
-#        'PASSWORD': 'ConecT4.2!'
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'delmmarc_serviconecta',
+        'HOST': 'postgresql-delmmarc.alwaysdata.net',
+        'USER': 'delmmarc_serviconecta',
+        'PASSWORD': 'ConecT4.2!'
+    }
+}
 
 #PARA DEPLOY EN HEROKU
-import dj_database_url
-from decouple import config
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+#import dj_database_url
+#from decouple import config
+#DATABASES = {
+#    'default': dj_database_url.config(
+ #       default=config('DATABASE_URL')
+#    )
 
-}
+#}
 
 
 # Password validation
