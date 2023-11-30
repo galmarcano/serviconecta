@@ -30,7 +30,7 @@
                 {{ formedicion.codigo_producto }}
             </div>
 
-            <div>
+            <div class="inputProducto">
                 <label for="{{ formedicion.nombre_producto.id_for_label }}"><b>Producto*:</b></label>
                 {{ formedicion.nombre_producto }}
             </div>
@@ -58,9 +58,8 @@
             <button type="submit" class="btn" name="action" value="guardar-cambios">
                 <b>Guardar cambios</b>
             </button>
-            <button type="button" class="btn">
-                <a
-                    href="{% url 'mi_cuenta_delete_prod' producto.id_emprendimiento.id_emprendimiento producto.id_producto %}">Eliminar</a>
+            <button type="submit" class="btn" name="action" value="guardar-cambios">
+                <b>Eliminar</b>
             </button>
         </section>
 
